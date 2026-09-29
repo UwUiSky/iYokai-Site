@@ -1,15 +1,11 @@
 // Le nove code: 7 bot + app utente + eseguibile. Compilare clientId/perms/url reali per attivare i pulsanti.
 // (Il bot Creator per i server di backup NON è qui: si invita da un pulsante privato del bot principale.)
 export const ITEMS = [
-  { kind: 'bot', title: 'iYokai', desc: 'Il bot principale: moderazione, utility e community.', clientId: '', perms: '' },
-  { kind: 'bot', title: 'Musica', desc: 'La colonna sonora della tua community.', clientId: '', perms: '' },
-  { kind: 'bot', title: 'NSFW', desc: 'Contenuti per adulti, solo per maggiorenni.', clientId: '', perms: '', age: true },
-  { kind: 'bot', title: 'Bot 4', desc: 'Descrizione in arrivo.', clientId: '', perms: '' },
-  { kind: 'bot', title: 'Bot 5', desc: 'Descrizione in arrivo.', clientId: '', perms: '' },
-  { kind: 'bot', title: 'Bot 6', desc: 'Descrizione in arrivo.', clientId: '', perms: '' },
-  { kind: 'bot', title: 'Bot 7', desc: 'Descrizione in arrivo.', clientId: '', perms: '' },
-  { kind: 'app', title: 'iYokai App', desc: 'Aggiungila al tuo profilo: funzioni cross-server ovunque tu sia.', clientId: '' },
-  { kind: 'exe', title: 'Panel per Windows', desc: 'panel.exe: alcune funzioni del bot, e altre dedicate, dal tuo PC.', url: '' },
+  { kind: 'bot', title: 'iYokaiミ', desc: 'Il bot principale: moderazione, automod, sicurezza, ticket, livelli, gilde, log e utility.', clientId: '', perms: '' },
+  ...[1, 2, 3, 4, 5].map((n) => ({ kind: 'bot', title: `iYokai Music ${n}`, desc: `Istanza musicale ${n} di 5: una connessione vocale ciascuna, aggiungine più d'una per più canali insieme.`, clientId: '', perms: '' })),
+  { kind: 'bot', title: 'iYokai NSFW', desc: 'Modulo isolato dal core, riservato ai maggiorenni.', clientId: '', perms: '', age: true },
+  { kind: 'app', title: 'iYokaiミ App', desc: 'Aggiungila al tuo profilo: funzioni cross-server ovunque tu sia.', clientId: '' },
+  { kind: 'exe', title: 'iYokai.exe / .apk', desc: 'Loader con autopatcher per le funzioni desktop e, in futuro, Android.', url: '' },
 ];
 const A = 'https://discord.com/oauth2/authorize';
 export function actionFor(it) {
