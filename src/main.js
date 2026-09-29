@@ -6,6 +6,9 @@ import { loadPrefs, applyPrefs } from './core/prefs.js';
 import { detectTier } from './core/quality.js';
 import { createRenderer } from './core/renderer.js';
 import { createMark } from './scenes/mark.js';
+import { createEntry } from './scenes/entry.js';
+import { initTerminal } from './ui/terminal.js';
+import { tear } from './core/audio.js';
 
 const prefs = loadPrefs();
 applyPrefs(prefs);
@@ -22,6 +25,21 @@ const mark = createMark(prefs.accent);
 scene.add(mark.group);
 const fit = () => mark.group.scale.setScalar(Math.min(1, camera.aspect * 1.1)); // il simbolo resta intero anche in verticale
 fit();
+
+const fx = { markScale: 1, mark: 0.3 };
+const entry = createEntry(scene, camera, quality.particles);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const term = initTerminal({
+  onEnter({ rect }) {
+    if (prefs.sound) tear();
+    const s = reduced ? 0.35 : 1;
+    gsap.timeline()
+      .to(fx, { mark: 1, duration: 0.12 * s }, 0) // i tre tagli lampeggiano
+      .to(fx, { markScale: 0, mark: 0, duration: 1.4 * s, ease: 'power3.in' }, 0.25 * s)
+      .to(fx, { markScale: 1, mark: 0.3, duration: 1.6 * s, ease: 'power2.out' }, 2.6 * s);
+    entry.play({ rect, scale: s, onReveal() { root.dataset.stage = 'hub'; term.hide(); document.dispatchEvent(new CustomEvent('realm:entered')); } });
+  },
+});
 
 const lenis = new Lenis({ lerp: 0.08 });
 gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -46,6 +64,7 @@ renderer.setAnimationLoop((now) => {
   const k = 1 - Math.exp(-dt * 4 * prefs.speed); // smorzamento forte
   pointer.sx += (pointer.x - pointer.sx) * k;
   pointer.sy += (pointer.y - pointer.sy) * k;
-  mark.update(now / 1000, pointer);
+  mark.update(now / 1000, pointer, fx);
+  entry.update(now / 1000);
   renderer.render(scene, camera);
 });
