@@ -49,7 +49,7 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); 
 .mod__ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .mod__t { font: 700 1rem "Syne Variable", sans-serif; }
 .mod__d { grid-column: 2; font-size: .76rem; line-height: 1.4; color: rgba(233, 228, 242, .55); }
-.mod--sealed { opacity: .55; filter: saturate(.6); border-style: dashed; cursor: not-allowed; }
+.mod--sealed { opacity: .55; filter: saturate(.6); border-style: dashed; }
 .player { position: fixed; left: 16px; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; padding: 12px 14px; border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, .09); background: rgba(12, 8, 20, .72); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
 .player__meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
@@ -123,3 +123,26 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); 
 .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255, 110, 230, .4); color: var(--ink); text-decoration: none; font: 600 .84rem "Manrope Variable", sans-serif; } .chip:hover { box-shadow: 0 0 24px rgba(178, 75, 255, .35); } .chip--off { opacity: .5; border-style: dashed; }
 :root[data-theme="light"] :is(.hub__tag, .mod__d, .player small, .dc__lead, .glass p, .glass ul, .term__log) { color: rgba(20, 16, 28, .68); }
 :root[data-theme="light"] :is(.mod, .player, .glass, .term__win, .btn, .gear) { background: rgba(255, 255, 255, .62); border-color: rgba(20, 16, 28, .14); }
+
+.dc__h { margin: 0 0 6px; font: 800 clamp(1.8rem, 4.4vw, 3.2rem) / 1.05 "Syne Variable", sans-serif; } .dc__sub, .dc__note { margin: 0 0 22px; max-width: 52ch; color: rgba(233, 228, 242, .68); } .dc__note { margin: 22px 0 0; font-size: .84rem; }
+.dc__invite { align-content: start; padding-top: 18vh; } .dc__grid--3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.inv { display: flex; flex-direction: column; gap: 4px; } .inv__n { font: 700 .72rem "Manrope Variable", sans-serif; color: #ff9be8; letter-spacing: .06em; } .inv__a { margin-top: auto; padding-top: 10px; }
+.btn--off { opacity: .5; border-style: dashed; cursor: default; box-shadow: none !important; } .btn--age { border-color: rgba(255, 110, 230, .55); }
+.age__f { display: grid; gap: 6px; margin: 12px 0; font-size: .84rem; } .age__f input { min-height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .16); background: rgba(5, 4, 8, .5); color: var(--ink); font: inherit; color-scheme: dark; }
+.age__msg { min-height: 1.2em; margin: 0 0 10px; color: #ff7ab8 !important; }
+.sys { position: fixed; inset: 0; z-index: 6; display: grid; place-items: center; padding: 16px; background: rgba(5, 4, 8, .5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); } .sys[hidden] { display: none; }
+.sys__box { position: relative; width: min(680px, 100%); min-height: min(360px, 60vh); display: grid; place-items: center; overflow: hidden; border-radius: 24px; border: 1px solid rgba(255, 110, 230, .3); background: rgba(14, 9, 24, .55); -webkit-backdrop-filter: blur(20px) saturate(1.3); backdrop-filter: blur(20px) saturate(1.3); animation: boxj 4.2s steps(1) infinite; }
+.sys__box::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px); animation: scan 6s linear infinite; }
+.sys__cuts { position: absolute; inset: 0; width: 100%; height: 100%; } .sc { fill: url(#sg); opacity: 0; filter: drop-shadow(0 0 8px rgba(255, 79, 216, .7)); }
+.sc1 { animation: cut 3.4s steps(1) infinite; } .sc2 { animation: cut 4.1s steps(1) .9s infinite; } .sc3 { animation: cut 3.7s steps(1) 1.7s infinite; }
+.glitch { position: relative; margin: 0; padding: 0 16px; text-align: center; text-transform: uppercase; font: 800 clamp(1.9rem, 7vw, 4rem) / 1.05 "Syne Variable", sans-serif; color: #fff; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; padding: 0 16px; overflow: hidden; }
+.glitch::before { color: #ff4fd8; translate: -4px 0; animation: gl1 2.6s steps(1) infinite; } .glitch::after { color: #7c5cff; translate: 4px 0; animation: gl2 3.1s steps(1) infinite; }
+@keyframes gl1 { 0%, 100% { clip-path: inset(0 0 100% 0); } 8% { clip-path: inset(15% 0 60% 0); } 12% { clip-path: inset(0 0 100% 0); } 47% { clip-path: inset(55% 0 20% 0); } 51% { clip-path: inset(0 0 100% 0); } 83% { clip-path: inset(30% 0 40% 0); } 86% { clip-path: inset(0 0 100% 0); } }
+@keyframes gl2 { 0%, 100% { clip-path: inset(100% 0 0 0); } 20% { clip-path: inset(60% 0 10% 0); } 24% { clip-path: inset(100% 0 0 0); } 62% { clip-path: inset(10% 0 65% 0); } 66% { clip-path: inset(100% 0 0 0); } 90% { clip-path: inset(40% 0 30% 0); } 93% { clip-path: inset(100% 0 0 0); } }
+@keyframes cut { 0% { opacity: 0; clip-path: inset(0 100% 0 0); } 5% { opacity: 1; clip-path: inset(0 55% 0 0); } 8% { opacity: 1; clip-path: inset(0 0 0 35%); } 11% { opacity: .25; clip-path: inset(0); } 14% { opacity: 1; clip-path: inset(0); } 55% { opacity: 1; clip-path: inset(0); } 58% { opacity: 1; clip-path: inset(0 0 55% 0); } 62% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes boxj { 0%, 100% { transform: none; } 30% { transform: translate(-3px, 1px); } 32% { transform: translate(4px, -1px) skewX(-1deg); } 34% { transform: none; } 71% { transform: translate(2px, 2px); } 73% { transform: none; } }
+@keyframes scan { to { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) { .sys__box, .sys__box::after, .glitch::before, .glitch::after { animation: none; } .glitch::before, .glitch::after { display: none; } .sc { animation: none; opacity: .8; } .sc2 { opacity: .35; } }
+.mod--sealed { cursor: pointer; }
+.dc__invite .dc__sub { margin-bottom: 72px; } .dc__grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); }

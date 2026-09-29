@@ -14,6 +14,8 @@ import { tear } from './core/audio.js';
 import { createOrb } from './scenes/orb.js';
 import { initHub } from './ui/hub.js';
 import { initPlayer } from './ui/player.js';
+import { initInvite } from './ui/invite.js';
+import { initSystem } from './ui/system.js';
 import { initSheet } from './ui/sheet.js';
 import { initPrefsPanel } from './ui/prefsPanel.js';
 import { createStreet } from './scenes/street.js';
@@ -45,6 +47,8 @@ const hub = initHub();
 initPlayer();
 gsap.globalTimeline.timeScale(prefs.speed);
 initSheet();
+initSystem();
+initInvite();
 initPrefsPanel({ prefs, onChange: (k) => { if (k === 'accent') mark.setAccent(prefs.accent); if (k === 'speed') gsap.globalTimeline.timeScale(prefs.speed); } });
 const street = createStreet(scene, quality.tier), kit = createKitsune(quality.tier);
 kit.group.visible = false; scene.add(kit.group);
@@ -85,7 +89,8 @@ addEventListener('resize', () => {
 
 lenis.on('scroll', () => { const max = document.documentElement.scrollHeight - innerHeight; dcP = mode === 'discord' && max > 0 ? Math.min(1, scrollY / max) : 0; dcEl.style.setProperty('--sp', dcP.toFixed(3)); });
 const io = new IntersectionObserver((es) => es.forEach((x) => x.target.classList.toggle('in', x.isIntersecting)), { threshold: 0.15 });
-document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+const watch = () => document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+watch(); document.addEventListener('rv:refresh', watch);
 function enterDiscord(rect) {
   if (mode !== 'hub') return; mode = 'busy';
   if (prefs.sound) tear();
@@ -108,6 +113,8 @@ function leaveDiscord() {
   } });
 }
 hubEl.addEventListener('click', (e) => { const a = e.target.closest('a[href="#discord"]'); if (a) { e.preventDefault(); enterDiscord(a.getBoundingClientRect()); } });
+document.addEventListener('tail:focus', (e) => kit.focus(e.detail));
+dcEl.addEventListener('click', (e) => { const a = e.target.closest('a[href^="#"]'); const id = a?.getAttribute('href'); if (!id || id === '#') return; const t = document.querySelector(id); if (t) { e.preventDefault(); lenis.scrollTo(t); } });
 document.getElementById('dcback').addEventListener('click', leaveDiscord);
 
 let last = performance.now();
@@ -122,11 +129,11 @@ renderer.setAnimationLoop((now) => {
   orb.update(now / 1000, pointer);
   hub.update(pointer);
   if (mode === 'discord') {
-    const e = dcP * dcP * (3 - 2 * dcP), ang = -0.35 + 0.8 * e, rad = 7.4 - 2.6 * e, tails = 3 + dcP * 4;
+    const e = dcP * dcP * (3 - 2 * dcP), ang = -0.35 + 0.8 * e, rad = 7.4 - 2.6 * e, tails = 3 + Math.min(1, dcP / 0.9) * 6;
     camera.position.set(Math.sin(ang) * rad + pointer.sx * 0.25, 1.15 - 0.15 * e - pointer.sy * 0.1, Math.cos(ang) * rad);
     camera.lookAt(0, 0.95, 0); camera.fov = 42 - 8 * e; camera.updateProjectionMatrix();
     street.update(now / 1000, dt); kit.update(now / 1000, dt, pointer, tails);
-    const n = Math.min(7, Math.round(tails)); if (dcState.dataset.n != n) { dcState.dataset.n = n; dcState.textContent = `code ${n}/7`; }
+    const n = Math.min(9, Math.round(tails)); if (dcState.dataset.n != n) { dcState.dataset.n = n; dcState.textContent = `code ${n}/9`; }
   }
   renderer.render(scene, camera);
 });

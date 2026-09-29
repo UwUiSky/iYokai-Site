@@ -1,9 +1,10 @@
 import * as THREE from 'three/webgpu';
 import { glowTexture } from './entry.js';
 // Kitsune procedurale in penombra: corpo quasi nero, solo i contorni si vedono; occhio magenta, maschera di lato, fino a 7 code indipendenti.
-const TAILS = 7, PTS = 26, ORDER = [3, 2, 4, 1, 5, 0, 6], RANK = [0, 1, 2, 3, 4, 5, 6].map((i) => ORDER.indexOf(i));
+const TAILS = 9, PTS = 26, ORDER = [4, 3, 5, 2, 6, 1, 7, 0, 8], RANK = ORDER.map((_, i) => ORDER.indexOf(i)); // nove code, una per funzione
 export function createKitsune(tier) {
   const root = new THREE.Group(), tex = glowTexture();
+  let focusRank = -1;
   const dark = new THREE.MeshBasicMaterial({ color: 0x07040b });
   const outline = (geo, o = 0.55) => new THREE.LineSegments(new THREE.EdgesGeometry(geo, 20), new THREE.LineBasicMaterial({ color: 0xff5fe0, transparent: true, opacity: o }));
   const part = (geo, x, y, z, parent = root, o) => { const m = new THREE.Mesh(geo, dark); m.position.set(x, y, z); m.add(outline(geo, o)); parent.add(m); return m; };
@@ -28,17 +29,17 @@ export function createKitsune(tier) {
     const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
     const ls = new THREE.LineSegments(geo, mat); ls.frustumCulled = false; root.add(ls);
     const tip = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, color: 0xff6ee7, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending })); tip.scale.set(0.3, 0.3, 1); root.add(tip);
-    return { pts, strands, pos, col, geo, mat, tip, th: (i - 3) * 0.34, len: 2.5 - Math.abs(i - 3) * 0.16, damp: 2.2 + i * 0.7, ph: i * 1.3, w: 0.7 + i * 0.13 };
+    return { pts, strands, pos, col, geo, mat, tip, th: (i - 4) * 0.28, len: 2.5 - Math.abs(i - 4) * 0.14, boost: 0, damp: 2.2 + i * 0.5, ph: i * 1.3, w: 0.7 + i * 0.13 };
   });
-  return { group: root, update(t, dt, p, count) {
+  return { group: root, focus(r) { focusRank = r; }, update(t, dt, p, count) {
     const kh = 1 - Math.exp(-dt * 1.6); // sguardo: smorzamento forte
     head.rotation.y += (Math.max(-0.6, Math.min(0.6, p.sx * 0.7)) - head.rotation.y) * kh;
     head.rotation.x += (p.sy * 0.25 - head.rotation.x) * kh;
     tails.forEach((T, i) => {
       const vis = Math.min(1, Math.max(0, count - RANK[i]));
-      T.mat.opacity += (vis * 0.9 - T.mat.opacity) * Math.min(1, dt * 3); T.tip.material.opacity = T.mat.opacity;
+      T.mat.opacity += (vis * 0.9 - T.mat.opacity) * Math.min(1, dt * 3); T.tip.material.opacity = T.mat.opacity; T.boost += ((focusRank >= 0 && ORDER[focusRank] === i ? 1 : 0) - T.boost) * Math.min(1, dt * 6); T.tip.scale.setScalar(0.3 + 0.5 * T.boost);
       if (T.mat.opacity < 0.01) return;
-      const k = 1 - Math.exp(-dt * T.damp), L = T.len;
+      const k = 1 - Math.exp(-dt * T.damp), L = T.len, m = 1 + T.boost * 1.4;
       for (let j = 1; j < PTS; j++) {
         const s = j / (PTS - 1), a = T.th + Math.sin(t * T.w + T.ph + s * 2.4) * 0.2 * s + p.sx * 0.25 * s;
         const tx = Math.sin(a) * L * s * 0.95, ty = 0.62 + 0.35 * L * s + 0.5 * L * s * s + Math.cos(t * T.w * 1.3 + T.ph + s * 3) * 0.08 * s, tz = -0.28 - Math.cos(a) * L * s * 0.55 - 0.1 * s;
@@ -49,7 +50,7 @@ export function createKitsune(tier) {
         const off = (st - (T.strands - 1) / 2) * 0.06;
         for (let j = 0; j < PTS - 1; j++) for (let e = 0; e < 2; e++) {
           const q = T.pts[j + e], s = (j + e) / (PTS - 1), w = off * (0.5 + 3 * Math.sin(Math.PI * Math.min(1, s * 1.15))), c = 0.25 + 0.75 * s;
-          T.pos[o] = q.x + w; T.pos[o + 1] = q.y + w * 0.3; T.pos[o + 2] = q.z; T.col[o] = c; T.col[o + 1] = 0.25 * c; T.col[o + 2] = 0.9 * c; o += 3;
+          T.pos[o] = q.x + w; T.pos[o + 1] = q.y + w * 0.3; T.pos[o + 2] = q.z; T.col[o] = c * m; T.col[o + 1] = 0.25 * c * m; T.col[o + 2] = 0.9 * c * m; o += 3;
         }
       }
       T.geo.attributes.position.needsUpdate = true; T.geo.attributes.color.needsUpdate = true; T.tip.position.copy(T.pts[PTS - 1]);
