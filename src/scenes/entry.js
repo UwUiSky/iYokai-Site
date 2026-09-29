@@ -3,7 +3,7 @@ import gsap from 'gsap';
 // Particelle: dal terminale → nucleo luminoso → nebulosa. Interpolazione su CPU solo durante la sequenza.
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
-function glowTexture() {
+export function glowTexture() {
   const c = document.createElement('canvas'); c.width = c.height = 128;
   const g = c.getContext('2d'), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
   r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(0.25, 'rgba(255,120,230,.8)');
