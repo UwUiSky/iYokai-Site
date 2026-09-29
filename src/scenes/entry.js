@@ -30,6 +30,7 @@ export function createEntry(scene, camera, count) {
     geo.attributes.position.needsUpdate = true;
   };
   return {
+    dim(o) { gsap.to(mat, { opacity: o, duration: 1.5 }); },
     update(t) { if (active) points.rotation.z = t * 0.015; },
     play({ rect, scale: s, onReveal }) {
       const H = 2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360), W = H * camera.aspect;
@@ -42,6 +43,7 @@ export function createEntry(scene, camera, count) {
         end[i3] = Math.cos(tw) * R; end[i3 + 1] = Math.sin(tw) * R * 0.65; end[i3 + 2] = (Math.random() - 0.5) * 3;
         delay[i] = Math.random() * 0.35;
       }
+      st.gather = 0; st.burst = 0; mat.opacity = 0; glow.material.opacity = 0; glow.scale.set(0.4, 0.4, 1);
       active = true; apply();
       gsap.timeline()
         .to(mat, { opacity: 1, duration: 0.3 * s }, 0)

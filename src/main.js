@@ -14,6 +14,8 @@ import { tear } from './core/audio.js';
 import { createOrb } from './scenes/orb.js';
 import { initHub } from './ui/hub.js';
 import { initPlayer } from './ui/player.js';
+import { createStreet } from './scenes/street.js';
+import { createKitsune } from './scenes/kitsune.js';
 
 const prefs = loadPrefs();
 applyPrefs(prefs);
@@ -39,6 +41,10 @@ const fit = () => { // il simbolo resta intero anche in verticale; l'orbe sale s
 fit();
 const hub = initHub();
 initPlayer();
+const street = createStreet(scene, quality.tier), kit = createKitsune(quality.tier);
+kit.group.visible = false; scene.add(kit.group);
+const dcEl = document.getElementById('dc'), hubEl = document.getElementById('hub'), dcState = document.getElementById('dcstate');
+let mode = 'hub', dcP = 0;
 
 const fx = { markScale: 1, mark: 0.3 };
 const entry = createEntry(scene, camera, quality.particles);
@@ -64,12 +70,40 @@ addEventListener('pointermove', (e) => {
   pointer.x = (e.clientX / innerWidth) * 2 - 1;
   pointer.y = (e.clientY / innerHeight) * 2 - 1;
 }, { passive: true });
+addEventListener('pointerdown', (e) => { pointer.x = (e.clientX / innerWidth) * 2 - 1; pointer.y = (e.clientY / innerHeight) * 2 - 1; }, { passive: true }); // il tocco fa girare lo sguardo
 addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight, false);
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   fit();
 });
+
+lenis.on('scroll', () => { const max = document.documentElement.scrollHeight - innerHeight; dcP = mode === 'discord' && max > 0 ? Math.min(1, scrollY / max) : 0; dcEl.style.setProperty('--sp', dcP.toFixed(3)); });
+const io = new IntersectionObserver((es) => es.forEach((x) => x.target.classList.toggle('in', x.isIntersecting)), { threshold: 0.15 });
+document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+function enterDiscord(rect) {
+  if (mode !== 'hub') return; mode = 'busy';
+  if (prefs.sound) tear();
+  gsap.to(hubEl, { opacity: 0, duration: 0.6, ease: 'power2.in' });
+  gsap.to(orb.group.scale, { x: 0.001, y: 0.001, z: 0.001, duration: 1.1, ease: 'power3.in' });
+  gsap.to(fx, { markScale: 0, duration: 1, ease: 'power3.in' });
+  entry.play({ rect, scale: 1, onReveal() {
+    orb.group.visible = mark.group.visible = false; hubEl.hidden = true; hubEl.style.opacity = 1;
+    street.group.visible = kit.group.visible = true; scene.fog = new THREE.FogExp2(0x07040d, 0.075); entry.dim(0.3);
+    dcEl.hidden = false; root.dataset.stage = 'discord'; mode = 'discord'; lenis.scrollTo(0, { immediate: true }); requestAnimationFrame(() => lenis.resize());
+  } });
+}
+function leaveDiscord() {
+  if (mode !== 'discord') return; mode = 'busy';
+  gsap.to(dcEl, { opacity: 0, duration: 0.5, onComplete() {
+    dcEl.hidden = true; dcEl.style.opacity = 1; street.group.visible = kit.group.visible = false; scene.fog = null;
+    camera.position.set(0, 0, 6); camera.lookAt(0, 0, 0); camera.fov = 40; camera.updateProjectionMatrix();
+    mark.group.visible = true; fx.markScale = 1; entry.dim(1); orb.show(); hubEl.hidden = false; gsap.fromTo(hubEl, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+    root.dataset.stage = 'hub'; mode = 'hub'; dcP = 0; lenis.scrollTo(0, { immediate: true });
+  } });
+}
+hubEl.addEventListener('click', (e) => { const a = e.target.closest('a[href="#discord"]'); if (a) { e.preventDefault(); enterDiscord(a.getBoundingClientRect()); } });
+document.getElementById('dcback').addEventListener('click', leaveDiscord);
 
 let last = performance.now();
 renderer.setAnimationLoop((now) => {
@@ -82,5 +116,12 @@ renderer.setAnimationLoop((now) => {
   entry.update(now / 1000);
   orb.update(now / 1000, pointer);
   hub.update(pointer);
+  if (mode === 'discord') {
+    const e = dcP * dcP * (3 - 2 * dcP), ang = -0.35 + 0.8 * e, rad = 7.4 - 2.6 * e, tails = 3 + dcP * 4;
+    camera.position.set(Math.sin(ang) * rad + pointer.sx * 0.25, 1.15 - 0.15 * e - pointer.sy * 0.1, Math.cos(ang) * rad);
+    camera.lookAt(0, 0.95, 0); camera.fov = 42 - 8 * e; camera.updateProjectionMatrix();
+    street.update(now / 1000, dt); kit.update(now / 1000, dt, pointer, tails);
+    const n = Math.min(7, Math.round(tails)); if (dcState.dataset.n != n) { dcState.dataset.n = n; dcState.textContent = `code ${n}/7`; }
+  }
   renderer.render(scene, camera);
 });
