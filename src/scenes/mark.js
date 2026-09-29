@@ -12,6 +12,7 @@ export function createMark(accent) {
   });
   return {
     group,
+    setAccent(c) { bars.forEach((b) => b.material.color.set(c)); },
     update(t, p, fx) {
       group.rotation.y = p.sx * 0.35;
       group.rotation.x = p.sy * 0.2;

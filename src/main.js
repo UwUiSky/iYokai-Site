@@ -14,6 +14,8 @@ import { tear } from './core/audio.js';
 import { createOrb } from './scenes/orb.js';
 import { initHub } from './ui/hub.js';
 import { initPlayer } from './ui/player.js';
+import { initSheet } from './ui/sheet.js';
+import { initPrefsPanel } from './ui/prefsPanel.js';
 import { createStreet } from './scenes/street.js';
 import { createKitsune } from './scenes/kitsune.js';
 
@@ -41,6 +43,9 @@ const fit = () => { // il simbolo resta intero anche in verticale; l'orbe sale s
 fit();
 const hub = initHub();
 initPlayer();
+gsap.globalTimeline.timeScale(prefs.speed);
+initSheet();
+initPrefsPanel({ prefs, onChange: (k) => { if (k === 'accent') mark.setAccent(prefs.accent); if (k === 'speed') gsap.globalTimeline.timeScale(prefs.speed); } });
 const street = createStreet(scene, quality.tier), kit = createKitsune(quality.tier);
 kit.group.visible = false; scene.add(kit.group);
 const dcEl = document.getElementById('dc'), hubEl = document.getElementById('hub'), dcState = document.getElementById('dcstate');

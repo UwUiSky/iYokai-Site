@@ -107,3 +107,19 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); 
 .dc__state { position: fixed; left: clamp(12px, 3vw, 40px); bottom: max(14px, env(safe-area-inset-bottom)); margin: 0; font-size: .74rem; color: rgba(255, 155, 232, .7); }
 @keyframes bob { 50% { transform: translateY(-7px); } }
 @media (prefers-reduced-motion: reduce) { .glass { animation: none; } }
+
+.gear { position: fixed; z-index: 4; top: max(16px, env(safe-area-inset-top)); left: 16px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .12); background: rgba(14, 9, 24, .6); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--ink); cursor: pointer; }
+.gear svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; } .gear:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.prefs { position: fixed; z-index: 4; top: calc(max(16px, env(safe-area-inset-top)) + 54px); left: 16px; width: min(280px, calc(100vw - 32px)); display: grid; gap: 12px; }
+.prefs { animation: none; translate: none; }
+.prefs[hidden], .sheet[hidden] { display: none; }
+.prefs__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .84rem; } .prefs__row input[type=range] { width: 120px; accent-color: var(--accent); } .prefs__row input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
+.prefs button[data-k] { min-height: 32px; margin-left: 6px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .14); background: transparent; color: var(--ink); font: 600 .78rem "Manrope Variable", sans-serif; cursor: pointer; }
+.prefs button[aria-pressed=true] { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(178, 75, 255, .25); }
+.prefs .sw { width: 28px; padding: 0; background: var(--c) !important; } .prefs button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sheet { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; padding: 16px; background: rgba(5, 4, 8, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sheet__box { width: min(460px, 100%); animation: none; translate: none; } .sheet__x { position: absolute; top: 10px; right: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.4rem; cursor: pointer; }
+.sheet__x:focus-visible, .chip:focus-visible { outline: 2px solid #fff; outline-offset: 2px; } .sheet__items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255, 110, 230, .4); color: var(--ink); text-decoration: none; font: 600 .84rem "Manrope Variable", sans-serif; } .chip:hover { box-shadow: 0 0 24px rgba(178, 75, 255, .35); } .chip--off { opacity: .5; border-style: dashed; }
+:root[data-theme="light"] :is(.hub__tag, .mod__d, .player small, .dc__lead, .glass p, .glass ul, .term__log) { color: rgba(20, 16, 28, .68); }
+:root[data-theme="light"] :is(.mod, .player, .glass, .term__win, .btn, .gear) { background: rgba(255, 255, 255, .62); border-color: rgba(20, 16, 28, .14); }
