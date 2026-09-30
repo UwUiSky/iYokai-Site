@@ -1,4 +1,5 @@
 import './style.css';
+import { initI18n, t } from './i18n/index.js';
 import '@fontsource-variable/syne';
 import '@fontsource-variable/manrope';
 import '@fontsource/jetbrains-mono/400.css';
@@ -30,6 +31,7 @@ import { createKitsune } from './scenes/kitsune.js';
 
 const prefs = loadPrefs();
 applyPrefs(prefs);
+await initI18n(prefs.lang); // prima di costruire qualsiasi interfaccia
 const quality = detectTier();
 const renderer = await createRenderer(document.getElementById('gl'), quality);
 const root = document.documentElement;
@@ -124,6 +126,7 @@ function leaveDiscord() {
     root.dataset.stage = 'hub'; mode = 'hub'; dcP = 0; lenis.scrollTo(0, { immediate: true });
   } });
 }
+document.addEventListener('i18n:change', () => { dcState.dataset.n = ''; });
 hubEl.addEventListener('click', (e) => { const a = e.target.closest('a[href="#discord"]'); if (a) { e.preventDefault(); enterDiscord(a.getBoundingClientRect()); } });
 document.addEventListener('tail:focus', (e) => kit.focus(e.detail));
 dcEl.addEventListener('click', (e) => { const a = e.target.closest('a[href^="#"]'); const id = a?.getAttribute('href'); if (!id || id === '#') return; const t = document.querySelector(id); if (t) { e.preventDefault(); lenis.scrollTo(t); } });
@@ -146,7 +149,7 @@ renderer.setAnimationLoop((now) => {
     camera.position.set(Math.sin(ang) * rad + pointer.sx * 0.25, 1.15 - 0.15 * e - pointer.sy * 0.1, Math.cos(ang) * rad);
     camera.lookAt(0, 0.95, 0); camera.fov = 42 - 8 * e; camera.updateProjectionMatrix();
     street.update(now / 1000, dt); kit.update(now / 1000, dt, pointer, tails);
-    const n = Math.min(9, Math.round(tails)); if (dcState.dataset.n != n) { dcState.dataset.n = n; dcState.textContent = `code ${n}/9`; }
+    const n = Math.min(9, Math.round(tails)); if (dcState.dataset.n != n) { dcState.dataset.n = n; dcState.textContent = t('dc.tails', { n }); }
   }
   renderer.render(scene, camera);
 });

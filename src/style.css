@@ -183,3 +183,4 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); 
 .bdg--n { min-width: 20px; height: 20px; padding: 0 5px; background: #e11d48; }
 @keyframes live { 0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, .6); } 50% { box-shadow: 0 0 0 7px rgba(225, 29, 72, 0); } }
 @media (prefers-reduced-motion: reduce) { .bdg--live { animation: none; } }
+.prefs__sel { min-height: 36px; padding: 0 10px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .16); background: rgba(5, 4, 8, .6); color: var(--ink); font: inherit; font-size: .82rem; }

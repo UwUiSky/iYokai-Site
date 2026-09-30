@@ -1,10 +1,11 @@
 import gsap from 'gsap';
 import { MODULES } from '../data/modules.js';
+import { a, t } from '../i18n/index.js';
 const DEPTH = [1, 1.5, 0.8, 1.2, 0.7, 1.6]; // parallasse: ogni modulo ha la sua profondità
 export function initHub() {
   const hub = document.getElementById('hub'), nav = hub.querySelector('.hub__mods');
   nav.innerHTML = MODULES.map((m, i) => `<a class="mod${m.sealed ? ' mod--sealed' : ''}" href="${m.href}" style="--d:${DEPTH[i]}"${m.sealed ? ' aria-haspopup="dialog"' : ''}>
-    <span class="mod__ico">${m.icon}</span><span class="mod__t">${m.title}</span><span class="mod__d">${m.desc}</span></a>`).join('');
+    <span class="mod__ico">${m.icon}</span><span class="mod__t"${m.tk ? ` ${a(m.tk)}` : ''}>${m.tk ? t(m.tk) : m.title}</span><span class="mod__d" ${a(m.dk)}>${t(m.dk)}</span></a>`).join('');
   nav.addEventListener('click', (e) => { if (e.target.closest('.mod--sealed')) e.preventDefault(); });
   let shown = false;
   return {

@@ -16,10 +16,10 @@
   <canvas id="gl" aria-hidden="true"></canvas>
   <main id="term" class="term">
     <div class="term__win">
-      <p class="term__log">iYokai OS<br>Sessione notturna aperta. Il regno attende il comando.</p>
+      <p class="term__log">iYokai OS<br><span data-i18n="term.log">Sessione notturna aperta. Il regno attende il comando.</span></p>
       <form id="cmd" class="prompt" autocomplete="off">
         <span class="prompt__ps" aria-hidden="true">›</span>
-        <input id="in" value="/iYokai ミ" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Comando">
+        <input id="in" value="/iYokai ミ" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Comando" data-i18n-attr="aria-label:term.cmd">
         <button id="go" type="submit">
           <svg viewBox="0 0 64 64" width="18" height="18" aria-hidden="true"><g stroke="currentColor" stroke-width="6" stroke-linecap="round"><path d="M22 18l22-6"/><path d="M18 34l28-7"/><path d="M13 51l38-10"/></g></svg>
           Enter the Realm
@@ -31,12 +31,12 @@
     </div>
   </main>
   <div id="hub" class="hub" hidden>
-    <header class="hub__top"><h1 class="hub__word">iYokai</h1><p class="hub__tag">Un solo cuore. Infinite possibilità.</p></header>
-    <nav class="hub__mods" aria-label="Moduli"></nav>
-    <aside id="player" class="player" aria-label="Player musicale">
-      <div class="player__meta"><span class="player__cover" aria-hidden="true">ミ</span><div><b id="pt">Tracce in arrivo</b><small id="pa">iYokaiミ</small></div></div>
+    <header class="hub__top"><h1 class="hub__word">iYokai</h1><p class="hub__tag" data-i18n="hub.tag">Un solo cuore. Infinite possibilità.</p></header>
+    <nav class="hub__mods" aria-label="Moduli" data-i18n-attr="aria-label:hub.mods"></nav>
+    <aside id="player" class="player" aria-label="Player musicale" data-i18n-attr="aria-label:player.aria">
+      <div class="player__meta"><span class="player__cover" aria-hidden="true">ミ</span><div><b id="pt" data-i18n="player.soon">Tracce in arrivo</b><small id="pa">iYokaiミ</small></div></div>
       <div class="player__bar"><i id="pp"></i></div>
-      <div class="player__ctl"><button id="pprev" aria-label="Precedente"></button><button id="ppl" class="player__play" aria-label="Riproduci"></button><button id="pnext" aria-label="Successiva"></button></div>
+      <div class="player__ctl"><button id="pprev" aria-label="Precedente" data-i18n-attr="aria-label:player.prev"></button><button id="ppl" class="player__play" aria-label="Riproduci" data-i18n-attr="aria-label:player.play"></button><button id="pnext" aria-label="Successiva" data-i18n-attr="aria-label:player.next"></button></div>
     </aside>
     <span class="hub__v hub__v--l" aria-hidden="true">管理・創造・成長</span>
     <span class="hub__v hub__v--r" aria-hidden="true">妖怪</span>
@@ -44,31 +44,31 @@
   <div id="dc" class="dc" hidden>
     <header class="dc__bar">
       <button id="dcback" class="btn" type="button">← iYokai</button>
-      <nav class="dc__acts" aria-label="Azioni bot"><a class="btn" href="#panel">Login Discord</a><a class="btn btn--main" href="#invita">Invite bot</a><a class="btn" href="#panel">Dashboard</a><a class="btn" href="#commands">Commands</a></nav>
+      <nav class="dc__acts" aria-label="Azioni bot" data-i18n-attr="aria-label:dc.actions"><a class="btn" href="#panel">Login Discord</a><a class="btn btn--main" href="#invita">Invite bot</a><a class="btn" href="#panel">Dashboard</a><a class="btn" href="#commands">Commands</a></nav>
     </header>
     <section class="dc__sec dc__hero">
       <div class="rv"><p class="dc__kick">More than a bot. A spirit.</p><h2 class="dc__word">iYokai</h2>
-        <p class="dc__lead">Il tuo alleato digitale, nato dall'equilibrio tra tecnologia e leggenda.</p>
-        <p class="dc__chips"><span>Moderazione</span><span>Community</span><span>Automazione</span><span>Intrattenimento</span></p></div>
+        <p class="dc__lead" data-i18n="dc.lead">Il tuo alleato digitale, nato dall'equilibrio tra tecnologia e leggenda.</p>
+        <p class="dc__chips"><span data-i18n="dc.chip1">Moderazione</span><span data-i18n="dc.chip2">Community</span><span data-i18n="dc.chip3">Automazione</span><span data-i18n="dc.chip4">Intrattenimento</span></p></div>
     </section>
     <section class="dc__sec"><div class="dc__grid">
-      <article class="glass rv" style="--z:.6;--bd:7s"><h3>Moderazione avanzata</h3><p>AutoMod, filtri, ban, mute e molto altro.</p></article>
-      <article class="glass rv" style="--z:1.2;--bd:9s"><h3>Ticket system</h3><p>Assistenza rapida, semplice e organizzata.</p></article>
-      <article class="glass rv" style="--z:.9;--bd:8s"><h3>Level &amp; XP</h3><p>Premia la tua community con un sistema di progressione.</p></article>
-      <article class="glass rv" style="--z:1.4;--bd:10s"><h3>Music &amp; Radio</h3><p>Playlist, comandi, radio e integrazione Spotify.</p></article>
-      <article class="glass rv" style="--z:.7;--bd:8.5s"><h3>Sicurezza</h3><p>Anti-raid, anti-nuke, protezione avanzata.</p></article>
-      <article class="glass rv" style="--z:1.1;--bd:9.5s"><h3>Automazioni</h3><p>Risparmia tempo, lascia che il bot lavori per te.</p></article></div></section>
+      <article class="glass rv" style="--z:.6;--bd:7s"><h3 data-i18n="ft.mod.t">Moderazione avanzata</h3><p data-i18n="ft.mod.d">AutoMod, filtri, ban, mute e molto altro.</p></article>
+      <article class="glass rv" style="--z:1.2;--bd:9s"><h3 data-i18n="ft.tick.t">Ticket system</h3><p data-i18n="ft.tick.d">Assistenza rapida, semplice e organizzata.</p></article>
+      <article class="glass rv" style="--z:.9;--bd:8s"><h3 data-i18n="ft.lvl.t">Level &amp; XP</h3><p data-i18n="ft.lvl.d">Premia la tua community con un sistema di progressione.</p></article>
+      <article class="glass rv" style="--z:1.4;--bd:10s"><h3 data-i18n="ft.music.t">Music &amp; Radio</h3><p data-i18n="ft.music.d">Playlist, comandi, radio e integrazione Spotify.</p></article>
+      <article class="glass rv" style="--z:.7;--bd:8.5s"><h3 data-i18n="ft.sec.t">Sicurezza</h3><p data-i18n="ft.sec.d">Anti-raid, anti-nuke, protezione avanzata.</p></article>
+      <article class="glass rv" style="--z:1.1;--bd:9.5s"><h3 data-i18n="ft.auto.t">Automazioni</h3><p data-i18n="ft.auto.d">Risparmia tempo, lascia che il bot lavori per te.</p></article></div></section>
     <section class="dc__sec dc__end" id="comandi"><div class="dc__grid dc__grid--2">
-      <article class="glass rv" style="--z:.8"><h3>Dashboard</h3><p>Controllo totale, in un'unica interfaccia.</p><ul><li>Configurazione moduli</li><li>Statistiche in tempo reale</li><li>Gestione multi-server</li><li>Log e sicurezza</li></ul></article>
+      <article class="glass rv" style="--z:.8"><h3 data-i18n="dash.t">Dashboard</h3><p data-i18n="dash.d">Controllo totale, in un'unica interfaccia.</p><ul><li data-i18n="dash.l1">Configurazione moduli</li><li data-i18n="dash.l2">Statistiche in tempo reale</li><li data-i18n="dash.l3">Gestione multi-server</li><li data-i18n="dash.l4">Log e sicurezza</li></ul></article>
       </div></section>
-    <section class="dc__sec dc__yokai" id="yokai"><div class="rv"><h2 class="dc__h">Ogni modulo ha il suo spirito.</h2><p class="dc__sub">iYokai nasce dalla tradizione giapponese: ogni Yokai rappresenta una parte della tua community.</p></div><div id="ykgrid" class="yk__grid"></div></section>
-    <section class="dc__sec dc__invite" id="invita"><div class="rv"><h2 class="dc__h">Nove code. Un'unica identità.</h2><p class="dc__sub">Sette bot, un'app e un eseguibile: ogni funzione è una coda della stessa kitsune.</p></div>
+    <section class="dc__sec dc__yokai" id="yokai"><div class="rv"><h2 class="dc__h" data-i18n="yk.h">Ogni modulo ha il suo spirito.</h2><p class="dc__sub" data-i18n="yk.sub">iYokai nasce dalla tradizione giapponese: ogni Yokai rappresenta una parte della tua community.</p></div><div id="ykgrid" class="yk__grid"></div></section>
+    <section class="dc__sec dc__invite" id="invita"><div class="rv"><h2 class="dc__h" data-i18n="inv.h">Nove code. Un'unica identità.</h2><p class="dc__sub" data-i18n="inv.sub">Sette bot, un'app e un eseguibile: ogni funzione è una coda della stessa kitsune.</p></div>
       <div id="invgrid" class="dc__grid dc__grid--3"></div>
-      <p class="dc__note rv">Il bot Creator per i server di backup si invita da un pulsante che riceverai in privato dal bot principale.</p></section>
-    <footer class="dc__foot"><span class="dc__mark" aria-hidden="true">ミ</span><span>© 2026 iYokai. Tutti i diritti riservati.</span><nav aria-label="Note legali"><a href="/termini.html">Termini di servizio</a><a href="/privacy.html">Privacy</a><a href="#" data-todo>Supporto</a></nav></footer>
+      <p class="dc__note rv" data-i18n="inv.note">Il bot Creator per i server di backup si invita da un pulsante che riceverai in privato dal bot principale.</p></section>
+    <footer class="dc__foot"><span class="dc__mark" aria-hidden="true">ミ</span><span data-i18n="ft.rights">© 2026 iYokai. Tutti i diritti riservati.</span><nav aria-label="Note legali" data-i18n-attr="aria-label:ft.legal"><a href="/termini.html" data-i18n="ft.terms">Termini di servizio</a><a href="/privacy.html" data-i18n="ft.privacy">Privacy</a><a href="#" data-todo data-i18n="ft.support">Supporto</a></nav></footer>
     <p id="dcstate" class="dc__state" aria-live="off"></p>
   </div>
-  <noscript><main style="font-family:system-ui;padding:2rem;color:#e9e4f2"><h1>iYokai ミ</h1><p>Identità musicale ed ecosistema di bot Discord. Per vivere il sito serve JavaScript.</p><p><a href="/privacy.html" style="color:#ff9be8">Privacy</a> · <a href="/termini.html" style="color:#ff9be8">Termini</a></p></main></noscript>
+  <noscript><main style="font-family:system-ui;padding:2rem;color:#e9e4f2"><h1>iYokai ミ</h1><p>Identità musicale ed ecosistema di bot Discord. Per vivere il sito serve JavaScript. / Music identity and Discord bot ecosystem. JavaScript is required.</p><p><a href="/privacy.html" style="color:#ff9be8">Privacy</a> · <a href="/termini.html" style="color:#ff9be8">Termini</a></p></main></noscript>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

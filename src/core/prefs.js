@@ -1,5 +1,5 @@
 const KEY = 'iyokai:prefs';
-const defaults = { theme: 'dark', speed: 1, accent: '#b24bff', sound: true };
+const defaults = { theme: 'dark', speed: 1, accent: '#b24bff', sound: true, lang: '' };
 export function loadPrefs() {
   try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; }
   catch { return { ...defaults }; }

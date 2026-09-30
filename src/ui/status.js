@@ -1,4 +1,5 @@
 // Stato live: badge LIVE/OFFLINE per Twitch e contatore rosso dei video YouTube nuovi dall'ultima visita (localStorage).
+import { t } from '../i18n/index.js';
 const LS = 'iyokai:yt:';
 export const status = { twitch: null, yt: [] };
 const subs = []; let raw = null;
@@ -14,7 +15,7 @@ export function markSeen(i) { try { localStorage.setItem(LS + i, new Date().toIS
 export function badgeFor(key) {
   if (key === 'twitch') return status.twitch?.live === true ? '<b class="bdg bdg--live">LIVE</b>' : status.twitch?.live === false ? '<b class="bdg bdg--off">OFFLINE</b>' : '';
   const n = status.yt[+key.split(':')[1]];
-  return n > 0 ? `<b class="bdg bdg--n" aria-label="${n} nuovi video">${n > 99 ? '99+' : n}</b>` : '';
+  return n > 0 ? `<b class="bdg bdg--n" aria-label="${t('status.videos', { n })}">${n > 99 ? '99+' : n}</b>` : '';
 }
 async function poll() { try { const r = await fetch('/api/status', { credentials: 'omit' }); if (r.ok) { raw = await r.json(); compute(); } } catch { /* API non raggiungibile: nessun badge */ } }
 export function initStatus() {
