@@ -32,10 +32,11 @@ export function createStreet(scene, tier) {
   const R = tier === 'high' ? 1400 : tier === 'mid' ? 800 : 350, rp = new Float32Array(R * 6), rs = new Float32Array(R);
   for (let i = 0; i < R; i++) { const o = i * 6, x = rnd(-7, 7), z = rnd(-20, 7), y = rnd(0, 9); rp.set([x, y, z, x, y + 0.35, z], o); rs[i] = rnd(9, 15); }
   const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.BufferAttribute(rp, 3));
-  g.add(new THREE.LineSegments(rg, new THREE.LineBasicMaterial({ color: 0xc9a4ff, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false })));
+  const rain = new THREE.LineSegments(rg, new THREE.LineBasicMaterial({ color: 0xc9a4ff, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false }));
+  g.add(rain);
   const mist = Array.from({ length: 9 }, (_, i) => { const s = new THREE.Sprite(glow(0x6a3aa8, 0.1)); s.scale.set(9, 3, 1); s.position.set(rnd(-4, 4), rnd(0.4, 1.6), -i * 3); g.add(s); return s; });
   scene.add(g);
-  return { group: g, update(t, dt) {
+  return { group: g, lite() { rain.visible = false; }, update(t, dt) {
     for (let i = 0; i < R; i++) { const o = i * 6; let y = rp[o + 1] - rs[i] * dt; if (y < 0) y += 9; rp[o + 1] = y; rp[o + 4] = y + 0.35; }
     rg.attributes.position.needsUpdate = true;
     mist.forEach((m, i) => { m.position.x = Math.sin(t * 0.08 + i) * 4; });

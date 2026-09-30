@@ -15,6 +15,10 @@ class Settings:
     site_origin: str = field(default_factory=lambda: _e("PANEL_SITE_ORIGIN", "https://iyokai.dev"))
     cookie_secure: bool = field(default_factory=lambda: _e("PANEL_COOKIE_SECURE", "1") != "0")
     trust_cf: bool = field(default_factory=lambda: _e("PANEL_TRUST_CF", "1") != "0")  # solo se l'API non è raggiungibile se non dal tunnel
+    twitch_client_id: str = field(default_factory=lambda: _e("TWITCH_CLIENT_ID"))
+    twitch_client_secret: str = field(default_factory=lambda: _e("TWITCH_CLIENT_SECRET"), repr=False)
+    twitch_login: str = field(default_factory=lambda: _e("TWITCH_LOGIN"))
+    yt_channels: tuple = field(default_factory=lambda: tuple(x.strip() for x in _e("YOUTUBE_CHANNEL_IDS").split(",") if x.strip()))
     auto_migrate: bool = field(default_factory=lambda: _e("PANEL_AUTO_MIGRATE", "1") != "0")
     session_ttl: int = 7 * 24 * 3600
 

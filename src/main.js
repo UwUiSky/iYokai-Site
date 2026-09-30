@@ -21,6 +21,8 @@ import { initPanel } from './ui/panel.js';
 import { initCommands } from './ui/commands.js';
 import { initInvite } from './ui/invite.js';
 import { initSystem } from './ui/system.js';
+import { initStatus } from './ui/status.js';
+import { createAdaptive } from './core/adaptive.js';
 import { initSheet } from './ui/sheet.js';
 import { initPrefsPanel } from './ui/prefsPanel.js';
 import { createStreet } from './scenes/street.js';
@@ -34,6 +36,7 @@ const root = document.documentElement;
 root.dataset.backend = renderer.backend?.isWebGPUBackend ? 'webgpu' : 'webgl2';
 root.dataset.tier = quality.tier;
 
+const adapt = createAdaptive(renderer, quality, { onLowest: () => street.lite() });
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 0.1, 50);
 camera.position.z = 6;
@@ -52,6 +55,7 @@ const hub = initHub();
 initPlayer();
 gsap.globalTimeline.timeScale(prefs.speed);
 initSheet();
+initStatus();
 initSystem();
 initInvite();
 initYokai();
@@ -135,6 +139,7 @@ renderer.setAnimationLoop((now) => {
   mark.update(now / 1000, pointer, fx);
   entry.update(now / 1000);
   orb.update(now / 1000, pointer);
+  adapt.tick(dt);
   hub.update(pointer);
   if (mode === 'discord') {
     const e = dcP * dcP * (3 - 2 * dcP), ang = -0.35 + 0.8 * e, rad = 7.4 - 2.6 * e, tails = 3 + Math.min(1, dcP / 0.9) * 6;

@@ -1,4 +1,5 @@
 import secrets
+import httpx
 from contextlib import asynccontextmanager
 from urllib.parse import urlencode
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -8,6 +9,7 @@ from . import discord as dc
 from .config import get_settings
 from .db import Db
 from .modules import MODULES
+from .status import TTL, twitch_live, youtube_feed
 from .security import RateLimiter, client_ip, derive, hash_sid, pkce_pair, sign, unsign
 
 limiter = RateLimiter()
@@ -17,7 +19,9 @@ MAX_ID = 2**63 - 1
 async def lifespan(app: FastAPI):
     app.state.s = get_settings()
     app.state.db = await Db.connect(app.state.s.database_url, app.state.s.auto_migrate)
+    app.state.http, app.state.cache = httpx.AsyncClient(timeout=6, follow_redirects=False), TTL()
     yield
+    await app.state.http.aclose()
     await app.state.db.close()
 
 app = FastAPI(title="iYokai Panel API", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
@@ -62,6 +66,13 @@ async def guild_for(request: Request, gid: int, sess: dict) -> int:
 @app.get("/api/health")
 async def health():
     return {"ok": True}
+
+@app.get("/api/status")
+async def status(request: Request):
+    """Pubblico: Twitch live/offline e date degli ultimi video YouTube (il conteggio dei nuovi lo fa il browser)."""
+    hit(request, "st", 60, 60)
+    s, http, cache = request.app.state.s, request.app.state.http, request.app.state.cache
+    return {"twitch": await twitch_live(s, http, cache), "youtube": [{"latest": await youtube_feed(http, cache, c)} for c in s.yt_channels]}
 
 @app.get("/api/auth/login")
 async def login(request: Request):

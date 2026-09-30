@@ -177,3 +177,9 @@ html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); 
 @media (prefers-reduced-motion: reduce) { .yk__i { animation: none; } .yk__in { transition: none; transform: none; } }
 .inv, .yk { translate: 0 calc(var(--sp) * var(--z, 1) * -14px); } /* parallasse contenuto: le carte vicine non si sovrappongono */
 .yk__grid { grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
+.chip { position: relative; gap: 8px; } .mod { position: relative; } .mod__b { position: absolute; top: -8px; right: 10px; }
+.bdg { display: inline-flex; align-items: center; justify-content: center; font: 800 .64rem "Manrope Variable", sans-serif; letter-spacing: .04em; border-radius: 999px; color: #fff; }
+.bdg--live { padding: 3px 8px; background: #e11d48; animation: live 1.4s ease-in-out infinite; } .bdg--off { padding: 3px 8px; background: rgba(255, 255, 255, .14); color: rgba(233, 228, 242, .7); }
+.bdg--n { min-width: 20px; height: 20px; padding: 0 5px; background: #e11d48; }
+@keyframes live { 0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, .6); } 50% { box-shadow: 0 0 0 7px rgba(225, 29, 72, 0); } }
+@media (prefers-reduced-motion: reduce) { .bdg--live { animation: none; } }
