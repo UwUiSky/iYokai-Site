@@ -1,0 +1,26 @@
+# Nessuna porta pubblicata: l'unico ingresso è il Cloudflare Tunnel (IP di origine mai esposto).
+# Prima: npm run build (crea ../dist) e copia .env.example in .env.
+services:
+  api:
+    build: ../server
+    env_file: .env
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    extra_hosts: ["host.docker.internal:host-gateway"]  # per raggiungere il Postgres del bot sull'host
+    networks: [internal]
+  web:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    volumes: ["../dist:/srv:ro", "./Caddyfile:/etc/caddy/Caddyfile:ro"]
+    depends_on: [api]
+    networks: [internal]
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    environment: ["TUNNEL_TOKEN=${TUNNEL_TOKEN}"]
+    restart: unless-stopped
+    networks: [internal]
+networks:
+  internal: {}

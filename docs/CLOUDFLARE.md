@@ -1,19 +1,22 @@
-# Cloudflare: hosting e protezioni per iyokai.dev
+# Cloudflare: hosting sul tuo server e protezioni
 
-## Architettura consigliata
-- **Frontend (questo repo):** Cloudflare Pages, collegato a GitHub. Build `npm run build`, cartella `dist`. Gli asset statici sono gratuiti e illimitati; le intestazioni di sicurezza stanno in `public/_headers`.
-- **Backend del panel (API + OAuth2 Discord):** sul tuo server, accanto al bot, esposto con **Cloudflare Tunnel** su `api.iyokai.dev` (nessuna porta aperta, IP di origine nascosto). Evita Pages Functions per le chiamate frequenti: sul piano gratuito contano nel tetto di 100.000 richieste al giorno dei Workers.
-- **Cookie di sessione:** `HttpOnly; Secure; SameSite=Lax; Domain=.iyokai.dev`, firmati. OAuth2 con `state` e PKCE, CSRF token sulle azioni che modificano dati.
+## Architettura
+- **Tutto sul tuo server** (`deploy/docker-compose.yml`): Caddy serve il frontend (`npm run build`, cartella `dist`) e inoltra `/api/*` al backend Python; **Cloudflare Tunnel** (`cloudflared`) è l'unico ingresso. Nessuna porta pubblicata, IP di origine nascosto.
+- Nel dashboard Cloudflare: Zero Trust, Networks, Tunnels; hostname pubblico `iyokai.dev` verso `http://web:80`.
 
-## Da attivare nel dashboard Cloudflare
-1. **SSL/TLS:** modalità *Full (strict)*, *Always Use HTTPS*, HSTS (già inviato da `_headers`), TLS minimo 1.2.
-2. **DNSSEC** attivo sul dominio.
-3. **WAF:** regole gestite Cloudflare + OWASP; regola custom che blocca `/api/*` senza `Origin` di iyokai.dev sui metodi che scrivono.
-4. **Rate limiting** su `/api/auth/*` e `/api/*` (più stretto sul login).
-5. **Bot Fight Mode** attivo; **Turnstile** (gratuito) sul login e sulle azioni sensibili.
-6. **Cloudflare Access** (Zero Trust, gratuito fino a 50 utenti) davanti a qualunque endpoint admin/owner.
-7. **Tunnel** con `cloudflared` come servizio sul server; firewall del server chiuso a tutto tranne l'uscita.
-8. **Segreti** (token del bot, `WEB_PANEL_SECRET_KEY`, `OAUTH_ENCRYPTION_KEY`, client secret Discord) solo nelle variabili d'ambiente del server o in Worker secrets, mai nel repo.
+## Da attivare
+1. **SSL/TLS** *Full (strict)*, Always Use HTTPS, HSTS, TLS minimo 1.2; **DNSSEC**.
+2. **WAF** con regole gestite; **Bot Fight Mode**; **rate limiting** su `/api/auth/*` e `/api/*`; **Turnstile** sul login se subisce abusi.
+3. **Cloudflare Access** davanti a qualsiasi endpoint admin.
+4. **Cache:** regola per `/assets/*` e `/audio/*` (file con nome e contenuto stabili).
+5. Firewall dell'host chiuso in ingresso: il tunnel esce, non serve entrare.
+6. Segreti solo in `deploy/.env` (mai nel repo); il file è fuori da git.
 
-## Verifica
-`public/_headers` è stato provato con un server locale che invia le stesse intestazioni: nessuna violazione della CSP in hub, sezione Discord, elenco comandi e invito.
+## Le intestazioni di sicurezza
+Stanno in `deploy/Caddyfile` (CSP senza script inline, HSTS, anti-framing). `public/_headers` serve solo se un giorno userai Cloudflare Pages.
+
+## Attenzione: file pesanti (audio, 3D)
+Il Tunnel è gratuito, ma passare dalla CDN di Cloudflare video o una quota sproporzionata di file grandi senza i servizi a pagamento previsti (Stream, Images, R2, Developer Platform) può portare a redirect o limitazioni sui piani Free/Pro/Business (vedi la pagina "Delivering videos with Cloudflare" nella documentazione). Regole pratiche:
+- Pagine, JS, CSS, JSON e modelli 3D compressi (Draco/KTX2) sono il normale traffico di un sito.
+- **Audio:** meglio MP3/Opus (non WAV) per il player; se i file crescono, spostali su **Cloudflare R2** (dominio tipo `media.iyokai.dev`) e aggiungilo a `media-src` nella CSP di `deploy/Caddyfile`.
+- Il corpo delle richieste è limitato a 100 MB sui piani Free e Pro.
