@@ -1,22 +1,22 @@
 import * as THREE from 'three/webgpu';
-// ミ: tre tagli diagonali che crescono verso il basso.
-const CUTS = [{ x: 0.15, y: 0.9, w: 1.5 }, { x: 0, y: 0, w: 2.1 }, { x: -0.3, y: -0.9, w: 2.9 }];
+import bodyUrl from '../assets/claws.png';
+import rimUrl from '../assets/claws-rim.png';
+// Il simbolo: i tre graffi. Corpo viola scuro con le crepe del disegno e bordo luminoso nel colore d'accento.
+const H = 2.7, W = H * (502 / 660);
 export function createMark(accent) {
-  const group = new THREE.Group();
-  const bars = CUTS.map((c) => {
-    const bar = new THREE.Mesh(new THREE.PlaneGeometry(c.w, 0.045), new THREE.MeshBasicMaterial({ color: accent, transparent: true, depthWrite: false }));
-    bar.position.set(c.x, c.y, 0);
-    bar.rotation.z = 0.32;
-    group.add(bar);
-    return bar;
-  });
+  const group = new THREE.Group(), L = new THREE.TextureLoader();
+  const tex = (u) => { const t = L.load(u); t.colorSpace = THREE.SRGBColorSpace; return t; };
+  const body = new THREE.MeshBasicMaterial({ map: tex(bodyUrl), color: 0x3a0f52, transparent: true, depthWrite: false });
+  const rim = new THREE.MeshBasicMaterial({ map: tex(rimUrl), color: accent, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  const meshes = [body, rim].map((m, i) => { const me = new THREE.Mesh(new THREE.PlaneGeometry(W, H), m); me.position.z = i * 0.01; group.add(me); return me; });
   return {
     group,
-    setAccent(c) { bars.forEach((b) => b.material.color.set(c)); },
+    setAccent(c) { rim.color.set(c); },
     update(t, p, fx) {
-      group.rotation.y = p.sx * 0.35;
-      group.rotation.x = p.sy * 0.2;
-      bars.forEach((b, i) => { b.scale.setScalar(Math.max(fx.markScale, 0.0001)); b.material.opacity = fx.mark * (0.7 + 0.3 * Math.sin(t * 0.9 + i * 1.7)); });
+      group.rotation.y = p.sx * 0.35; group.rotation.x = p.sy * 0.2;
+      meshes.forEach((m) => m.scale.setScalar(Math.max(fx.markScale, 0.0001)));
+      const pulse = 0.85 + 0.15 * Math.sin(t * 0.9);
+      body.opacity = Math.min(1, fx.mark) * 0.95; rim.opacity = Math.min(1, fx.mark * pulse * 1.15);
     },
   };
 }
