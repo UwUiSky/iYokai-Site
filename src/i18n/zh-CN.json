@@ -297,7 +297,7 @@
   "dc.music-open": "进入模块",
   "dc.music-listen-note": "在哪里根和影响会面. 返回第一个面板,选择 Spotify 或 YouTube (主题)。",
   "dc.open-panel": "打开Dashboard",
-  "dc.return": "← 返回协议选择",
+  "dc.return": "返回协议选择",
   "dc.login": "通过 Discord 登录",
   "dc.commands": "命令列表",
   "dc.patches": "更新日志",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "故事暂不可用，请重试。",
   "spirit.musicShared": "音乐命令属于 Core，由整个舰队共享。",
   "spirit.modCompanion": "Mod 协助 Core 执行操作和记录日志，并不能独立替代主机器人。",
-  "house.features": "功能"
+  "house.features": "功能",
+  "help.wiki": "百科"
 }

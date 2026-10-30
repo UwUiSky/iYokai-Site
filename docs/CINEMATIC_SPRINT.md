@@ -874,3 +874,20 @@ la conferma 18+ esistente, che resta un’autodichiarazione, non verifica identi
 Il file statico non costituisce una risorsa protetta lato server. Layout contain
 e sfumatura al nero preservati; descrizione alternativa corretta in dieci lingue.
 Nessuna modifica a font, altre tavole, backend o bot.
+
+## 30 ottobre — menu essenziale e FAQ come ultimo pannello
+
+Rimossa la didascalia Control & Explore dal drawer. Ritorno ai protocolli sotto
+Contattami, con lo stesso oro e freccia SVG locale coordinata, anche su desktop.
+Privacy spostata nel footer del menu accanto al copyright; verificata apertura.
+Wiki sostituisce FAQ nelle utility: finestra predisposta con Work in Progress,
+nessun collegamento esterno inventato. FAQ ora ottavo e ultimo pannello Discord,
+nero, con cinque risposte originali espandibili, tradotte dai dizionari esistenti
+e copyright/Privacy in fondo. Nuovo SVG nero locale e associazione esplicita
+nel catalogo: nessuna tavola delle altre sezioni viene sostituita.
+
+39 test JavaScript e build riusciti. Browser simulato: menu 390×844 senza overflow,
+colore coerente di Contattami/ritorno, apertura Wiki e Privacy, ritorno ai sei
+protocolli verificati. FAQ attivo senza overflow orizzontale in 4:3, 16:10, 16:9,
+21:9, 32:9 e telefoni 390×844, 360×740, 430×932; prima risposta aperta.
+Nessun test touch fisico o API Discord e nessuna modifica al backend/font/NSFW.

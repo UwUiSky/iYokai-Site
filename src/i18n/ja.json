@@ -297,7 +297,7 @@
   "dc.music-open": "モジュールに入ります。",
   "dc.music-listen-note": "根と影響が出会う場所 最初のパネルに戻って Spotify または YouTube (テーマ) を選択します。",
   "dc.open-panel": "ダッシュボードを開く",
-  "dc.return": "← プロトコル選択へ",
+  "dc.return": "プロトコル選択へ",
   "dc.login": "Discordでログイン",
   "dc.commands": "コマンド一覧",
   "dc.patches": "更新履歴",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "物語を読み込めません。再試行してください。",
   "spirit.musicShared": "音楽コマンドはCoreに属し、艦隊全体で共有されます。",
   "spirit.modCompanion": "ModはCoreの操作やログ処理を補助します。メインボットを単独で置き換えるものではありません。",
-  "house.features": "機能"
+  "house.features": "機能",
+  "help.wiki": "Wiki"
 }

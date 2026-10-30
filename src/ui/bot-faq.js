@@ -1,0 +1,10 @@
+import { translateCopy as text } from '../i18n/index.js';
+
+// Shared translated FAQ content for the final Discord panel.
+export function renderBotFaq(){return [
+   [text('Il bot è gratuito?','Is the bot free?'),text('Sì. Il lancio è gratuito. Premium e VIP sono predisposti per il futuro; i pagamenti sono disattivati.','Yes. Launch access is free. Premium and VIP are prepared for the future; payments are disabled.')],
+   [text('Chi può modificare un server?','Who can configure a server?'),text('I permessi devono essere confermati dal bot: proprietario, Gestisci server o ruolo admin configurato. Vedere un pulsante non autorizza un’azione.','The bot must confirm access: server owner, Manage Server or the configured bot admin role. A visible button does not authorize an action.')],
+   [text('Gli intent si attivano dal sito?','Can the site enable privileged intents?'),text('No. Server Members e Message Content si configurano nel Developer Portal dell’applicazione e, quando richiesto da Discord, richiedono approvazione. I permessi di invito al server sono separati.','No. Server Members and Message Content are configured in the application Developer Portal and require approval when Discord requests it. Server invite permissions are separate.')],
+   [text('Come funzionano i controlli sui doppi account?','How do alternate-account checks work?'),text('Sono segnali da valutare dallo staff: un indirizzo condiviso non dimostra che due account appartengano alla stessa persona. Non promettiamo identificazioni certe.','They provide signals for staff review: a shared address does not prove two accounts belong to one person. Detection is not guaranteed.')],
+   [text('Lo storico contiene tutti i log Discord?','Does activity show all Discord logs?'),text('Lo storico del pannello riguarda le modifiche alla configurazione. I log degli eventi e le destinazioni dei canali richiedono una configurazione distinta.','Panel activity tracks configuration changes. Event logs and channel destinations require separate configuration.')]
+  ].map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');}

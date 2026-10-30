@@ -297,7 +297,7 @@
   "dc.music-open": "모듈을 입력합니다.",
   "dc.music-listen-note": "뿌리와 영향이 만나는 곳. 첫 번째 패널으로 돌아가 Spotify 또는 YouTube (테마)를 선택합니다.",
   "dc.open-panel": "Dashboard를 열어주세요",
-  "dc.return": "← 프로토콜 선택으로",
+  "dc.return": "프로토콜 선택으로",
   "dc.login": "Discord로 로그인",
   "dc.commands": "명령어 목록",
   "dc.patches": "업데이트 내역",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "이야기를 불러올 수 없습니다. 다시 시도해 주세요.",
   "spirit.musicShared": "음악 명령어는 Core에 속하며 함대가 함께 사용합니다.",
   "spirit.modCompanion": "Mod는 Core의 작업과 로그 처리를 돕습니다. 메인 봇을 독립적으로 대체하지는 않습니다.",
-  "house.features": "기능"
+  "house.features": "기능",
+  "help.wiki": "위키"
 }

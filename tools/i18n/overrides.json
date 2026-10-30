@@ -11,7 +11,7 @@
     "dc.add-bot": "Füge iYokai deinem Server hinzu",
     "dc.add-app": "Füge iYokai deinem Profil hinzu",
     "dc.login": "Mit Discord anmelden",
-    "dc.return": "← Zur Protokollauswahl",
+    "dc.return": "Zur Protokollauswahl",
     "dc.commands": "Befehlsliste",
     "dash.t": "Dashboard",
     "inv.tail": "Schweif {n}",
@@ -84,7 +84,8 @@
     "spirit.musicShared": "Die Musikbefehle gehören zu Core und werden von der Flotte gemeinsam genutzt.",
     "spirit.modCompanion": "Mod unterstützt Core bei Aktionen und Logs; es ersetzt den Hauptbot nicht eigenständig.",
     "house.features": "Funktionen",
-    "copy.ff51d0184ae7": "Drei erwachsene Kitsune in Satin-Nachthemden in der nächtlichen Lounge"
+    "copy.ff51d0184ae7": "Drei erwachsene Kitsune in Satin-Nachthemden in der nächtlichen Lounge",
+    "help.wiki": "Wiki"
   },
   "fr": {
     "gate.title": "Choisis ton protocole",
@@ -98,7 +99,7 @@
     "dc.add-bot": "Ajoute iYokai à ton serveur",
     "dc.add-app": "Ajoute iYokai à ton profil",
     "dc.login": "Se connecter avec Discord",
-    "dc.return": "← Choix du protocole",
+    "dc.return": "Choix du protocole",
     "dc.commands": "Liste des commandes",
     "dash.t": "Tableau de bord",
     "inv.tail": "Queue {n}",
@@ -171,7 +172,8 @@
     "spirit.musicShared": "Les commandes musicales appartiennent au Core et sont partagées par la flotte.",
     "spirit.modCompanion": "Mod aide le Core à exécuter des actions et des logs ; il ne remplace pas le bot principal de manière autonome.",
     "house.features": "Fonctionnalités",
-    "copy.ff51d0184ae7": "Trois Kitsune adultes en nuisettes de satin dans le salon nocturne"
+    "copy.ff51d0184ae7": "Trois Kitsune adultes en nuisettes de satin dans le salon nocturne",
+    "help.wiki": "Wiki"
   },
   "es-ES": {
     "gate.title": "Elige tu protocolo",
@@ -185,7 +187,7 @@
     "dc.add-bot": "Añade iYokai a tu servidor",
     "dc.add-app": "Añade iYokai a tu perfil",
     "dc.login": "Iniciar sesión con Discord",
-    "dc.return": "← Elegir protocolo",
+    "dc.return": "Elegir protocolo",
     "dc.commands": "Lista de comandos",
     "dash.t": "Panel de control",
     "inv.tail": "Cola {n}",
@@ -258,7 +260,8 @@
     "spirit.musicShared": "Los comandos musicales pertenecen al Core y se comparten con la flota.",
     "spirit.modCompanion": "Mod ayuda al Core con acciones y registros; no sustituye de forma autónoma al bot principal.",
     "house.features": "Funciones",
-    "copy.ff51d0184ae7": "Tres Kitsune adultas con vestidos de satén en el salón nocturno"
+    "copy.ff51d0184ae7": "Tres Kitsune adultas con vestidos de satén en el salón nocturno",
+    "help.wiki": "Wiki"
   },
   "ru": {
     "gate.title": "Выбери протокол",
@@ -272,7 +275,7 @@
     "dc.add-bot": "Добавить iYokai на сервер",
     "dc.add-app": "Добавить iYokai в профиль",
     "dc.login": "Войти через Discord",
-    "dc.return": "← К выбору протокола",
+    "dc.return": "К выбору протокола",
     "dc.commands": "Список команд",
     "dash.t": "Панель управления",
     "inv.tail": "Хвост {n}",
@@ -345,7 +348,8 @@
     "spirit.musicShared": "Музыкальные команды принадлежат Core и используются всей флотилией.",
     "spirit.modCompanion": "Mod помогает Core выполнять действия и вести журналы; он не заменяет основного бота автономно.",
     "house.features": "Возможности",
-    "copy.ff51d0184ae7": "Три взрослые кицунэ в атласных платьях в ночной гостиной"
+    "copy.ff51d0184ae7": "Три взрослые кицунэ в атласных платьях в ночной гостиной",
+    "help.wiki": "Вики"
   },
   "uk": {
     "gate.title": "Обери протокол",
@@ -359,7 +363,7 @@
     "dc.add-bot": "Додати iYokai на сервер",
     "dc.add-app": "Додати iYokai до профілю",
     "dc.login": "Увійти через Discord",
-    "dc.return": "← До вибору протоколу",
+    "dc.return": "До вибору протоколу",
     "dc.commands": "Список команд",
     "dash.t": "Панель керування",
     "inv.tail": "Хвіст {n}",
@@ -433,7 +437,8 @@
     "spirit.musicShared": "Музичні команди належать Core і спільно використовуються флотилією.",
     "spirit.modCompanion": "Mod допомагає Core виконувати дії та вести журнали; він не замінює головного бота автономно.",
     "house.features": "Функції",
-    "copy.ff51d0184ae7": "Три дорослі кіцуне в атласних сукнях у нічній вітальні"
+    "copy.ff51d0184ae7": "Три дорослі кіцуне в атласних сукнях у нічній вітальні",
+    "help.wiki": "Вікі"
   },
   "ja": {
     "gate.title": "プロトコルを選択",
@@ -447,7 +452,7 @@
     "dc.add-bot": "サーバーにiYokaiを追加",
     "dc.add-app": "プロフィールにiYokaiを追加",
     "dc.login": "Discordでログイン",
-    "dc.return": "← プロトコル選択へ",
+    "dc.return": "プロトコル選択へ",
     "dc.commands": "コマンド一覧",
     "dash.t": "ダッシュボード",
     "inv.tail": "尾 {n}",
@@ -522,7 +527,8 @@
     "spirit.musicShared": "音楽コマンドはCoreに属し、艦隊全体で共有されます。",
     "spirit.modCompanion": "ModはCoreの操作やログ処理を補助します。メインボットを単独で置き換えるものではありません。",
     "house.features": "機能",
-    "copy.ff51d0184ae7": "夜のラウンジでサテンのスリップドレスを着た3人の大人のキツネ"
+    "copy.ff51d0184ae7": "夜のラウンジでサテンのスリップドレスを着た3人の大人のキツネ",
+    "help.wiki": "Wiki"
   },
   "ko": {
     "gate.title": "프로토콜 선택",
@@ -536,7 +542,7 @@
     "dc.add-bot": "서버에 iYokai 추가",
     "dc.add-app": "프로필에 iYokai 추가",
     "dc.login": "Discord로 로그인",
-    "dc.return": "← 프로토콜 선택으로",
+    "dc.return": "프로토콜 선택으로",
     "dc.commands": "명령어 목록",
     "dash.t": "대시보드",
     "inv.tail": "꼬리 {n}",
@@ -610,7 +616,8 @@
     "spirit.musicShared": "음악 명령어는 Core에 속하며 함대가 함께 사용합니다.",
     "spirit.modCompanion": "Mod는 Core의 작업과 로그 처리를 돕습니다. 메인 봇을 독립적으로 대체하지는 않습니다.",
     "house.features": "기능",
-    "copy.ff51d0184ae7": "밤의 라운지에서 새틴 슬립 드레스를 입은 성인 키츠네 세 명"
+    "copy.ff51d0184ae7": "밤의 라운지에서 새틴 슬립 드레스를 입은 성인 키츠네 세 명",
+    "help.wiki": "위키"
   },
   "zh-CN": {
     "gate.title": "选择协议",
@@ -624,7 +631,7 @@
     "dc.add-bot": "将 iYokai 添加到服务器",
     "dc.add-app": "将 iYokai 添加到个人资料",
     "dc.login": "通过 Discord 登录",
-    "dc.return": "← 返回协议选择",
+    "dc.return": "返回协议选择",
     "dc.commands": "命令列表",
     "dash.t": "控制面板",
     "inv.tail": "尾巴 {n}",
@@ -697,6 +704,7 @@
     "spirit.musicShared": "音乐命令属于 Core，由整个舰队共享。",
     "spirit.modCompanion": "Mod 协助 Core 执行操作和记录日志，并不能独立替代主机器人。",
     "house.features": "功能",
-    "copy.ff51d0184ae7": "夜间休息室里三位身穿缎面吊带裙的成年狐女"
+    "copy.ff51d0184ae7": "夜间休息室里三位身穿缎面吊带裙的成年狐女",
+    "help.wiki": "百科"
   }
 }

@@ -297,7 +297,7 @@
   "dc.music-open": "Entra nel modulo ↗",
   "dc.music-listen-note": "Un incontro tra radici e contaminazioni. Torna al primo pannello per scegliere Spotify o YouTube (Tema).",
   "dc.open-panel": "Apri il pannello",
-  "dc.return": "← Scelta del protocollo",
+  "dc.return": "Scelta del protocollo",
   "dc.login": "Accedi con Discord",
   "dc.commands": "Lista comandi",
   "dc.patches": "Patch notes",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "La storia non è disponibile. Riprova.",
   "spirit.musicShared": "I comandi musicali appartengono al Core e sono condivisi dalla flotta.",
   "spirit.modCompanion": "Mod affianca il Core nell’esecuzione di azioni e log; non sostituisce autonomamente il bot principale.",
-  "house.features": "Funzionalità"
+  "house.features": "Funzionalità",
+  "help.wiki": "Wiki"
 }

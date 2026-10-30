@@ -25,4 +25,5 @@ export const DISCORD_ART = {
  spirits:'/cinematic/discord-spirits-v2-wide.webp',
  invites:'/cinematic/discord-invites-wide.webp',
  house:'/cinematic/spirit-house-wide.webp',
+ faq:'/cinematic/discord-faq.svg',
 };

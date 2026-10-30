@@ -297,7 +297,7 @@
   "dc.music-open": "Entrar en el módulo",
   "dc.music-listen-note": "Dónde se reúnen las raíces y las influencias. Volver al primer panel para elegir Spotify o YouTube (Tema).",
   "dc.open-panel": "Abre el dashboard",
-  "dc.return": "← Elegir protocolo",
+  "dc.return": "Elegir protocolo",
   "dc.login": "Iniciar sesión con Discord",
   "dc.commands": "Lista de comandos",
   "dc.patches": "Notas de actualización",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "La historia no está disponible. Vuelve a intentarlo.",
   "spirit.musicShared": "Los comandos musicales pertenecen al Core y se comparten con la flota.",
   "spirit.modCompanion": "Mod ayuda al Core con acciones y registros; no sustituye de forma autónoma al bot principal.",
-  "house.features": "Funciones"
+  "house.features": "Funciones",
+  "help.wiki": "Wiki"
 }

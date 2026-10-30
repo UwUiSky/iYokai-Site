@@ -297,7 +297,7 @@
   "dc.music-open": "Enter the module ↗",
   "dc.music-listen-note": "Where roots and influences meet. Return to the first panel to choose Spotify or YouTube (Tema).",
   "dc.open-panel": "Open the dashboard",
-  "dc.return": "← Choose your protocol",
+  "dc.return": "Choose your protocol",
   "dc.login": "Sign in with Discord",
   "dc.commands": "Command list",
   "dc.patches": "Patch notes",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "The story is unavailable. Please retry.",
   "spirit.musicShared": "Music commands belong to Core and are shared by the fleet.",
   "spirit.modCompanion": "Mod assists Core with actions and logs; it does not independently replace the main bot.",
-  "house.features": "Features"
+  "house.features": "Features",
+  "help.wiki": "Wiki"
 }

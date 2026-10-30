@@ -1,3 +1,4 @@
+import { renderBotFaq } from './bot-faq.js';
 import { decorateLanguageSelect } from '../i18n/index.js';
 import gsap from 'gsap';
 import { initDiscordChrome } from './discord-chrome.js';
@@ -19,6 +20,10 @@ export function initDiscordPanels({ host, lenis, prefs, enabled, reduced }) {
  const house=document.createElement('section');house.className='dc__sec dc__house';house.id='spirit-house';
  house.innerHTML='<div class="dc-house-copy"><p class="dc__kick" data-i18n="house.kicker"></p><h2 class="dc__h" data-i18n="house.title"></h2><p class="spirit-house-intro" data-i18n="house.intro"></p><div class="dc-house-actions"><button type="button" class="btn btn--main" data-spirit="house" data-i18n="house.discover"></button><button type="button" class="btn" data-house-features data-i18n="house.features"></button></div><p class="dc__note" data-i18n="house.note"></p></div>';
  host.querySelector('.dc__foot').before(house);apply(house);
+ const faq=document.createElement('section');faq.className='dc__sec dc__faq';faq.id='discord-faq';
+ faq.innerHTML='<div><h2 class="dc__h" data-i18n="help.faq"></h2><div class="dc-faq-list"></div></div>';
+ host.querySelector('.dc__foot').before(faq);apply(faq);
+ const updateFaq=()=>{faq.querySelector('.dc-faq-list').innerHTML=renderBotFaq();};updateFaq();document.addEventListener('i18n:change',updateFaq);
  const background=document.createElement('div');background.className='discord-page-bg';background.setAttribute('aria-hidden','true');background.innerHTML='<div class="world-vignette"></div>';host.prepend(background);
  host.querySelector('[data-i18n="ft.mod.t"]').closest('.dc__sec').id='discord-features';
  const scenes=createStillScenes(background),art=DISCORD_LAYOUT.map(p=>DISCORD_ART[p.art]);

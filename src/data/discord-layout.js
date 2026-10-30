@@ -7,4 +7,5 @@ export const DISCORD_LAYOUT=[
  {selector:'#yokai',label:'dc.spirits',art:'spirits'},
  {selector:'#invita',label:'dc.invites',art:'invites'},
  {selector:'#spirit-house',label:'house.title',art:'house'},
+ {selector:'#discord-faq',label:'help.faq',art:'faq'},
 ];

@@ -297,7 +297,7 @@
   "dc.music-open": "Entrez dans le module",
   "dc.music-listen-note": "Retour au premier panneau pour choisir Spotify ou YouTube (Tème).",
   "dc.open-panel": "Ouvrez le dashboard",
-  "dc.return": "← Choix du protocole",
+  "dc.return": "Choix du protocole",
   "dc.login": "Se connecter avec Discord",
   "dc.commands": "Liste des commandes",
   "dc.patches": "Notes de mise à jour",
@@ -1260,5 +1260,6 @@
   "spirit.loadError": "L’histoire est indisponible. Réessayez.",
   "spirit.musicShared": "Les commandes musicales appartiennent au Core et sont partagées par la flotte.",
   "spirit.modCompanion": "Mod aide le Core à exécuter des actions et des logs ; il ne remplace pas le bot principal de manière autonome.",
-  "house.features": "Fonctionnalités"
+  "house.features": "Fonctionnalités",
+  "help.wiki": "Wiki"
 }
