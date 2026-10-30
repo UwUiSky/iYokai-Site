@@ -243,7 +243,7 @@
   "protocol.social": "Соцсети",
   "protocol.music": "Моя музыка",
   "protocol.live": "Прямые эфиры",
-  "protocol.projects": "Проекты в разработке",
+  "protocol.projects": "Будущие проекты",
   "protocol.contact": "Связаться со мной",
   "protocol.discord.hint": "Общество / Автоматизация",
   "protocol.social.hint": "За пределами маски",
@@ -1251,13 +1251,14 @@
   "house.title": "Дом духов",
   "house.kicker": "ЗА ПРЕДЕЛАМИ DISCORD · ОБИТЕЛЬ",
   "house.intro": "Дом экосистемы за пределами Discord. У духов наконец появилась своя обитель.",
-  "house.discover": "Войти в Дом",
+  "house.discover": "Скачать приложение Desktop / Mobile",
   "house.note": "Desktop и Android находятся в разработке. Загрузка станет доступна после добавления официальных пакетов.",
-  "house.desktop": "Скачать Desktop",
-  "house.android": "Скачать Android",
+  "house.desktop": "Скачать приложение Desktop",
+  "house.android": "Скачать приложение Mobile",
   "inv.mod": "Отдельный экземпляр для расширенной защиты: Хвост-Страж.",
   "spirit.loading": "Загрузка истории…",
   "spirit.loadError": "История недоступна. Повторите попытку.",
   "spirit.musicShared": "Музыкальные команды принадлежат Core и используются всей флотилией.",
-  "spirit.modCompanion": "Mod помогает Core выполнять действия и вести журналы; он не заменяет основного бота автономно."
+  "spirit.modCompanion": "Mod помогает Core выполнять действия и вести журналы; он не заменяет основного бота автономно.",
+  "house.features": "Возможности"
 }

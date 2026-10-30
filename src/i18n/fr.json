@@ -243,7 +243,7 @@
   "protocol.social": "Réseaux sociaux",
   "protocol.music": "Ma musique",
   "protocol.live": "Chaînes en direct",
-  "protocol.projects": "Projets en cours",
+  "protocol.projects": "Projets futurs",
   "protocol.contact": "Contacte-moi",
   "protocol.discord.hint": "Communauté / Automatisation",
   "protocol.social.hint": "Au-delà de la masque",
@@ -1251,13 +1251,14 @@
   "house.title": "La Maison des Esprits",
   "house.kicker": "AU-DELÀ DE DISCORD · LA DEMEURE",
   "house.intro": "La demeure de l’écosystème, au-delà de Discord. Les esprits ont enfin un foyer.",
-  "house.discover": "Entrer dans la Maison",
+  "house.discover": "Télécharger l’application Desktop / Mobile",
   "house.note": "Desktop et Android sont en développement. Les téléchargements seront disponibles lorsque les paquets officiels seront liés.",
-  "house.desktop": "Télécharger Desktop",
-  "house.android": "Télécharger Android",
+  "house.desktop": "Télécharger l’application Desktop",
+  "house.android": "Télécharger l’application Mobile",
   "inv.mod": "Une instance dédiée à la sécurité avancée : la Queue Gardienne.",
   "spirit.loading": "Chargement de l’histoire…",
   "spirit.loadError": "L’histoire est indisponible. Réessayez.",
   "spirit.musicShared": "Les commandes musicales appartiennent au Core et sont partagées par la flotte.",
-  "spirit.modCompanion": "Mod aide le Core à exécuter des actions et des logs ; il ne remplace pas le bot principal de manière autonome."
+  "spirit.modCompanion": "Mod aide le Core à exécuter des actions et des logs ; il ne remplace pas le bot principal de manière autonome.",
+  "house.features": "Fonctionnalités"
 }

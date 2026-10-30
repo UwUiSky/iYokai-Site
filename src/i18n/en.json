@@ -243,7 +243,7 @@
   "protocol.social": "Social",
   "protocol.music": "My music",
   "protocol.live": "Live channels",
-  "protocol.projects": "Work-in-Progress projects",
+  "protocol.projects": "Future projects",
   "protocol.contact": "Contact me",
   "protocol.discord.hint": "Community / automation",
   "protocol.social.hint": "Beyond the mask",
@@ -1251,13 +1251,14 @@
   "house.title": "The House of Spirits",
   "house.kicker": "BEYOND DISCORD · THE HOME",
   "house.intro": "A home for the ecosystem beyond Discord. The spirits finally have a place to return to.",
-  "house.discover": "Enter the House",
+  "house.discover": "Download the Desktop / Mobile app",
   "house.note": "Desktop and Android are in development. Downloads will be available when official packages are linked.",
-  "house.desktop": "Download Desktop",
-  "house.android": "Download Android",
+  "house.desktop": "Download the Desktop app",
+  "house.android": "Download the Mobile app",
   "inv.mod": "A dedicated advanced security instance: the Guardian Tail.",
   "spirit.loading": "Loading the story…",
   "spirit.loadError": "The story is unavailable. Please retry.",
   "spirit.musicShared": "Music commands belong to Core and are shared by the fleet.",
-  "spirit.modCompanion": "Mod assists Core with actions and logs; it does not independently replace the main bot."
+  "spirit.modCompanion": "Mod assists Core with actions and logs; it does not independently replace the main bot.",
+  "house.features": "Features"
 }

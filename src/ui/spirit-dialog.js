@@ -5,6 +5,7 @@ import { loadPublicLinks } from '../core/links-config.js';
 import './spirit-dialog.css';
 
 export function initSpiritDialog(){
+ initHouseFeatures();
  const dialog=document.createElement('dialog');dialog.className='spirit-dialog';dialog.setAttribute('aria-labelledby','spirit-title');
  dialog.innerHTML='<div class="spirit-shell"><header><div><p class="spirit-kicker"></p><h2 id="spirit-title"></h2></div><button type="button" data-spirit-close>×</button></header><div class="spirit-content" data-lenis-prevent tabindex="0"><p class="spirit-original"></p><p class="spirit-bio" lang="it"></p><div class="spirit-actions"></div><section class="spirit-story" lang="it" id="spirit-story" hidden></section><p class="spirit-note"></p></div></div>';
  document.body.append(dialog);
@@ -63,4 +64,15 @@ export function initSpiritDialog(){
  document.addEventListener('click',e=>{const trigger=e.target.closest('[data-spirit]');if(trigger){e.preventDefault();open(trigger.dataset.spirit,trigger);}});
  document.addEventListener('i18n:change',()=>{if(dialog.open)render();});
  return {open};
+}
+
+function initHouseFeatures(){
+ const dialog=document.createElement('dialog');dialog.className='spirit-dialog house-features';dialog.setAttribute('aria-labelledby','house-features-title');
+ dialog.innerHTML='<div class="spirit-shell"><header><h2 id="house-features-title"></h2><button type="button" data-features-close>×</button></header><div class="spirit-content"><p class="spirit-bio" lang="en">Work in Progress</p></div></div>';
+ document.body.append(dialog);let from;
+ const translate=()=>{dialog.querySelector('h2').textContent=t('house.features');dialog.querySelector('button').setAttribute('aria-label',t('sheet.close'));};
+ document.addEventListener('click',e=>{const trigger=e.target.closest('[data-house-features]');if(trigger){from=trigger;translate();dialog.showModal();}});
+ dialog.addEventListener('click',e=>{if(e.target===dialog||e.target.closest('[data-features-close]'))dialog.close();});
+ dialog.addEventListener('close',()=>from?.focus({preventScroll:true}));
+ document.addEventListener('i18n:change',translate);translate();
 }

@@ -243,7 +243,7 @@
   "protocol.social": "소셜 미디어",
   "protocol.music": "나의 음악",
   "protocol.live": "라이브 채널",
-  "protocol.projects": "개발 중인 프로젝트",
+  "protocol.projects": "향후 프로젝트",
   "protocol.contact": "문의하기",
   "protocol.discord.hint": "공동체 / 자동화",
   "protocol.social.hint": "마스크를 넘어서",
@@ -1251,13 +1251,14 @@
   "house.title": "정령의 집",
   "house.kicker": "DISCORD 너머 · 안식처",
   "house.intro": "Discord 밖으로 이어지는 생태계의 안식처. 정령들에게도 돌아갈 집이 생겼습니다.",
-  "house.discover": "집에 들어가기",
+  "house.discover": "Desktop / Mobile 앱 다운로드",
   "house.note": "Desktop과 Android는 개발 중입니다. 공식 패키지 링크가 등록되면 다운로드할 수 있습니다.",
-  "house.desktop": "Desktop 다운로드",
-  "house.android": "Android 다운로드",
+  "house.desktop": "Desktop 앱 다운로드",
+  "house.android": "Mobile 앱 다운로드",
   "inv.mod": "고급 보안을 위한 전용 인스턴스, 수호의 꼬리.",
   "spirit.loading": "이야기를 불러오는 중…",
   "spirit.loadError": "이야기를 불러올 수 없습니다. 다시 시도해 주세요.",
   "spirit.musicShared": "음악 명령어는 Core에 속하며 함대가 함께 사용합니다.",
-  "spirit.modCompanion": "Mod는 Core의 작업과 로그 처리를 돕습니다. 메인 봇을 독립적으로 대체하지는 않습니다."
+  "spirit.modCompanion": "Mod는 Core의 작업과 로그 처리를 돕습니다. 메인 봇을 독립적으로 대체하지는 않습니다.",
+  "house.features": "기능"
 }

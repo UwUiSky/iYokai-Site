@@ -2,6 +2,7 @@ import { decorateLanguageSelect } from '../i18n/index.js';
 import gsap from 'gsap';
 import { initDiscordChrome } from './discord-chrome.js';
 import { DISCORD_ART } from '../data/artworks.js';
+import { DISCORD_LAYOUT } from '../data/discord-layout.js';
 import { createStillScenes } from './still-scenes.js';
 import { preloadImage } from '../core/preload.js';
 import { harukazeNodes } from './harukaze.js';
@@ -16,20 +17,22 @@ export function initDiscordPanels({ host, lenis, prefs, enabled, reduced }) {
  music.innerHTML='<div><h2 class="dc__h" data-i18n="dc.music-title"></h2><p class="dc__sub" data-i18n="dc.music-body"></p><div class="dc-module-actions"><a class="btn btn--main" href="#commands" data-i18n="dc.music-commands"></a><a class="btn" href="#invita" data-i18n="dc.music-invite"></a></div><p class="dc__note" data-i18n="dc.music-note"></p></div>';
  host.querySelector('#comandi').before(music);apply(music);
  const house=document.createElement('section');house.className='dc__sec dc__house';house.id='spirit-house';
- house.innerHTML='<div class="dc-house-copy"><p class="dc__kick" data-i18n="house.kicker"></p><h2 class="dc__h" data-i18n="house.title"></h2><p class="spirit-house-intro" data-i18n="house.intro"></p><div class="dc-house-actions"><button type="button" class="btn btn--main" data-spirit="house" data-i18n="house.discover"></button></div><p class="dc__note" data-i18n="house.note"></p></div>';
+ house.innerHTML='<div class="dc-house-copy"><p class="dc__kick" data-i18n="house.kicker"></p><h2 class="dc__h" data-i18n="house.title"></h2><p class="spirit-house-intro" data-i18n="house.intro"></p><div class="dc-house-actions"><button type="button" class="btn btn--main" data-spirit="house" data-i18n="house.discover"></button><button type="button" class="btn" data-house-features data-i18n="house.features"></button></div><p class="dc__note" data-i18n="house.note"></p></div>';
  host.querySelector('.dc__foot').before(house);apply(house);
  const background=document.createElement('div');background.className='discord-page-bg';background.setAttribute('aria-hidden','true');background.innerHTML='<div class="world-vignette"></div>';host.prepend(background);
- const scenes=createStillScenes(background),art=Object.values(DISCORD_ART);
- const sections=[...host.querySelectorAll(':scope > .dc__sec')];
- const names=['dc.overview','dc.features','dc.music-title','dash.t','dc.spirits','dc.invites','house.title'];
+ host.querySelector('[data-i18n="ft.mod.t"]').closest('.dc__sec').id='discord-features';
+ const scenes=createStillScenes(background),art=DISCORD_LAYOUT.map(p=>DISCORD_ART[p.art]);
+ const sections=DISCORD_LAYOUT.map(p=>host.querySelector(p.selector));
+ const names=DISCORD_LAYOUT.map(p=>p.label);
  const footer=host.querySelector('.dc__foot');
+ sections.forEach(section=>footer.before(section));
  sections.forEach((section,i)=>{
   section.id ||= `discord-${i}`;
   section.tabIndex=-1;section.dataset.panelName=names[i];
   const content=document.createElement('div');content.className='dc-panel-content';
   if(i){content.dataset.panelScroll='';content.dataset.lenisPrevent='';content.tabIndex=0;}
   content.append(...section.childNodes);
-  if(i===1||i===3){const heading=document.createElement('h2');heading.className='dc__h dc-panel-title';heading.dataset.i18n=names[i];heading.textContent=t(names[i]);content.prepend(heading);}
+  if(DISCORD_LAYOUT[i].heading){const heading=document.createElement('h2');heading.className='dc__h dc-panel-title';heading.dataset.i18n=names[i];heading.textContent=t(names[i]);content.prepend(heading);}
   section.append(content);
  });
  sections.at(-1).firstElementChild.append(footer);
@@ -66,7 +69,7 @@ export function initDiscordPanels({ host, lenis, prefs, enabled, reduced }) {
  document.addEventListener('i18n:change',translate);translate();
  // Feature cards are entry points to their relevant functional layouts.
  const musicCard=host.querySelector('[data-i18n="ft.music.t"]').closest('article');
- const openMusic=document.createElement('button');openMusic.className='protocol-action';openMusic.type='button';openMusic.dataset.i18n='dc.music-open';openMusic.textContent=t('dc.music-open');openMusic.onclick=()=>go(2);musicCard.append(openMusic);
+ const openMusic=document.createElement('button');openMusic.className='protocol-action';openMusic.type='button';openMusic.dataset.i18n='dc.music-open';openMusic.textContent=t('dc.music-open');openMusic.onclick=()=>go(sections.indexOf(music));musicCard.append(openMusic);
  const sisters=document.createElement('button');sisters.type='button';sisters.className='btn';sisters.dataset.spirit='music';sisters.dataset.i18n='spirit.sisters';sisters.textContent=t('spirit.sisters');music.querySelector('.dc-module-actions').append(sisters);
  music.querySelector('a[href="#commands"]').dataset.commandScope='music';
  const musicNames=document.createElement('div');musicNames.className='dc-house-actions';

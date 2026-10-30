@@ -243,7 +243,7 @@
   "protocol.social": "Соцмережі",
   "protocol.music": "Моя музика",
   "protocol.live": "Прямі ефіри",
-  "protocol.projects": "Проєкти в розробці",
+  "protocol.projects": "Майбутні проєкти",
   "protocol.contact": "Зв’язатися зі мною",
   "protocol.discord.hint": "Компанія / Автоматизація",
   "protocol.social.hint": "За межами маски",
@@ -1251,13 +1251,14 @@
   "house.title": "Дім духів",
   "house.kicker": "ПОЗА DISCORD · ОСЕЛЯ",
   "house.intro": "Дім екосистеми поза Discord. Духи нарешті мають власну оселю.",
-  "house.discover": "Увійти до Дому",
+  "house.discover": "Завантажити застосунок Desktop / Mobile",
   "house.note": "Desktop і Android перебувають у розробці. Завантаження стане доступним після додавання офіційних пакетів.",
-  "house.desktop": "Завантажити Desktop",
-  "house.android": "Завантажити Android",
+  "house.desktop": "Завантажити застосунок Desktop",
+  "house.android": "Завантажити застосунок Mobile",
   "inv.mod": "Окремий екземпляр для розширеного захисту: Хвіст-Вартовий.",
   "spirit.loading": "Завантаження історії…",
   "spirit.loadError": "Історія недоступна. Спробуйте ще раз.",
   "spirit.musicShared": "Музичні команди належать Core і спільно використовуються флотилією.",
-  "spirit.modCompanion": "Mod допомагає Core виконувати дії та вести журнали; він не замінює головного бота автономно."
+  "spirit.modCompanion": "Mod допомагає Core виконувати дії та вести журнали; він не замінює головного бота автономно.",
+  "house.features": "Функції"
 }

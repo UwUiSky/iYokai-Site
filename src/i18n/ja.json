@@ -243,7 +243,7 @@
   "protocol.social": "ソーシャル",
   "protocol.music": "私の音楽",
   "protocol.live": "ライブ配信",
-  "protocol.projects": "開発中のプロジェクト",
+  "protocol.projects": "今後のプロジェクト",
   "protocol.contact": "お問い合わせ",
   "protocol.discord.hint": "コミュニティ / 自動化",
   "protocol.social.hint": "マスクを超えて",
@@ -1251,13 +1251,14 @@
   "house.title": "精霊たちの家",
   "house.kicker": "DISCORDの先へ・精霊たちの住まい",
   "house.intro": "Discordの外に広がるエコシステムの住まい。精霊たちにも、帰る家ができました。",
-  "house.discover": "家に入る",
+  "house.discover": "Desktop / Mobileアプリをダウンロード",
   "house.note": "DesktopとAndroidは開発中です。公式パッケージのリンクが設定されるとダウンロードできます。",
-  "house.desktop": "Desktopをダウンロード",
-  "house.android": "Androidをダウンロード",
+  "house.desktop": "Desktopアプリをダウンロード",
+  "house.android": "Mobileアプリをダウンロード",
   "inv.mod": "高度なセキュリティを担う専用インスタンス「守護の尾」。",
   "spirit.loading": "物語を読み込み中…",
   "spirit.loadError": "物語を読み込めません。再試行してください。",
   "spirit.musicShared": "音楽コマンドはCoreに属し、艦隊全体で共有されます。",
-  "spirit.modCompanion": "ModはCoreの操作やログ処理を補助します。メインボットを単独で置き換えるものではありません。"
+  "spirit.modCompanion": "ModはCoreの操作やログ処理を補助します。メインボットを単独で置き換えるものではありません。",
+  "house.features": "機能"
 }

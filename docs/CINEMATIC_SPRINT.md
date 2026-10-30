@@ -844,3 +844,22 @@ UI giapponese verificata con testo originale italiano dichiarato. Non testati
 inviti Discord reali, avvio Mod, download non configurati o telefono fisico.
 La configurazione live OAuth/API/PostgreSQL resta incompleta. Il backup ZIP r11
 è precedente a questo aggiornamento; sorgenti correnti salvati con Git.
+
+## 30 ottobre — menu leggibile, download e ordine Discord
+
+Didascalia del menu mobile `iYokaiミ / CONTROL & EXPLORE`: 17 px, font locale
+YokaiInterface e nessun tracking aggiunto. La correzione è locale alla didascalia,
+non altera metriche, kerning o font Yokai normale/Extreme del resto del sito.
+
+Ordine esplicito: Discord Core, Dashboard, Funzionalità, Musica, Spiriti,
+Nove code, Casa degli Spiriti. Ogni sezione mantiene la propria tavola;
+il collegamento Music nelle funzionalità usa il riferimento al pannello,
+non un indice fisso. Pulsanti Casa rinominati Scarica l’applicazione Desktop /
+Mobile e singoli download Desktop/Mobile nella finestra bio. Aggiunto pulsante
+Funzionalità sulla Casa con finestra contenente solo Work in Progress.
+Scelta protocollo Progetti futuri, etichette aggiornate nelle dieci lingue.
+
+39 test JavaScript e build passati. Browser simulato 390×844: menu a 17 px senza
+overflow, ordine dei sette pannelli verificato nel DOM, nuovi pulsanti e finestra
+Work in Progress verificati. Controllata anche la dicitura Progetti futuri al
+ritorno al selettore. Nessuna modifica al backend e nessun test su telefono fisico.

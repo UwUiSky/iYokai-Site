@@ -1,4 +1,5 @@
 /* Shared chrome: gold hairline and translucent ink; artwork remains visible. */
+:root[data-artwork="static"] .dc-drawer .dc-drawer-kicker{font-family:YokaiInterface,sans-serif!important;font-size:17px;line-height:1.5;letter-spacing:0;font-kerning:normal;text-transform:none;color:#dfc18f;overflow-wrap:normal}
 #dc .dc__bar{display:flex;align-items:center;gap:18px;padding:14px clamp(20px,4vw,75px);min-height:78px;background:linear-gradient(110deg,#09060dc9,#150d1ca3);border-bottom:1px solid #c9a77c30;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #dc .dc__bar .btn{min-height:46px;padding:10px 17px;font-size:14px;white-space:nowrap;border-radius:6px}
 #dc .dc__bar #dcback{border:1px solid #c7a56c8a;color:#f4e5c9;background:#b08b4a16;font-size:14px;font-weight:600}

@@ -243,7 +243,7 @@
   "protocol.social": "社交平台",
   "protocol.music": "我的音乐",
   "protocol.live": "直播频道",
-  "protocol.projects": "开发中的项目",
+  "protocol.projects": "未来项目",
   "protocol.contact": "联系我",
   "protocol.discord.hint": "社区 / 自动化",
   "protocol.social.hint": "超越面具",
@@ -1251,13 +1251,14 @@
   "house.title": "灵之居所",
   "house.kicker": "DISCORD 之外 · 灵之居所",
   "house.intro": "Discord 之外的生态之家。精灵们终于有了可以回归的居所。",
-  "house.discover": "进入居所",
+  "house.discover": "下载 Desktop / Mobile 应用",
   "house.note": "Desktop 和 Android 正在开发中。链接官方安装包后即可下载。",
-  "house.desktop": "下载 Desktop",
-  "house.android": "下载 Android",
+  "house.desktop": "下载 Desktop 应用",
+  "house.android": "下载 Mobile 应用",
   "inv.mod": "专为高级安全防护而设的独立实例：守护之尾。",
   "spirit.loading": "正在加载故事…",
   "spirit.loadError": "故事暂不可用，请重试。",
   "spirit.musicShared": "音乐命令属于 Core，由整个舰队共享。",
-  "spirit.modCompanion": "Mod 协助 Core 执行操作和记录日志，并不能独立替代主机器人。"
+  "spirit.modCompanion": "Mod 协助 Core 执行操作和记录日志，并不能独立替代主机器人。",
+  "house.features": "功能"
 }

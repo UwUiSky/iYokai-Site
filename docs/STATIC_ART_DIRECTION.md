@@ -723,3 +723,11 @@ Aggiunta come settimo pannello Discord con le stesse dissolvenze e sfumature.
 Su mobile titoli/intro restano nella colonna sinistra per lasciare leggibile il
 volto. La Casa è Desktop/Android e non fa parte delle nove code Discord.
 Le tavole precedenti, i font normale/Extreme r11 e il default statico restano.
+
+## 30 ottobre — sequenza richiesta e didascalia menu
+
+La sequenza Discord mette Dashboard dopo la home, poi Funzionalità e Musica;
+seguono Spiriti, Nove code e Casa. Il catalogo DISCORD_LAYOUT mantiene abbinate
+le tavole anche quando cambia l'ordine. Nessuna nuova immagine in questa revisione.
+Solo la didascalia dorata del drawer usa YokaiInterface a 17 px per leggibilità;
+titoli, bio e lore conservano i font Yokai già approvati.

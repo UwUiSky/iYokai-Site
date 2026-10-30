@@ -243,7 +243,7 @@
   "protocol.social": "Social Media",
   "protocol.music": "Meine Musik",
   "protocol.live": "Live-Kanäle",
-  "protocol.projects": "Laufende Projekte",
+  "protocol.projects": "Zukünftige Projekte",
   "protocol.contact": "Kontaktiere mich",
   "protocol.discord.hint": "Gemeinschaft / Automatisierung",
   "protocol.social.hint": "Über die Maske hinaus",
@@ -1251,13 +1251,14 @@
   "house.title": "Das Haus der Geister",
   "house.kicker": "JENSEITS VON DISCORD · DAS ZUHAUSE",
   "house.intro": "Ein Zuhause für das Ökosystem jenseits von Discord. Die Geister haben endlich einen Ort zum Zurückkehren.",
-  "house.discover": "Das Haus betreten",
+  "house.discover": "Desktop- / Mobile-App herunterladen",
   "house.note": "Desktop und Android sind in Entwicklung. Downloads folgen, sobald offizielle Pakete verlinkt sind.",
-  "house.desktop": "Desktop herunterladen",
-  "house.android": "Android herunterladen",
+  "house.desktop": "Desktop-App herunterladen",
+  "house.android": "Mobile-App herunterladen",
   "inv.mod": "Eine eigene Instanz für erweiterte Sicherheit: der Wächter-Schweif.",
   "spirit.loading": "Geschichte wird geladen…",
   "spirit.loadError": "Die Geschichte ist nicht verfügbar. Bitte erneut versuchen.",
   "spirit.musicShared": "Die Musikbefehle gehören zu Core und werden von der Flotte gemeinsam genutzt.",
-  "spirit.modCompanion": "Mod unterstützt Core bei Aktionen und Logs; es ersetzt den Hauptbot nicht eigenständig."
+  "spirit.modCompanion": "Mod unterstützt Core bei Aktionen und Logs; es ersetzt den Hauptbot nicht eigenständig.",
+  "house.features": "Funktionen"
 }

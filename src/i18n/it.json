@@ -243,7 +243,7 @@
   "protocol.social": "Social",
   "protocol.music": "La mia musica",
   "protocol.live": "Canali Live",
-  "protocol.projects": "Progetti Work-in-Progress",
+  "protocol.projects": "Progetti futuri",
   "protocol.contact": "Contattami",
   "protocol.discord.hint": "Community / automazioni",
   "protocol.social.hint": "Oltre la maschera",
@@ -1251,13 +1251,14 @@
   "house.title": "La Casa degli Spiriti",
   "house.kicker": "OLTRE DISCORD · LA DIMORA",
   "house.intro": "La dimora dell’ecosistema, oltre Discord. Gli spiriti hanno finalmente una casa.",
-  "house.discover": "Entra nella Casa",
+  "house.discover": "Scarica l’applicazione Desktop / Mobile",
   "house.note": "Desktop e Android sono in sviluppo. I download saranno disponibili quando verranno collegati i pacchetti ufficiali.",
-  "house.desktop": "Scarica Desktop",
-  "house.android": "Scarica Android",
+  "house.desktop": "Scarica l’applicazione Desktop",
+  "house.android": "Scarica l’applicazione Mobile",
   "inv.mod": "Istanza dedicata alla sicurezza avanzata: la Coda Guardiana.",
   "spirit.loading": "Caricamento della storia…",
   "spirit.loadError": "La storia non è disponibile. Riprova.",
   "spirit.musicShared": "I comandi musicali appartengono al Core e sono condivisi dalla flotta.",
-  "spirit.modCompanion": "Mod affianca il Core nell’esecuzione di azioni e log; non sostituisce autonomamente il bot principale."
+  "spirit.modCompanion": "Mod affianca il Core nell’esecuzione di azioni e log; non sostituisce autonomamente il bot principale.",
+  "house.features": "Funzionalità"
 }
