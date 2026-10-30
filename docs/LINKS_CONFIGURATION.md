@@ -55,3 +55,16 @@ La conferma dell’età è un’autodichiarazione, non una verifica d’identit�
 Le revisioni si aggiornano in `public/patch-notes.json`: data ISO, titolo e
 lista modifiche per IT/EN. Ordine nel file = ordine nell’interfaccia. Modificare
 il file e pubblicare una nuova versione del sito; non esiste un editor pubblico.
+
+## Nove code e Casa degli Spiriti — 30 ottobre
+
+`discord.musicBots` contiene esattamente cinque configurazioni, in ordine:
+Shirayuki (Music 1), Aoi (2), Kuro (3), Hana (4), Rei (5). Ogni elemento ha
+`clientId` e `permissions` pubblici; i nomi sono canonici nel catalogo del sito.
+`discord.modClientId` e `modPermissions` identificano iYokai Mod.
+Nessun token deve comparire qui. Per il backend usare la policy privata e le
+variabili ambiente; Mod usa `YOKAI_MOD_TOKEN`, come il bot esistente.
+
+La Casa degli Spiriti usa `desktopUrl` e `mobileUrl` (Android). È distinta dalle
+nove code: ha il suo pannello e la sua finestra bio/lore, non un invito Discord.
+I link mancanti lasciano i pulsanti disabilitati. Vedi docs/lore/README.md.

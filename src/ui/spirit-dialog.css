@@ -1,0 +1,18 @@
+.spirit-dialog{padding:0;width:min(880px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);border:1px solid #bc8aaf66;border-radius:22px;background:linear-gradient(140deg,#211321,#0b0a13 70%);color:#f5ecf6;box-shadow:0 24px 100px #000c}
+.spirit-dialog::backdrop{background:#05030bd9;backdrop-filter:blur(8px)}
+.spirit-shell{display:flex;flex-direction:column;max-height:calc(100dvh - 34px);min-height:0}
+.spirit-shell>header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:24px 30px;border-bottom:1px solid #dc9bdc26}
+.spirit-shell h2{font-family:Yokaiextreme,serif;font-size:clamp(30px,4vw,48px);line-height:1.12;margin:4px 0 0;overflow-wrap:anywhere}
+.spirit-kicker,.spirit-original{color:#dcb4ce;font-size:15px;line-height:1.4}
+.spirit-shell [data-spirit-close]{flex:none;width:44px;height:44px;border:1px solid #f8d5ee33;border-radius:50%;background:#ffffff08;color:inherit;font-size:27px;cursor:pointer}
+.spirit-content{padding:24px 30px 32px;overflow:auto;overscroll-behavior:contain;min-height:0;scrollbar-width:thin;touch-action:pan-y}
+.spirit-bio,.spirit-story p{font-family:Yokainormal,serif;font-size:clamp(19px,2vw,23px);line-height:1.65;white-space:pre-line;overflow-wrap:anywhere}
+.spirit-original{margin:0 0 12px}.spirit-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.spirit-actions .btn{white-space:normal;min-height:48px;max-width:100%;text-align:center}
+.spirit-story{border-top:1px solid #f6b2ee33;padding-top:18px}.spirit-story[hidden]{display:none}.spirit-story p{margin:0 0 1.1em}
+.spirit-note{font:15px/1.65 YokaiInterface,sans-serif;color:#bea9c2;border-top:1px solid #fff1;padding-top:18px}
+.spirit-dialog :focus-visible,.yk [data-spirit]:focus-visible{outline:2px solid #ffb3ef;outline-offset:4px}
+.yk__title-button{border:0;background:none;color:inherit;font:inherit;cursor:pointer;text-underline-offset:6px}.yk__title-button:hover{text-decoration:underline}
+.inv__identity{font:15px/1.5 YokaiInterface,sans-serif;color:#d9b7d3}.inv__bio{font-size:18px;line-height:1.5}.inv [data-spirit]{white-space:normal}
+.dc-house-copy{max-width:650px}.dc-house-copy .spirit-house-intro{font-size:clamp(21px,2.2vw,30px);line-height:1.5}.dc-house-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+@media(max-width:600px){.spirit-dialog{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.spirit-shell{max-height:calc(100dvh - 22px)}.spirit-shell>header{padding:20px 18px}.spirit-content{padding:20px 18px 26px}.spirit-actions{flex-direction:column;align-items:stretch}.spirit-shell h2{font-size:34px}.spirit-bio,.spirit-story p{font-size:20px}}
+@media(max-width:600px){.dc__house .dc__h,.dc-house-copy .spirit-house-intro{max-width:70%;text-shadow:0 2px 18px #000}.dc__house .dc__note{max-width:92%}}

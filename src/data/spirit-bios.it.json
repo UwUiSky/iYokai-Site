@@ -1,0 +1,70 @@
+{
+  "kitsune": {
+    "bio": "La Kitsune è l’intelligenza centrale di iYokai. Coordina moderazione avanzata, ticket, livelli, gilde e automazioni con eleganza e precisione. Il cuore del bot Discord italiano tutto-in-uno, capace di tenere insieme community complesse senza perdere controllo né finezza.",
+    "language": "it"
+  },
+  "tengu": {
+    "bio": "Il Tengu incarna la protezione silenziosa e disciplinata. Spirito della sicurezza avanzata, anti-raid e difesa dei confini del server. Interviene solo quando serve, con forza calibrata, per garantire stabilità e ordine alla community.",
+    "language": "it"
+  },
+  "nekomata": {
+    "bio": "La Nekomata regge i sistemi di level, XP e clan. Premia chi resta e contribuisce nel tempo, favorendo legami duraturi e progressione autentica. Spirito dell’equilibrio che trasforma la presenza in valore e la community in casa.",
+    "language": "it"
+  },
+  "bakeneko": {
+    "bio": "La Bakeneko rappresenta la creatività senza schemi rigidi e la libertà consapevole. Custodisce gli spazi espressivi e i margini meno regolamentati, ricordando che una community sana ha bisogno anche di zone in cui sperimentare senza costrizioni eccessive.",
+    "language": "it"
+  },
+  "oni": {
+    "bio": "L’Oni è potenza incanalata nella disciplina. Spirito della sicurezza pesante e dell’intervento deciso, protegge il server quando le minacce superano la moderazione ordinaria. Forza grezza educata a non diventare mai prepotenza.",
+    "language": "it"
+  },
+  "rokurokubi": {
+    "bio": "La Rokurokubi è lo spirito che si estende oltre i confini del server. Simbolo di adattabilità e continuità, permette alle funzioni di seguire l’utente da una community all’altra, crescendo senza restare imprigionata in un unico perimetro.",
+    "language": "it"
+  },
+  "main": {
+    "bio": "Il bot principale di iYokai. Moderazione avanzata, AutoMod, ticket system, livelli, gilde, log e utility in un’unica presenza elegante e potente. L’alleato digitale completo per server Discord italiani che cercano ordine, profondità e affidabilità.",
+    "language": "it"
+  },
+  "shirayuki": {
+    "bio": "Prima delle Cinque Sorelle Musicali. Presenza costante e atmosferica, ideale per radio 24/7, lofi e playlist lunghe. La coda musicale Discord che resta attiva anche quando il server dorme, con eleganza rarefatta e qualità costante.",
+    "language": "it"
+  },
+  "aoi": {
+    "bio": "Seconda sorella musicale. Precisione, ordine e rispetto per la qualità della coda. Il bot musica Discord pensato per chi vuole playlist curate, controllo fine e un’esperienza sonora metodica e affidabile.",
+    "language": "it"
+  },
+  "kuro": {
+    "bio": "Terza sorella musicale. Energia densa, bassi potenti e presenza fisica. La coda ideale per party, serate live e server che vogliono una musica capace di riempire lo spazio e far vibrare la community.",
+    "language": "it"
+  },
+  "hana": {
+    "bio": "Quarta sorella musicale. La più versatile e adattabile. Passa da un genere all’altro con naturalezza, rispondendo all’umore del server. Il bot musica Discord che sa ascoltare la community mentre suona.",
+    "language": "it"
+  },
+  "rei": {
+    "bio": "Quinta e ultima sorella musicale. Specializzata nei casi limite, nelle richieste particolari e nelle integrazioni non standard. Completa la flotta musicale multi-istanza di iYokai occupandosi di ciò che le altre non trattano.",
+    "language": "it"
+  },
+  "mod": {
+    "bio": "Istanza dedicata alla sicurezza avanzata. Anti-raid, anti-nuke e protezione pesante separate dal core per massima reattività e isolamento del rischio. La difesa silenziosa che interviene quando davvero serve.",
+    "language": "it"
+  },
+  "nsfw": {
+    "bio": "Modulo NSFW isolato e riservato ai maggiorenni. Completamente separato dal core per sicurezza e chiarezza. Spazio dedicato a contenuti per adulti, gestito con regole proprie e accessibile solo nei canali age-restricted.",
+    "language": "it"
+  },
+  "app": {
+    "bio": "L’applicazione Discord legata al profilo utente. Funzioni cross-server sempre disponibili: note, promemoria, strumenti rapidi e utility personali. La presenza iYokai che ti segue anche nei server dove il bot principale non è presente.",
+    "language": "it"
+  },
+  "house": {
+    "bio": "L’applicazione desktop (e in futuro Android) di iYokai. Non è una coda, ma la dimora degli spiriti. Pannello rapido, personalizzazioni avanzate, scorciatoie, notifiche intelligenti, editor embed e accesso diretto alle AI con token propri. L’estensione dell’ecosistema oltre Discord.",
+    "language": "it"
+  },
+  "music": {
+    "bio": "Cinque connessioni vocali indipendenti. Cinque personalità distinte. Un’unica volontà: fare in modo che la musica non debba mai scegliere tra potenza e presenza, tra qualità e quantità. Puoi invitarne una sola e avrà comunque carattere proprio. Oppure puoi invitarle tutte e cinque e scoprire cosa succede quando cinque volontà diverse decidono di non calpestarsi più.",
+    "language": "it"
+  }
+}

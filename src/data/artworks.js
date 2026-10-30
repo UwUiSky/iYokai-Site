@@ -24,4 +24,5 @@ export const DISCORD_ART = {
  dashboard:'/cinematic/discord-dashboard-ears-v3-wide.webp',
  spirits:'/cinematic/discord-spirits-v2-wide.webp',
  invites:'/cinematic/discord-invites-wide.webp',
+ house:'/cinematic/spirit-house-wide.webp',
 };

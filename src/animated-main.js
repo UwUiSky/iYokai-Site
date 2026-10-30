@@ -1,3 +1,4 @@
+import { initSpiritDialog } from './ui/spirit-dialog.js';
 import './style.css';
 import './cinematic.css';
 import { initI18n, t } from './i18n/index.js';
@@ -57,7 +58,7 @@ const kit = createAvatar(quality.tier); scene.add(kit.group); kit.group.visible 
 const entry = createEntry(scene, camera, quality.particles);
 const adapt = createAdaptive(renderer, quality, { onLowest: () => street.lite() });
 const hub = initHub();
-initPlayer(); initSheet(); initStatus(); initSystem(); initInvite(); initYokai(); initCommands(); initPanel();
+initPlayer(); initSheet(); initStatus(); initSystem(); initSpiritDialog();initInvite(); initYokai(); initCommands(); initPanel();
 gsap.globalTimeline.timeScale(prefs.speed);
 initPrefsPanel({ prefs, onChange(k) { if (k === 'accent') mark.setAccent(prefs.accent); if (k === 'speed') gsap.globalTimeline.timeScale(prefs.speed); } });
 // Preferences remain reachable while the product hub is closed.

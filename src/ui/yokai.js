@@ -1,3 +1,4 @@
+import { spiritBio } from '../data/spirit-catalog.js';
 // "Ogni modulo ha il suo spirito": sei sigilli in linea, ognuno con colore e movimento propri; la carta segue il puntatore.
 import { a, t } from '../i18n/index.js';
 const S = (d) => `<svg viewBox="0 0 120 120" aria-hidden="true">${d}</svg>`;
@@ -11,7 +12,8 @@ const YOKAI = [
 ];
 export function initYokai() {
   const grid = document.getElementById('ykgrid'); if (!grid) return;
-  grid.innerHTML = YOKAI.map((y, k) => `<article class="glass yk rv" style="--c:${y.c};--d:${y.d}s;--z:${(0.7 + (k % 3) * 0.3).toFixed(1)};--bd:${8 + (k % 3)}s"><div class="yk__in"><span class="yk__i">${y.i}</span><h3>${y.n}</h3><p ${a(y.k)}>${t(y.k)}</p></div></article>`).join('');
+  grid.innerHTML = YOKAI.map((y, k) => `<article class="glass yk rv" style="--c:${y.c};--d:${y.d}s;--z:${(0.7 + (k % 3) * 0.3).toFixed(1)};--bd:${8 + (k % 3)}s"><div class="yk__in"><span class="yk__i">${y.i}</span><h3><button type="button" class="yk__title-button" data-spirit="${y.n.toLowerCase()}">${y.n}</button></h3><p ${a(y.k)}>${t(y.k)}</p></div></article>`).join('');
+  grid.querySelectorAll('.yk').forEach((card,i)=>{const bio=card.querySelector('p');bio.removeAttribute('data-i18n');bio.lang='it';bio.textContent=spiritBio(YOKAI[i].n.toLowerCase()).bio;const b=document.createElement('button');b.type='button';b.className='btn';b.dataset.spirit=YOKAI[i].n.toLowerCase();b.dataset.i18n='spirit.discover';b.textContent=t('spirit.discover');card.querySelector('.yk__in').append(b);});
   if (!matchMedia('(pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   grid.addEventListener('pointermove', (e) => {
     const c = e.target.closest('.yk'); if (!c) return;

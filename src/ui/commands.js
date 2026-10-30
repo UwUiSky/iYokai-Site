@@ -1,6 +1,7 @@
 import './commands.css';
 import { t,apply,lang } from '../i18n/index.js';
 import { indexCommands,filterCommands } from '../core/command-catalog.js';
+import { scopedCommands } from '../data/spirit-catalog.js';
 
 export function initCommands(){
  const dialog=document.createElement('dialog');dialog.className='command-dialog';dialog.setAttribute('aria-labelledby','cmd-title');
@@ -8,7 +9,8 @@ export function initCommands(){
  document.body.append(dialog);apply(dialog);
  const input=dialog.querySelector('input'),categories=dialog.querySelector('.command-categories'),results=dialog.querySelector('.command-results'),list=dialog.querySelector('ul'),empty=dialog.querySelector('.command-empty'),count=dialog.querySelector('.command-count'),clear=dialog.querySelector('[data-command-clear]'),copyStatus=dialog.querySelector('.command-copy-status');
  const localized=()=>Object.fromEntries(Object.keys(translations).map(name=>[name,t('command.description.'+name)===('command.description.'+name)?translations[name]:t('command.description.'+name)]));
- let catalog,translations={},commands,groups=[],category='*',from,request=0,loading=false,failed=false,debounce,copyRevision=0;
+ let catalog,translations={},commands,groups=[],category='*',scope='*',from,request=0,loading=false,failed=false,debounce,copyRevision=0;
+ function index(){commands=scopedCommands(indexCommands(catalog,{translations:localized(),language:lang(),translationLanguage:lang()}),scope);groups=[...new Set(commands.map(c=>c.category))].map(name=>[name,commands.filter(c=>c.category===name).length]);}
  const categoryLabel=name=>t(`cmd.category.${name}`)===`cmd.category.${name}`?name:t(`cmd.category.${name}`);
  function filters(){
   categories.replaceChildren();if(!commands)return;
@@ -42,12 +44,13 @@ export function initCommands(){
    const [source,english]=await Promise.all([import('../data/commands.json'),import('../data/commands.en.json')]);
    const data=source.default;
    if(ticket!==request||!dialog.open)return;
-   catalog=data;translations=english.default;commands=indexCommands(catalog,{translations:localized(),language:lang(),translationLanguage:lang()});groups=data.categories.map(g=>[g.name,g.commands.length]);filters();
+   catalog=data;translations=english.default;index();filters();
   }catch{if(ticket===request&&dialog.open)failed=true;}
   finally{if(ticket===request&&dialog.open){loading=false;results.setAttribute('aria-busy','false');render();}}
  }
- function open(trigger){
-  from=trigger.closest('#dc-mobile-menu')?document.querySelector('.dc-menu-toggle'):trigger;
+ function open(trigger,selectedScope='*'){
+  scope=selectedScope;category='*';input.value='';if(catalog)index();
+  from=trigger?.closest('#dc-mobile-menu')?document.querySelector('.dc-menu-toggle'):trigger;
   if(!dialog.open)dialog.showModal();apply(dialog);if(commands)filters();copyStatus.textContent='';render();input.focus({preventScroll:true});if(!commands)load();
  }
  dialog.addEventListener('keydown',e=>{
@@ -70,6 +73,7 @@ export function initCommands(){
    catch{if(ticket===copyRevision&&dialog.open)copyStatus.textContent=t('cmd.copy-error');}
   }
  });
- document.addEventListener('click',e=>{const link=e.target.closest('a[href="#commands"]');if(link){e.preventDefault();open(link);}});
- document.addEventListener('i18n:change',()=>{if(catalog)commands=indexCommands(catalog,{translations:localized(),language:lang(),translationLanguage:lang()});if(dialog.open){apply(dialog);filters();render();copyStatus.textContent='';}});
+ document.addEventListener('click',e=>{const link=e.target.closest('a[href="#commands"]');if(link){e.preventDefault();open(link,link.dataset.commandScope||'*');}});
+ document.addEventListener('iyokai:commands-open',e=>open(e.detail?.trigger,e.detail?.scope||'*'));
+ document.addEventListener('i18n:change',()=>{if(catalog)index();if(dialog.open){apply(dialog);filters();render();copyStatus.textContent='';}});
 }

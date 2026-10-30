@@ -1,5 +1,6 @@
 import { currentRoute,setRoute,normalizeRoute } from './core/navigation.js';
 import { initBotHelp } from './ui/bot-help.js';
+import { initSpiritDialog } from './ui/spirit-dialog.js';
 import './style.css';
 import './cinematic.css';
 import './protocols.css';
@@ -35,7 +36,7 @@ const root=document.documentElement;root.dataset.artwork='static';root.dataset.b
 startAssetPipeline();preloadImage('/cinematic/gate-mask.webp');preloadImage('/cinematic/wisp-frames-v2.webp');preloadImage('/cinematic/loading-scroll-v2.webp');
 normalizeRoute();
 const prefs=loadPrefs();applyPrefs(prefs);await initI18n(prefs.lang);
-initBotHelp();
+initBotHelp();initSpiritDialog();
 const hub=initHub();initPlayer();initSheet();initStatus();initSystem();initInvite();initYokai();initCommands();initPanel();initPrefsPanel({prefs,onChange(){}});
 document.body.append(document.getElementById('gear'),document.getElementById('prefs'));
 const hubEl=document.getElementById('hub'),dc=document.getElementById('dc');hubEl.classList.add('cinematic-quick');

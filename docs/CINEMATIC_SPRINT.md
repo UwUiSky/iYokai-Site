@@ -817,3 +817,30 @@ Non verificati PostgreSQL reale, API Discord reali, telefono fisico o layout
 owner autenticato nel browser in questa revisione. Pannello live ancora
 disabilitato finché bot, OAuth e database non vengono configurati e collaudati.
 Lo ZIP r11 resta il backup precedente: non contiene questa modifica successiva.
+
+## 30 ottobre — lore canonica, nove code e Casa degli Spiriti
+
+Importato integralmente il TXT dell'autrice: 16 lore originali e bio SEO finali,
+conservate senza riscritture in docs/lore e nei dati locali del sito. Finestre
+bio con Lore completa, comandi pertinenti per funzionalità e invito per i bot.
+Shirayuki/Aoi/Kuro/Hana/Rei sono Music 1–5. Aggiunto iYokai Mod come nona coda;
+la Casa degli Spiriti è una dimora separata, con settimo pannello e nuova tavola
+21:9. Originale PNG e prompt/provenienza conservati. Nessuna modifica ai font
+Yokai r11, alle tavole precedenti o riattivazione di personaggi GPU/code animate.
+
+Letto il bot remoto (413186ab88fc7b3a8fc01fdd0b0da40ad77467cd): ModBot esiste già,
+si avvia con YOKAI_MOD_TOKEN e non possiede listener/comandi autonomi; esegue
+azioni/log scelti da bot_roles mentre Main ascolta gli eventi. La scheda non
+promette autonomia a Main spento. I comandi musicali del Core sono condivisi
+con i worker, non inventati come slash tree delle singole istanze. Aggiunti ID
+musicali/Mod a links.json e Mod alla policy di esempio. Token/ID non inventati.
+
+Interfaccia in dieci lingue; bio/lore dell'autrice restano in italiano originale,
+con indicazione esplicita e lang=it anche quando la UI è giapponese o altra.
+38 test JavaScript e 34 test backend simulati passati. Browser: House e finestra
+entro la viewport negli 8 formati, niente overflow orizzontale; bio/lore della
+Casa, scheda Shirayuki e filtro limitato ai 28 comandi musicali verificati.
+UI giapponese verificata con testo originale italiano dichiarato. Non testati
+inviti Discord reali, avvio Mod, download non configurati o telefono fisico.
+La configurazione live OAuth/API/PostgreSQL resta incompleta. Il backup ZIP r11
+è precedente a questo aggiornamento; sorgenti correnti salvati con Git.

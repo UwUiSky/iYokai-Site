@@ -48,6 +48,35 @@
     "botPermissions": "0",
     "desktopUrl": "",
     "mobileUrl": "",
-    "nsfwArtworkUrl": ""
+    "nsfwArtworkUrl": "",
+    "modClientId": "",
+    "modPermissions": "0",
+    "musicBots": [
+      {
+        "name": "Shirayuki",
+        "clientId": "",
+        "permissions": "0"
+      },
+      {
+        "name": "Aoi",
+        "clientId": "",
+        "permissions": "0"
+      },
+      {
+        "name": "Kuro",
+        "clientId": "",
+        "permissions": "0"
+      },
+      {
+        "name": "Hana",
+        "clientId": "",
+        "permissions": "0"
+      },
+      {
+        "name": "Rei",
+        "clientId": "",
+        "permissions": "0"
+      }
+    ]
   }
 }

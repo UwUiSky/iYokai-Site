@@ -712,3 +712,14 @@ Harukaze. Apostrofi autonomi e distanze maiuscole/minuscole; forme approvate,
 sviluppo discendente della L e tavole statiche preservati. Dieci dizionari locali
 completi nelle chiavi, bandiere SVG, tag di lingua corretti. Le nuove traduzioni
 sono bozze da revisionare. Nessun riavvio del personaggio 3D o delle code animate.
+
+## 30 ottobre — Casa degli Spiriti
+
+Nuova tavola statica spirit-house-wide.webp, PNG sorgente in art-src e prompt in
+docs/lore/README.md. Casa giapponese con computer, lanterne e giardino notturno;
+Kitsune argentea adulta seduta, due orecchie e due code furry dipinte insieme
+all'ambiente. Controllo visivo eseguito, senza certificare anatomia perfetta.
+Aggiunta come settimo pannello Discord con le stesse dissolvenze e sfumature.
+Su mobile titoli/intro restano nella colonna sinistra per lasciare leggibile il
+volto. La Casa è Desktop/Android e non fa parte delle nove code Discord.
+Le tavole precedenti, i font normale/Extreme r11 e il default statico restano.

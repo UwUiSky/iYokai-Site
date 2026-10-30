@@ -9,7 +9,7 @@
     },
     {
       "id": "music-1",
-      "name": "iYokai Music 1",
+      "name": "Shirayuki",
       "client_id": "",
       "token_env": "DISCORD_MUSIC_1_TOKEN",
       "invite_permissions": "0",
@@ -19,7 +19,7 @@
     },
     {
       "id": "music-2",
-      "name": "iYokai Music 2",
+      "name": "Aoi",
       "client_id": "",
       "token_env": "DISCORD_MUSIC_2_TOKEN",
       "invite_permissions": "0",
@@ -29,7 +29,7 @@
     },
     {
       "id": "music-3",
-      "name": "iYokai Music 3",
+      "name": "Kuro",
       "client_id": "",
       "token_env": "DISCORD_MUSIC_3_TOKEN",
       "invite_permissions": "0",
@@ -39,7 +39,7 @@
     },
     {
       "id": "music-4",
-      "name": "iYokai Music 4",
+      "name": "Hana",
       "client_id": "",
       "token_env": "DISCORD_MUSIC_4_TOKEN",
       "invite_permissions": "0",
@@ -49,7 +49,7 @@
     },
     {
       "id": "music-5",
-      "name": "iYokai Music 5",
+      "name": "Rei",
       "client_id": "",
       "token_env": "DISCORD_MUSIC_5_TOKEN",
       "invite_permissions": "0",
@@ -64,6 +64,32 @@
       "token_env": "DISCORD_NSFW_TOKEN",
       "invite_permissions": "0",
       "modules": []
+    },
+    {
+      "id": "mod",
+      "name": "iYokai Mod",
+      "client_id": "",
+      "token_env": "YOKAI_MOD_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "automod",
+        "anti_nuke",
+        "anti_raid",
+        "global_ban",
+        "spam_trap",
+        "verify",
+        "security_score",
+        "permission_heatmap",
+        "moderation_actions",
+        "moderation_case_system",
+        "moderation_clear",
+        "moderation_channel_control",
+        "moderation_report",
+        "logging_basic",
+        "logging_advanced",
+        "ghost_ping_detection",
+        "reactionsnipe"
+      ]
     }
   ],
   "support_servers": [],

@@ -15,10 +15,13 @@ export function initDiscordPanels({ host, lenis, prefs, enabled, reduced }) {
  const music=document.createElement('section');music.className='dc__sec dc__music';music.id='discord-music';
  music.innerHTML='<div><h2 class="dc__h" data-i18n="dc.music-title"></h2><p class="dc__sub" data-i18n="dc.music-body"></p><div class="dc-module-actions"><a class="btn btn--main" href="#commands" data-i18n="dc.music-commands"></a><a class="btn" href="#invita" data-i18n="dc.music-invite"></a></div><p class="dc__note" data-i18n="dc.music-note"></p></div>';
  host.querySelector('#comandi').before(music);apply(music);
+ const house=document.createElement('section');house.className='dc__sec dc__house';house.id='spirit-house';
+ house.innerHTML='<div class="dc-house-copy"><p class="dc__kick" data-i18n="house.kicker"></p><h2 class="dc__h" data-i18n="house.title"></h2><p class="spirit-house-intro" data-i18n="house.intro"></p><div class="dc-house-actions"><button type="button" class="btn btn--main" data-spirit="house" data-i18n="house.discover"></button></div><p class="dc__note" data-i18n="house.note"></p></div>';
+ host.querySelector('.dc__foot').before(house);apply(house);
  const background=document.createElement('div');background.className='discord-page-bg';background.setAttribute('aria-hidden','true');background.innerHTML='<div class="world-vignette"></div>';host.prepend(background);
  const scenes=createStillScenes(background),art=Object.values(DISCORD_ART);
  const sections=[...host.querySelectorAll(':scope > .dc__sec')];
- const names=['dc.overview','dc.features','dc.music-title','dash.t','dc.spirits','dc.invites'];
+ const names=['dc.overview','dc.features','dc.music-title','dash.t','dc.spirits','dc.invites','house.title'];
  const footer=host.querySelector('.dc__foot');
  sections.forEach((section,i)=>{
   section.id ||= `discord-${i}`;
@@ -64,6 +67,13 @@ export function initDiscordPanels({ host, lenis, prefs, enabled, reduced }) {
  // Feature cards are entry points to their relevant functional layouts.
  const musicCard=host.querySelector('[data-i18n="ft.music.t"]').closest('article');
  const openMusic=document.createElement('button');openMusic.className='protocol-action';openMusic.type='button';openMusic.dataset.i18n='dc.music-open';openMusic.textContent=t('dc.music-open');openMusic.onclick=()=>go(2);musicCard.append(openMusic);
+ const sisters=document.createElement('button');sisters.type='button';sisters.className='btn';sisters.dataset.spirit='music';sisters.dataset.i18n='spirit.sisters';sisters.textContent=t('spirit.sisters');music.querySelector('.dc-module-actions').append(sisters);
+ music.querySelector('a[href="#commands"]').dataset.commandScope='music';
+ const musicNames=document.createElement('div');musicNames.className='dc-house-actions';
+ for(const id of ['shirayuki','aoi','kuro','hana','rei']){const b=document.createElement('button');b.type='button';b.className='btn';b.dataset.spirit=id;b.textContent=id[0].toUpperCase()+id.slice(1);musicNames.append(b);}
+ music.querySelector('div').append(musicNames);
+ const featureScopes={'ft.mod.t':['oni','moderation'],'ft.tick.t':['kitsune','tickets'],'ft.lvl.t':['nekomata','levels'],'ft.sec.t':['tengu','safety'],'ft.auto.t':['rokurokubi','automation']};
+ for(const [key,[id,scope]]of Object.entries(featureScopes)){const card=host.querySelector(`[data-i18n="${key}"]`).closest('article'),b=document.createElement('button');b.type='button';b.className='protocol-action';b.dataset.spirit=id;b.dataset.spiritScope=scope;b.dataset.i18n='spirit.discover';b.textContent=t('spirit.discover');card.append(b);}
  return {
   async prepare(){const ready=await Promise.all(art.map(preloadImage));if(ready.some(ok=>!ok))throw new Error('discord-art');},
   show(){lenis.resize();go(0,true);sections[0].focus({preventScroll:true});},

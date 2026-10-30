@@ -28,6 +28,6 @@ test('every current inner layout has its own existing painted scene',async()=>{
  const { DISCORD_ART, PROTOCOL_DETAIL_ART }=await import('../src/data/artworks.js');
  const { stat }=await import('node:fs/promises');
  const home=PROTOCOLS.map(p=>p.art),inner=[...Object.values(DISCORD_ART).slice(1),...Object.values(PROTOCOL_DETAIL_ART)];
- assert.equal(inner.length,10);assert.equal(new Set([...home,...inner]).size,16);
+ assert.equal(inner.length,11);assert.equal(new Set([...home,...inner]).size,17);
  for(const path of inner)assert.ok((await stat(new URL('../public'+path,import.meta.url))).size>10000,path);
 });

@@ -1,6 +1,7 @@
+import { spiritBio } from '../data/spirit-catalog.js';
 import { loadPublicLinks } from '../core/links-config.js';
 import { createNsfwLounge } from './nsfw-lounge.js';
-import { ITEMS, actionFor } from '../data/bots.js';
+import { ITEMS, configureBots } from '../data/bots.js';
 import { a, t } from '../i18n/index.js';
 const OK = 'iyokai:age18', NO = 'iyokai:ageblocked';
 const ok = () => { try { return localStorage.getItem(OK) === '1'; } catch { return false; } };
@@ -27,22 +28,24 @@ function ageGate() {
 }
 export function initInvite() {
   const grid = document.getElementById('invgrid'), open = ageGate(), lounge=createNsfwLounge();
-  const btn = (it) => {
-    const ac = actionFor(it);
-    if (it.age) return `<button class="btn btn--age" type="button" data-nsfw>${ok()?t('inv.nsfw-open'):t('inv.age')}</button>`;
-    return ac ? `<a class="btn btn--main" href="${ac.href}" target="_blank" rel="noopener" ${a(ac.lk)}>${t(ac.lk)}</a>` : `<span class="btn btn--off" aria-disabled="true" ${a('inv.soon')}>${t('inv.soon')}</span>`;
-  };
-  const render=()=>{grid.innerHTML = ITEMS.map((it, i) => `<article class="glass inv rv" data-r="${i}" style="--z:${(0.6 + (i % 4) * 0.25).toFixed(2)};--bd:${7 + (i % 3)}s"><span class="inv__n" ${a('inv.tail', { n: i + 1 })}>${t('inv.tail', { n: i + 1 })}</span><h3>${it.title}</h3><p ${a(it.dk, it.dv)}>${t(it.dk, it.dv)}</p><span class="inv__a">${btn(it)}</span></article>`).join('');
-  document.dispatchEvent(new CustomEvent('rv:refresh'));};render();
+  const render=()=>{
+    grid.replaceChildren();
+    ITEMS.forEach((it,i)=>{
+      const card=document.createElement('article');card.className='glass inv rv';card.dataset.r=String(i);card.style.setProperty('--z',String(.6+(i%4)*.25));
+      const number=document.createElement('span');number.className='inv__n';number.textContent=t('inv.tail',{n:i+1});
+      const title=document.createElement('h3');title.textContent=it.title;
+      const bio=document.createElement('p');bio.className='inv__bio';bio.lang='it';bio.textContent=spiritBio(it.id).bio;
+      const kind=document.createElement('p');kind.className='inv__identity';kind.textContent=it.musicNumber?t('spirit.musicNumber',{n:it.musicNumber}):t(it.kind==='app'?'spirit.kind.app':'spirit.kind.bot');
+      const actions=document.createElement('div');actions.className='inv__a';
+      const button=document.createElement('button');button.type='button';button.className='btn btn--main';button.dataset.spirit=it.id;button.textContent=t('spirit.discover');actions.append(button);
+      card.append(number,title,kind,bio,actions);grid.append(card);
+    });
+    document.dispatchEvent(new CustomEvent('rv:refresh'));
+  };render();
   document.addEventListener('i18n:change',render);
-  loadPublicLinks().then(p=>{ITEMS[0].clientId=p.discord.botClientId;ITEMS[0].perms=p.discord.botPermissions;ITEMS.find(i=>i.kind==='app').clientId=p.discord.appClientId;ITEMS.find(i=>i.age).clientId=p.discord.nsfwClientId;ITEMS.find(i=>i.kind==='exe').url=p.discord.desktopUrl||p.discord.mobileUrl||'';render();}).catch(()=>{});
+  loadPublicLinks().then(p=>{configureBots(p);render();}).catch(()=>{});
+  document.addEventListener('iyokai:nsfw-open',e=>{const trigger=e.detail?.trigger;if(ok())lounge(trigger);else open(()=>lounge(trigger));});
   const focus = (e, r) => { const c = e.target.closest('.inv'); if (c) document.dispatchEvent(new CustomEvent('tail:focus', { detail: r ? +c.dataset.r : -1 })); };
   grid.addEventListener('pointerover', (e) => focus(e, true)); grid.addEventListener('focusin', (e) => focus(e, true));
   grid.addEventListener('pointerleave', (e) => focus(e, false)); grid.addEventListener('focusout', () => document.dispatchEvent(new CustomEvent('tail:focus', { detail: -1 })));
-  grid.addEventListener('click', (e) => {
-    const n=e.target.closest('[data-nsfw]');if(n){if(ok())lounge(n);else open(()=>{render();lounge(grid.querySelector('[data-nsfw]'));});return;}
-    const b = e.target.closest('[data-age]'); if (!b) return;
-    const c = b.closest('.inv'), it = ITEMS[+c.dataset.r];
-    open(() => { c.querySelector('.inv__a').innerHTML = btn(it); });
-  });
 }
