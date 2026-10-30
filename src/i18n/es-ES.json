@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "Responsabilidad",
   "legal.termini.3a1a0d01f2": "Los administradores de servidores son responsables de la configuración de módulos y el contenido en sus servidores.El controlador puede suspender el acceso en casos de abuso.",
   "legal.termini.85371024ee": "Cambios y contacto",
-  "legal.termini.7cdd6c3da9": "Estos términos pueden cambiar; la versión actual es la publicada aquí. Detalles de contacto: [para ser completado]."
+  "legal.termini.7cdd6c3da9": "Estos términos pueden cambiar; la versión actual es la publicada aquí. Detalles de contacto: [para ser completado].",
+  "contact.retry": "Reintentar envío a Discord",
+  "contact.retrying": "Reintentando el envío…",
+  "contact.retryResult": "Resultado del envío:",
+  "contact.retryBlocked": "Reenvío bloqueado: actualiza las solicitudes y revisa el canal de Discord."
 }

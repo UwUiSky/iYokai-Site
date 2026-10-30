@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "責任",
   "legal.termini.3a1a0d01f2": "サーバーマネージャーは、モジュール構成およびサーバー上のコンテンツの責任を負います. 管理者は、不正行為の場合にアクセスを中止することができます。",
   "legal.termini.85371024ee": "変化と接触",
-  "legal.termini.7cdd6c3da9": "これらの条件が変更される可能性があります; 現在のバージョンはここに掲載されているものです。"
+  "legal.termini.7cdd6c3da9": "これらの条件が変更される可能性があります; 現在のバージョンはここに掲載されているものです。",
+  "contact.retry": "Discordへの送信を再試行",
+  "contact.retrying": "再送信中…",
+  "contact.retryResult": "送信結果：",
+  "contact.retryBlocked": "再送信できません。リクエストを更新し、Discordチャンネルを確認してください。"
 }

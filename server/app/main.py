@@ -273,5 +273,32 @@ async def contacts(request: Request, sess=Depends(session)):
     await call(request,'capabilities',sess['user_id']) # Owner checked inside bot process.
     from .vault import decrypt
     rows=await request.app.state.db.contact_requests()
-    for row in rows:row['message']=decrypt(request.app.state.s,row['message'])
+    for row in rows:
+        row['retryable']=row['message'].startswith('fernet:v1:') and row['delivery'] in ('failed','unconfigured','invalid_destination')
+        row['message']=decrypt(request.app.state.s,row['message'])
     return {'items':rows}
+
+@app.post('/api/owner/contacts/{contact_id}/retry')
+async def retry_contact(contact_id: str, request: Request, sess=Depends(guard)):
+    import re
+    from .bot_bridge import call
+    from .vault import decrypt
+    from .contact_delivery import deliver
+    # Re-check ownership in the bot process on every mutation, not in the UI.
+    await call(request,'capabilities',sess['user_id'])
+    hit(request,'owner-contact-retry',5,60,str(sess['user_id']))
+    if not re.fullmatch(r'[a-f0-9]{32}',contact_id):
+        raise HTTPException(422,{'code':'invalid_contact_id'})
+    row=await request.app.state.db.claim_contact_retry(contact_id)
+    if not row:raise HTTPException(409,{'code':'contact_not_retryable'})
+    try:
+        message=decrypt(request.app.state.s,row['message'])
+    except HTTPException:
+        # No external POST happened: it remains safe to retry after key repair.
+        await request.app.state.db.contact_delivery(contact_id,'failed')
+        raise
+    # Unexpected cancellation/failure leaves 'retrying' persisted: fail closed.
+    # Repeated owner clicks cannot turn an uncertain delivery into a duplicate.
+    delivery=await deliver(request,contact_id,row['user_id'],row['topic'],message,row['language'])
+    await request.app.state.db.contact_delivery(contact_id,delivery)
+    return {'id':contact_id,'delivery':delivery}

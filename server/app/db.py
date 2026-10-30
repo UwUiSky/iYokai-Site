@@ -132,3 +132,13 @@ class Db:
 
     async def contact_delivery(self, key, delivery):
         await self.pool.execute("UPDATE panel_contact_requests SET delivery=$2 WHERE id=$1",key,delivery)
+
+    async def claim_contact_retry(self, key):
+        # One atomic claim across processes. Pending/ambiguous/in-flight deliveries
+        # must never be replayed, even after a worker crash or a second click.
+        row=await self.pool.fetchrow("""UPDATE panel_contact_requests
+            SET delivery='retrying' WHERE id=$1
+            AND delivery IN ('unconfigured','invalid_destination','failed')
+            AND message LIKE 'fernet:v1:%'
+            RETURNING id,user_id,topic,message,language""",key)
+        return dict(row) if row else None

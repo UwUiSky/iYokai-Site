@@ -52,7 +52,11 @@
     "copy.9f1b1847b9de": "Der Bot muss den Zugriff bestätigen: Serverinhaber, „Server verwalten“ oder eine konfigurierte Bot-Adminrolle. Ein sichtbarer Button erteilt keine Berechtigung.",
     "copy.799290450d5e": "Nein. Server Members und Message Content werden im Developer Portal der Anwendung konfiguriert und benötigen gegebenenfalls die Zustimmung von Discord. Einladungsberechtigungen sind davon getrennt.",
     "copy.60e83a36bbf4": "Die Prüfungen liefern Hinweise für das Team. Eine gemeinsame Adresse beweist nicht, dass zwei Konten derselben Person gehören. Eine sichere Erkennung wird nicht garantiert.",
-    "copy.710cce08116f": "Der Panelverlauf erfasst Konfigurationsänderungen. Ereignisprotokolle und Zielkanäle müssen separat eingerichtet werden."
+    "copy.710cce08116f": "Der Panelverlauf erfasst Konfigurationsänderungen. Ereignisprotokolle und Zielkanäle müssen separat eingerichtet werden.",
+    "contact.retry": "Discord-Zustellung erneut versuchen",
+    "contact.retrying": "Zustellung wird erneut versucht…",
+    "contact.retryResult": "Zustellergebnis:",
+    "contact.retryBlocked": "Erneuter Versand gesperrt: Anfragen aktualisieren und Discord-Kanal prüfen."
   },
   "fr": {
     "gate.title": "Choisis ton protocole",
@@ -107,7 +111,11 @@
     "copy.9f1b1847b9de": "Le bot doit confirmer les droits : propriétaire du serveur, permission « Gérer le serveur » ou rôle administrateur du bot configuré. Un bouton visible n’autorise pas une action.",
     "copy.799290450d5e": "Non. Server Members et Message Content se configurent dans le Developer Portal de l’application et nécessitent une approbation lorsque Discord l’exige. Les permissions d’invitation sont distinctes.",
     "copy.60e83a36bbf4": "Ces contrôles fournissent des indices à examiner par l’équipe. Une adresse partagée ne prouve pas que deux comptes appartiennent à la même personne. La détection n’est pas garantie.",
-    "copy.710cce08116f": "L’historique du panneau suit les changements de configuration. Les journaux d’événements et les canaux de destination se configurent séparément."
+    "copy.710cce08116f": "L’historique du panneau suit les changements de configuration. Les journaux d’événements et les canaux de destination se configurent séparément.",
+    "contact.retry": "Réessayer l’envoi sur Discord",
+    "contact.retrying": "Nouvelle tentative d’envoi…",
+    "contact.retryResult": "Résultat de l’envoi :",
+    "contact.retryBlocked": "Nouvel envoi bloqué : actualisez les demandes et vérifiez le salon Discord."
   },
   "es-ES": {
     "gate.title": "Elige tu protocolo",
@@ -162,7 +170,11 @@
     "copy.9f1b1847b9de": "El bot debe confirmar los permisos: propietario del servidor, «Gestionar servidor» o rol de administrador del bot configurado. Ver un botón no autoriza una acción.",
     "copy.799290450d5e": "No. Server Members y Message Content se configuran en el Developer Portal de la aplicación y requieren aprobación cuando Discord lo exige. Los permisos de invitación son independientes.",
     "copy.60e83a36bbf4": "Las comprobaciones aportan indicios para el personal. Compartir una dirección no demuestra que dos cuentas pertenezcan a una misma persona. La detección no está garantizada.",
-    "copy.710cce08116f": "El historial del panel registra cambios de configuración. Los registros de eventos y los canales de destino se configuran por separado."
+    "copy.710cce08116f": "El historial del panel registra cambios de configuración. Los registros de eventos y los canales de destino se configuran por separado.",
+    "contact.retry": "Reintentar envío a Discord",
+    "contact.retrying": "Reintentando el envío…",
+    "contact.retryResult": "Resultado del envío:",
+    "contact.retryBlocked": "Reenvío bloqueado: actualiza las solicitudes y revisa el canal de Discord."
   },
   "ru": {
     "gate.title": "Выбери протокол",
@@ -217,7 +229,11 @@
     "copy.9f1b1847b9de": "Бот должен подтвердить права: владелец сервера, разрешение «Управлять сервером» или настроенная роль администратора бота. Видимая кнопка сама по себе не даёт права на действие.",
     "copy.799290450d5e": "Нет. Server Members и Message Content настраиваются в Developer Portal приложения и требуют одобрения, когда этого требует Discord. Разрешения для приглашения бота на сервер настраиваются отдельно.",
     "copy.60e83a36bbf4": "Проверки дают сигналы для рассмотрения командой. Общий адрес не доказывает, что два аккаунта принадлежат одному человеку. Точное выявление не гарантируется.",
-    "copy.710cce08116f": "История панели содержит изменения конфигурации. Журналы событий и каналы назначения настраиваются отдельно."
+    "copy.710cce08116f": "История панели содержит изменения конфигурации. Журналы событий и каналы назначения настраиваются отдельно.",
+    "contact.retry": "Повторить отправку в Discord",
+    "contact.retrying": "Повторная отправка…",
+    "contact.retryResult": "Результат отправки:",
+    "contact.retryBlocked": "Повторная отправка заблокирована: обновите запросы и проверьте канал Discord."
   },
   "uk": {
     "gate.title": "Обери протокол",
@@ -273,7 +289,11 @@
     "copy.9f1b1847b9de": "Бот має підтвердити права: власник сервера, дозвіл «Керувати сервером» або налаштована роль адміністратора бота. Видима кнопка сама по собі не дає права на дію.",
     "copy.799290450d5e": "Ні. Server Members і Message Content налаштовуються в Developer Portal застосунку та потребують схвалення, коли цього вимагає Discord. Дозволи для запрошення бота налаштовуються окремо.",
     "copy.60e83a36bbf4": "Перевірки дають сигнали для розгляду командою. Спільна адреса не доводить, що два облікові записи належать одній людині. Точне виявлення не гарантується.",
-    "copy.710cce08116f": "Історія панелі містить зміни конфігурації. Журнали подій і канали призначення налаштовуються окремо."
+    "copy.710cce08116f": "Історія панелі містить зміни конфігурації. Журнали подій і канали призначення налаштовуються окремо.",
+    "contact.retry": "Повторити надсилання в Discord",
+    "contact.retrying": "Повторне надсилання…",
+    "contact.retryResult": "Результат надсилання:",
+    "contact.retryBlocked": "Повторне надсилання заблоковано: оновіть запити та перевірте канал Discord."
   },
   "ja": {
     "gate.title": "プロトコルを選択",
@@ -330,7 +350,11 @@
     "copy.9f1b1847b9de": "アクセス権はボットが確認する必要があります。対象はサーバー所有者、「サーバーの管理」権限を持つ人、または設定済みのボット管理者ロールです。ボタンが見えるだけでは操作は許可されません。",
     "copy.799290450d5e": "いいえ。Server MembersとMessage ContentはアプリのDeveloper Portalで設定し、Discordが求める場合は承認が必要です。サーバーへの招待権限は別の設定です。",
     "copy.60e83a36bbf4": "確認結果はスタッフが判断するための手がかりです。同じアドレスを共有していても、二つのアカウントが同一人物のものだとは証明できません。確実な検出は保証されません。",
-    "copy.710cce08116f": "パネルの履歴には設定の変更が記録されます。イベントログと送信先チャンネルは別途設定する必要があります。"
+    "copy.710cce08116f": "パネルの履歴には設定の変更が記録されます。イベントログと送信先チャンネルは別途設定する必要があります。",
+    "contact.retry": "Discordへの送信を再試行",
+    "contact.retrying": "再送信中…",
+    "contact.retryResult": "送信結果：",
+    "contact.retryBlocked": "再送信できません。リクエストを更新し、Discordチャンネルを確認してください。"
   },
   "ko": {
     "gate.title": "프로토콜 선택",
@@ -386,7 +410,11 @@
     "copy.9f1b1847b9de": "봇이 접근 권한을 확인해야 합니다. 서버 소유자, 서버 관리 권한이 있는 사용자 또는 설정된 봇 관리자 역할이 대상입니다. 버튼이 보인다는 이유만으로 작업이 허용되지는 않습니다.",
     "copy.799290450d5e": "아니요. Server Members와 Message Content는 앱의 Developer Portal에서 설정하며 Discord가 요구하는 경우 승인이 필요합니다. 서버 초대 권한은 별도입니다.",
     "copy.60e83a36bbf4": "검사 결과는 운영진이 검토할 단서입니다. 같은 주소를 사용한다고 해서 두 계정이 동일인의 계정이라는 증거가 되지는 않습니다. 정확한 탐지가 보장되지는 않습니다.",
-    "copy.710cce08116f": "패널 이력은 설정 변경을 기록합니다. 이벤트 로그와 전송 대상 채널은 별도로 설정해야 합니다."
+    "copy.710cce08116f": "패널 이력은 설정 변경을 기록합니다. 이벤트 로그와 전송 대상 채널은 별도로 설정해야 합니다.",
+    "contact.retry": "Discord 전송 재시도",
+    "contact.retrying": "다시 전송 중…",
+    "contact.retryResult": "전송 결과:",
+    "contact.retryBlocked": "재전송이 차단되었습니다. 요청을 새로 고치고 Discord 채널을 확인하세요."
   },
   "zh-CN": {
     "gate.title": "选择协议",
@@ -441,6 +469,10 @@
     "copy.9f1b1847b9de": "访问权限必须由机器人确认：服务器所有者、拥有“管理服务器”权限的用户，或已配置的机器人管理员角色。看得到按钮并不意味着有权执行操作。",
     "copy.799290450d5e": "不可以。Server Members 和 Message Content 需要在应用的 Developer Portal 中配置，并在 Discord 要求时获得批准。服务器邀请权限是另一项独立设置。",
     "copy.60e83a36bbf4": "这些检测只提供供管理团队审核的线索。共用地址不能证明两个账号属于同一人，也不保证能够准确识别。",
-    "copy.710cce08116f": "面板历史记录追踪配置变更。事件日志和目标频道需要另外配置。"
+    "copy.710cce08116f": "面板历史记录追踪配置变更。事件日志和目标频道需要另外配置。",
+    "contact.retry": "重试发送到 Discord",
+    "contact.retrying": "正在重试发送…",
+    "contact.retryResult": "发送结果：",
+    "contact.retryBlocked": "重试已被阻止：请刷新请求并检查 Discord 频道。"
   }
 }

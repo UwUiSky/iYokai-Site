@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "Verantwortung",
   "legal.termini.3a1a0d01f2": "Servermanager sind für die Modulkonfiguration und Inhalt auf ihren Servern verantwortlich.Der Controller kann den Zugriff in Fällen von Missbrauch aufhören.",
   "legal.termini.85371024ee": "Änderungen und Kontakt",
-  "legal.termini.7cdd6c3da9": "Diese Bedingungen können sich ändern; die aktuelle Version ist die hier veröffentlichte. Kontaktdetails: [für abgeschlossen werden]."
+  "legal.termini.7cdd6c3da9": "Diese Bedingungen können sich ändern; die aktuelle Version ist die hier veröffentlichte. Kontaktdetails: [für abgeschlossen werden].",
+  "contact.retry": "Discord-Zustellung erneut versuchen",
+  "contact.retrying": "Zustellung wird erneut versucht…",
+  "contact.retryResult": "Zustellergebnis:",
+  "contact.retryBlocked": "Erneuter Versand gesperrt: Anfragen aktualisieren und Discord-Kanal prüfen."
 }

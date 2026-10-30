@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "Responsabilità",
   "legal.termini.3a1a0d01f2": "Chi gestisce un server è responsabile della configurazione dei moduli e dei contenuti che vi circolano. Il titolare può sospendere l’accesso in caso di abuso.",
   "legal.termini.85371024ee": "Modifiche e contatti",
-  "legal.termini.7cdd6c3da9": "Questi termini possono cambiare; la versione in vigore è quella pubblicata qui. Contatti: [da compilare]."
+  "legal.termini.7cdd6c3da9": "Questi termini possono cambiare; la versione in vigore è quella pubblicata qui. Contatti: [da compilare].",
+  "contact.retry": "Riprova consegna Discord",
+  "contact.retrying": "Reinvio in corso…",
+  "contact.retryResult": "Esito consegna:",
+  "contact.retryBlocked": "Reinvio bloccato: aggiorna le richieste e verifica il canale Discord."
 }

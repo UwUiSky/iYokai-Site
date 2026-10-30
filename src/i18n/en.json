@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "Responsibility",
   "legal.termini.3a1a0d01f2": "Server managers are responsible for module configuration and content on their servers. The controller may suspend access in cases of abuse.",
   "legal.termini.85371024ee": "Changes and contact",
-  "legal.termini.7cdd6c3da9": "These terms may change; the current version is the one published here. Contact details: [to be completed]."
+  "legal.termini.7cdd6c3da9": "These terms may change; the current version is the one published here. Contact details: [to be completed].",
+  "contact.retry": "Retry Discord delivery",
+  "contact.retrying": "Retrying delivery…",
+  "contact.retryResult": "Delivery result:",
+  "contact.retryBlocked": "Retry blocked: refresh requests and check the Discord channel."
 }

@@ -793,3 +793,27 @@ reinstallabili, token/sessioni, database inesistenti e pesi opzionali MT.
 Il push GitHub pubblico resta bloccato dall'autenticazione Git mancante
 (verificato con dry-run). Non usare un commit API con autore diverso da
 Yokai Site Dev. Preparato export Git per il successivo push autenticato.
+
+
+## 30 ottobre — reinvio contatti dal pannello owner
+
+Verificato il remoto GitHub: main pubblicato ceb1f1863e980dd8fb6d470d0e37dde087486254
+(supera il precedente blocco di autenticazione documentato). Sorgente Sites di
+partenza d70626f, anteprima owner-private confermata. Non riportare Harukaze al
+posto dei font Yokai normale/Extreme r11 già approvati. Nessuna modifica alle
+tavole, alle code, al terminale o alle transizioni.
+
+Aggiunto recupero manuale dei contatti Discord sicuramente falliti, dal pannello
+owner: API con sessione/CSRF/Origin, controllo owner nel bot a ogni tentativo,
+rate limit e presa in carico atomica nel database. Esiti sconosciuti, richieste
+in corso o già consegnate restano bloccati per evitare duplicati. Testo sempre
+cifrato a riposo; i dati del reinvio vengono letti dal server. Interfaccia in
+10 lingue; 1236 chiavi per lingua. Dettagli in CONTACT_AND_PLANS.md.
+
+Verifiche locali: 34 test JavaScript e 34 test backend con storage/trasporti
+simulati; build Vite riuscita. La suite che richiede PostgreSQL non è eseguibile
+senza TEST_DATABASE_URL (3 test stato non avviati per configurazione mancante).
+Non verificati PostgreSQL reale, API Discord reali, telefono fisico o layout
+owner autenticato nel browser in questa revisione. Pannello live ancora
+disabilitato finché bot, OAuth e database non vengono configurati e collaudati.
+Lo ZIP r11 resta il backup precedente: non contiene questa modifica successiva.

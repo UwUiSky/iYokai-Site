@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "责任",
   "legal.termini.3a1a0d01f2": "服务器管理员负责其服务器上的模块配置和内容,管理员可能会在滥用情况下暂停访问。",
   "legal.termini.85371024ee": "变化与联系",
-  "legal.termini.7cdd6c3da9": "这些条款可能发生变化;当前版本是此处发布的。"
+  "legal.termini.7cdd6c3da9": "这些条款可能发生变化;当前版本是此处发布的。",
+  "contact.retry": "重试发送到 Discord",
+  "contact.retrying": "正在重试发送…",
+  "contact.retryResult": "发送结果：",
+  "contact.retryBlocked": "重试已被阻止：请刷新请求并检查 Discord 频道。"
 }

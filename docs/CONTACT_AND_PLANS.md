@@ -14,7 +14,22 @@ L'API salva prima il testo cifrato, tenta una sola consegna embed e registra:
 `delivered`, `unconfigured`, `invalid_destination`, `failed` o `unknown`.
 `unknown` significa che l'invio potrebbe essere arrivato: non ritentare alla
 cieca. La sezione owner mostra lo stato; nessuna email viene inviata.
-Non esiste ancora una coda di retry o gestione risposte dei ticket completa.
+Il pannello owner permette ora un reinvio manuale solo per `unconfigured`,
+`invalid_destination` e `failed`, dopo aver corretto la destinazione o i permessi.
+L'API `POST /api/owner/contacts/{id}/retry` richiede sessione, Origin, CSRF e
+conferma owner dal processo del bot a ogni richiesta (massimo 5 tentativi/minuto).
+Una singola UPDATE condizionale PostgreSQL porta il ticket in `retrying`: due
+richieste concorrenti non possono prenderlo entrambe. Messaggio e destinazione
+vengono riletti dal server, mai dal browser. Nessuna nuova colonna da migrare;
+rimane necessario il privilegio UPDATE già documentato.
+
+`pending`, `retrying`, `unknown` e `delivered` NON sono reinviabili. Se il processo
+si interrompe dopo la presa in carico, `retrying` resta bloccato: verificare il
+canale e l'ID Request prima di qualsiasi intervento manuale. Non c'è uno sblocco
+automatico a tempo, che rischierebbe duplicati. Un errore di decifratura prima
+dell'invio ripristina `failed`, senza trasmettere testo in chiaro o placeholder.
+Le richieste legacy non cifrate non sono reinviabili: richiedono migrazione.
+Non esiste ancora una coda automatica o gestione risposte dei ticket completa.
 
 Genera la chiave **sul tuo server**, conserva backup separato e permessi stretti:
 

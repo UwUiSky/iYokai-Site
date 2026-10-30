@@ -1230,5 +1230,9 @@
   "legal.termini.c18ebc3c17": "Responsabilité",
   "legal.termini.3a1a0d01f2": "Les gestionnaires du serveur sont responsables de la configuration des modules et du contenu sur leurs serveurs.Le contrôleur peut suspendre l'accès en cas d'abus.",
   "legal.termini.85371024ee": "Changements et contacts",
-  "legal.termini.7cdd6c3da9": "Ces conditions peuvent changer; la version actuelle est celle qui est publiée ici. détails de contact: [pour être complété]."
+  "legal.termini.7cdd6c3da9": "Ces conditions peuvent changer; la version actuelle est celle qui est publiée ici. détails de contact: [pour être complété].",
+  "contact.retry": "Réessayer l’envoi sur Discord",
+  "contact.retrying": "Nouvelle tentative d’envoi…",
+  "contact.retryResult": "Résultat de l’envoi :",
+  "contact.retryBlocked": "Nouvel envoi bloqué : actualisez les demandes et vérifiez le salon Discord."
 }
