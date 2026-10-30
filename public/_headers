@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self' blob:; frame-src https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
@@ -8,3 +8,19 @@
   Cross-Origin-Opener-Policy: same-origin
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+/cinematic/*
+  Cache-Control: private, max-age=0, must-revalidate
+/asset-worker.js
+  Cache-Control: no-cache
+/asset-cache-policy.js
+  Cache-Control: no-cache
+/asset-manifest.json
+  Cache-Control: no-cache
+/links.json
+  Cache-Control: no-store
+
+/panel.json
+  Cache-Control: no-store
+
+/patch-notes.json
+  Cache-Control: no-store

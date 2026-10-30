@@ -1,54 +1,140 @@
-// Panel: login Discord, scelta del server, moduli attivabili e storico. Parla con l'API Python (/api) sullo stesso dominio.
-import { a, t } from '../i18n/index.js';
-const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-export function initPanel() {
-  const o = document.createElement('div'); o.className = 'sheet'; o.hidden = true; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true'); o.setAttribute('aria-labelledby', 'pnl-t');
-  o.innerHTML = `<div class="sheet__box glass pnl__box"><button class="sheet__x" type="button" aria-label="${t('sheet.close')}" data-i18n-attr="aria-label:sheet.close">×</button><h3 id="pnl-t" ${a('pnl.t')}>${t('pnl.t')}</h3><div class="pnl__body" aria-live="polite"></div></div>`;
-  document.body.appendChild(o);
-  const body = o.querySelector('.pnl__body'); let csrf = '', gid = '', from, view = 'load', viewMsg = '';
-  const api = async (path, method = 'GET', data) => {
-    const r = await fetch(`/api${path}`, { method, credentials: 'same-origin', headers: { Accept: 'application/json', ...(method !== 'GET' ? { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf } : {}) }, body: data ? JSON.stringify(data) : undefined });
-    if (!r.ok) throw Object.assign(new Error('http'), { status: r.status });
-    return r.json();
-  };
-  const note = (k) => { view = 'note'; viewMsg = k; body.innerHTML = `<p class="pnl__msg" ${a(k)}>${t(k)}</p>`; };
-  const loginView = (k = 'pnl.login') => { view = 'login'; viewMsg = k; body.innerHTML = `<p class="pnl__msg" ${a(k)}>${t(k)}</p><a class="btn btn--main" href="/api/auth/login">Login Discord</a>`; };
-  const hist = async () => {
-    const h = await api(`/guilds/${gid}/history?limit=8`), box = body.querySelector('.pnl__hist'); if (!box) return;
-    box.innerHTML = h.items.length ? h.items.map((i) => `<div class="pnl__row"><span>${esc(i.key)} ${t(i.new === 'true' ? 'pnl.on' : 'pnl.off')}</span><small>${esc(new Date(i.at).toLocaleString(document.documentElement.lang))}</small></div>`).join('') : `<p class="pnl__msg" ${a('pnl.none')}>${t('pnl.none')}</p>`;
-  };
-  const showGuild = async (id) => {
-    gid = id; const g = await api(`/guilds/${id}`), groups = {};
-    g.modules.forEach((m) => (groups[m.group] ||= []).push(m));
-    body.querySelectorAll('[data-g]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.g === id)));
-    body.querySelector('.pnl__main').innerHTML = `<div class="pnl__mods">${Object.entries(groups).map(([n, ms]) => `<section class="pnl__grp"><h4>${esc(n)}</h4>${ms.map((m) => `<div class="pnl__row"><span>${esc(m.label)}</span><button class="sw2" type="button" role="switch" aria-checked="${m.active}" aria-label="${esc(m.label)}" data-k="${esc(m.key)}"></button></div>`).join('')}</section>`).join('')}</div><section class="pnl__grp"><h4 ${a('pnl.changes')}>${t('pnl.changes')}</h4><div class="pnl__hist"></div></section>`;
-    await hist();
-  };
-  const load = async (msgKey) => {
-    if (msgKey) return loginView(msgKey);
-    view = 'load'; body.innerHTML = `<span ${a('pnl.loading')}>${t('pnl.loading')}</span>`;
-    try {
-      const me = await api('/me'); csrf = me.csrf; view = 'app';
-      body.innerHTML = `<div class="pnl__top"><span>${esc(me.user.name)}</span><button class="btn" type="button" data-out ${a('pnl.exit')}>${t('pnl.exit')}</button></div><div class="pnl__guilds" role="group" aria-label="${t('pnl.servers')}" data-i18n-attr="aria-label:pnl.servers">${me.guilds.map((g) => `<button type="button" data-g="${esc(g.id)}" aria-pressed="false">${esc(g.name)}</button>`).join('')}</div><div class="pnl__main">${me.guilds.length ? '' : `<p class="pnl__msg" ${a('pnl.noguild')}>${t('pnl.noguild')}</p>`}</div>`;
-      if (me.guilds.length) await showGuild(me.guilds[0].id);
-    } catch (e) { if (e.status === 401) loginView(); else note('pnl.down'); }
-  };
-  const open = (el, msgKey) => { from = el; o.hidden = false; o.querySelector('.sheet__x').focus(); load(msgKey); };
-  const shut = () => { o.hidden = true; from?.focus?.(); };
-  body.addEventListener('click', async (e) => {
-    const g = e.target.closest('[data-g]'), k = e.target.closest('[data-k]'), out = e.target.closest('[data-out]');
-    try {
-      if (g) await showGuild(g.dataset.g);
-      else if (out) { await api('/auth/logout', 'POST'); loginView('pnl.out'); }
-      else if (k) {
-        const next = k.getAttribute('aria-checked') !== 'true'; k.setAttribute('aria-checked', String(next)); k.disabled = true;
-        try { await api(`/guilds/${gid}/modules/${k.dataset.k}`, 'PATCH', { active: next }); await hist(); } catch { k.setAttribute('aria-checked', String(!next)); } finally { k.disabled = false; k.focus(); }
-      }
-    } catch { note('pnl.err'); }
-  });
-  o.querySelector('.sheet__x').addEventListener('click', shut); o.addEventListener('click', (e) => { if (e.target === o) shut(); });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !o.hidden) shut(); });
-  document.addEventListener('click', (e) => { const l = e.target.closest('a[href="#panel"]'); if (l) { e.preventDefault(); open(l); } });
-  document.addEventListener('i18n:change', () => { if (o.hidden) return; if (view === 'app' && gid) hist().catch(() => {}); });
-  document.addEventListener('realm:entered', () => { if (location.hash === '#panel') open(); else if (location.hash === '#panel-error') open(null, 'pnl.fail'); });
+import { decorateLanguageSelect } from '../i18n/index.js';
+import { translateCopy } from '../i18n/index.js';
+import { currentRoute } from '../core/navigation.js';
+import './panel.css';
+import { filterGuilds,moduleLocked,panelError,moduleWrite } from '../core/panel-state.js';
+import { moduleText } from '../data/panel-modules.js';
+import { t,lang,setLang,LANGS } from '../i18n/index.js';
+import { loadPrefs,savePrefs } from '../core/prefs.js';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const text=translateCopy;
+const DEMO={user:{name:'Profilo demo'},guilds:[{id:'demo-1',name:'Dojo demo',can_manage:true,bot_present:true},{id:'demo-2',name:'Studio demo',can_manage:true,bot_present:false},{id:'demo-3',name:'Community demo',can_manage:false,bot_present:true}]};
+const DEMO_MODULES=[['automod','AutoMod','Sicurezza'],['anti_raid','Anti-raid','Sicurezza'],['tickets','Ticket','Community'],['leveling','Level & XP','Community'],['music','Music','Utility e fun']].map(([key,label,group],i)=>({key,label,group,active:i<2,required_tier:'free',can_enable:true}));
+export function initPanel(){
+ const dialog=document.createElement('dialog');dialog.className='control-panel';dialog.setAttribute('aria-labelledby','control-title');dialog.innerHTML='<div class="control-shell"><header class="control-header"><span class="control-brand">iYokaiミ</span><strong id="control-title">Discord Core</strong><button type="button" class="control-signout" data-logout hidden></button><select data-language aria-label="Language"><option value="it">IT</option><option value="en">EN</option></select><button type="button" data-close>×</button></header><div class="control-body"></div><p class="control-status" role="status"></p></div>';document.body.append(dialog);dialog.querySelector('[data-language]').replaceChildren(...LANGS.map(l=>new Option(l.name,l.code)));decorateLanguageSelect(dialog.querySelector('[data-language]'));
+ const body=dialog.querySelector('.control-body'),status=dialog.querySelector('[role="status"]');
+ let settingsData=null,settingsError=false,ownerData=null;
+ let config={enabled:false,apiBase:'/api'},demo=false,me,current,data,personalEnt,tab='overview',identities=[{id:'core',name:'iYokaiミ',configured:true}],identity='core',csrf='',from,epoch=0,selection=0,cycle='monthly',loading=false,controller,guildQuery='',guildFilter='all',loadError='',historyError=false,pendingModule='',pickerOpen=false;
+ const api=async(path,method='GET',payload)=>{
+  const url=new URL(config.apiBase+path,location.origin);if(path.startsWith('/me')||path.startsWith('/guilds'))url.searchParams.set('identity',identity);
+  const response=await fetch(url,{method,credentials:'same-origin',cache:'no-store',signal:controller?.signal,headers:{Accept:'application/json',...(method!=='GET'?{'Content-Type':'application/json','X-CSRF-Token':csrf}:{})},body:payload?JSON.stringify(payload):undefined});
+  if(!response.ok){let code='';try{const error=await response.json();if(typeof error.detail?.code==='string')code=error.detail.code;}catch{}throw Object.assign(new Error('api'),{status:response.status,code});}return response.json();
+ };
+ function errorMessage(code){return ({session:text('La sessione è scaduta. Accedi di nuovo con Discord.','Your session expired. Sign in with Discord again.'),permission:text('I permessi sono cambiati oppure questa azione richiede un livello superiore. Aggiorna il server per verificare lo stato.','Permissions changed or this action requires a higher tier. Refresh the server to check its status.'),missing:text('Questa identità non è più presente nel server. Aggiorna l’elenco dei server.','This identity is no longer in the server. Refresh the server list.'),sync:text('La configurazione del bot non è ancora sincronizzata. Riprova tra poco.','The bot configuration is not synchronized yet. Try again shortly.'),rate:text('Troppe richieste. Attendi un momento prima di riprovare.','Too many requests. Wait a moment before trying again.'),unavailable:text('Connessione non disponibile. Nessuna modifica è stata confermata.','Connection unavailable. No change has been confirmed.')})[code];}
+ function handleError(error){const code=panelError(error.status);if(code==='session'){epoch++;selection++;controller?.abort();controller=new AbortController();csrf='';personalEnt=null;demo=false;welcome(errorMessage(code));body.querySelector('.control-login button')?.focus({preventScroll:true});return;}status.textContent=errorMessage(code);}
+ function welcome(message=''){
+  me=null;current=null;data=null;ownerData=null;csrf='';personalEnt=null;pendingModule='';dialog.querySelector('.control-signout').hidden=true;
+  body.innerHTML=`<section class="control-welcome"><p class="control-eyebrow">CONTROL ROOM / ミ</p><h1>${text('Il tuo server.','Your server.')}<br><em>${text('Il tuo equilibrio.','Your balance.')}</em></h1><p>${text('Accedi con Discord e scegli il server e l’identità da gestire. Permessi, moduli e vantaggi, in un unico spazio.','Sign in with Discord and choose the server and identity to manage. Permissions, modules and benefits in one place.')}</p><div class="control-actions"><form class="control-login" action="${esc(config.apiBase)}/auth/login" method="get"><label><input type="checkbox" name="remember" value="true"> ${text('Resta connessa/o su questo dispositivo','Keep me signed in on this device')}</label><button class="btn btn--main" type="submit" ${config.enabled?'':'disabled'}>${text('Accedi con Discord','Sign in with Discord')}</button></form><button class="btn" data-demo>${text('Anteprima del pannello','Preview the dashboard')}</button></div><p class="control-note">${esc(message||(!config.enabled?text('Accesso in attivazione. Puoi già esplorare l’anteprima.','Sign-in is being activated. You can explore the preview now.'):''))}</p></section>`;
+ }
+ function guildButtons(){const rows=filterGuilds(me.guilds,{query:guildQuery,filter:guildFilter});return rows.length?rows.map(g=>`<button data-guild="${esc(g.id)}" aria-pressed="${current===g.id}"><span class="control-guild-icon">${esc(g.name.slice(0,1))}</span><span><strong>${esc(g.name)}</strong><small>${!g.can_manage?text('Solo membro','Member only'):g.bot_present?text('Gestisci','Manage'):text('Da invitare','Ready to invite')}</small></span></button>`).join(''):`<p class="control-no-results">${text('Nessun server corrispondente.','No matching servers.')}</p>`;}
+ function updateGuilds(){const nav=body.querySelector('.control-guilds');if(nav)nav.innerHTML=guildButtons();const count=body.querySelector('.control-server-count');if(count)count.textContent=`${filterGuilds(me.guilds,{query:guildQuery,filter:guildFilter}).length} / ${me.guilds.length}`;}
+ function entitlement(){return data?.entitlement||personalEnt||{tier:'free',sources:[],aida:{enabled:false,monthly_tokens:0,remaining_tokens:0}};}
+ function render(){
+  dialog.querySelector('[data-language]').value=lang();const logout=dialog.querySelector('.control-signout');logout.hidden=!me;logout.textContent=text('Esci','Sign out');dialog.querySelector('[data-close]').setAttribute('aria-label',t('sheet.close'));
+  if(!me){welcome();return;}
+  const guild=me.guilds.find(g=>g.id===current),ent=entitlement(),tabs=[['overview',text('Panoramica','Overview')],['modules',text('Moduli','Modules')],['settings',text('Impostazioni','Settings')],['premium','Premium & VIP'],['history',text('Attività','Activity')],...(me.is_bot_owner?[['owner','Owner']]:[])];
+  body.innerHTML=`${demo?`<div class="control-demo">${text('Anteprima · dati dimostrativi · nessuna modifica viene inviata','Preview · sample data · no changes are sent')}<button data-exit-demo>${text('Esci dall’anteprima','Leave preview')}</button></div>`:''}<div class="control-layout"><aside class="control-sidebar${pickerOpen?' picker-open':''}"><button type="button" class="control-picker-toggle" data-picker aria-expanded="${pickerOpen}" aria-controls="control-picker-content">${text('Server e identità','Servers & identity')} <span aria-hidden="true">⌄</span></button><div id="control-picker-content" class="control-picker-content"><p class="control-eyebrow">${text('IDENTITÀ','IDENTITY')}</p><select data-identity aria-label="${text('Identità del bot','Bot identity')}">${identities.map(i=>`<option value="${esc(i.id)}"${i.id===identity?' selected':''}${!i.configured?' disabled':''}>${esc(i.name)}${!i.configured?' · '+text('in attivazione','not configured'):''}</option>`).join('')}</select><p class="control-eyebrow">${text('I TUOI SERVER','YOUR SERVERS')}</p><label class="control-search-label">${text('Cerca un server','Find a server')}<input data-guild-search type="search" maxlength="100" autocomplete="off" value="${esc(guildQuery)}" placeholder="${text('Nome o ID server','Server name or ID')}"></label><div class="control-server-filter"><select data-guild-filter aria-label="${text('Filtra server','Filter servers')}">${[['all',text('Tutti i server','All servers')],['manage',text('Da gestire','Manage')],['invite',text('Da invitare','Invite')],['member',text('Solo membro','Member only')]].map(([value,label])=>`<option value="${value}"${guildFilter===value?' selected':''}>${label}</option>`).join('')}</select><span class="control-server-count" role="status">${filterGuilds(me.guilds,{query:guildQuery,filter:guildFilter}).length} / ${me.guilds.length}</span><button type="button" data-refresh-profile aria-label="${text('Aggiorna elenco server','Refresh server list')}" ${demo||loading?'disabled':''}>↻</button></div><nav class="control-guilds" aria-label="${text('Server Discord','Discord servers')}">${guildButtons()}</nav></div><p class="control-user">${esc(me.user.name)}</p><button class="control-text" data-logout>${text('Disconnetti','Sign out')}</button></aside><main class="control-main"><header class="control-server-head"><div><p class="control-eyebrow">DISCORD CORE / ${esc(identity)}</p><h1>${esc(guild?.name||text('Scegli un server','Choose a server'))}</h1></div><div class="control-server-actions"><span class="control-tier">${esc(ent.tier.toUpperCase())}</span><button type="button" data-refresh-guild ${loading?'disabled':''}>${text('Aggiorna','Refresh')}</button></div></header><nav class="control-tabs" aria-label="${text('Sezioni pannello','Dashboard sections')}">${tabs.map(([id,label])=>`<button data-tab="${id}"${id===tab?' aria-current="page"':''}>${label}</button>`).join('')}</nav><div class="control-content">${loading?`<p role="status">${t('pnl.loading')}</p>`:loadError?`<section class="control-empty"><h2>${text('Server non disponibile','Server unavailable')}</h2><p>${esc(errorMessage(loadError))}</p><button class="btn" data-refresh-guild>${text('Riprova','Retry')}</button></section>`:content(guild,ent)}</div></main></div>`;
+ }
+ function content(g,ent){
+  if(tab==='owner'&&me.is_bot_owner)return `<section><h2>Owner / iYokaiミ</h2><p>${text('Accesso confermato dal processo del bot, distinto dal proprietario di un server.','Access confirmed by the bot process, separate from server ownership.')}</p><button class="btn" data-owner-load>${text('Carica diagnostica e richieste','Load diagnostics & requests')}</button>${ownerData?`<p>Members intent: ${ownerData.cap.members_requested?'ON':'OFF'} · Message Content: ${ownerData.cap.message_content_requested?'ON':'OFF'}</p><p>${text('L’approvazione nel Developer Portal va verificata separatamente. La gestione VIP dei singoli moduli e gli annunci cross-server sono ancora da integrare.','Developer Portal approval must be checked separately. Per-module VIP control and cross-server announcements still require integration.')}</p><h3>${text('Richieste di contatto','Contact requests')}</h3>${ownerData.contacts.items.map(r=>`<article class="control-log"><strong>${esc(r.topic)} · ${esc(r.user_id)}</strong><p style="white-space:pre-wrap">${esc(r.message)}</p><small>${esc(r.created_at)} · Discord: ${esc(r.delivery||'pending')}</small></article>`).join('')||text('Nessuna richiesta.','No requests.')}`:''}</section>`;
+  if(!g)return `<p>${t('pnl.noguild')}</p>`;
+  if(tab==='settings')return `<section class="control-settings"><h2>${text('Ruoli e lingua','Roles & language')}</h2><p>${text('Le modifiche usano gli stessi controlli dei comandi del bot.','Changes use the same checks as bot commands.')}</p>${!settingsData?`<p>${demo?text('Configurazione dimostrativa: nessuna scrittura reale.','Sample settings: no real writes.'):settingsError?text('Collegamento al bot non disponibile. Nessuna modifica è stata inviata.','Bot connection unavailable. No changes were sent.'):text('Carica le impostazioni dal bot.','Load settings from the bot.')}</p><button class="btn" data-load-settings ${demo?'disabled':''}>${text('Carica impostazioni','Load settings')}</button>`:`<form data-settings-language><label>${text('Lingua del server','Server language')}<input name="language" maxlength="20" required value="${esc(settingsData.lingua)}"></label><button class="btn">${text('Salva lingua','Save language')}</button></form>${settingsData.ruoli_bot.map(r=>`<form data-settings-role><label>${esc(r.etichetta)}<select name="role_id"><option value="">${text('Nessun ruolo','No role')}</option>${settingsData.ruoli_server.map(role=>`<option value="${esc(role.id)}" ${role.id===r.attuale?'selected':''}>${esc(role.nome)}</option>`).join('')}</select></label><input type="hidden" name="kind" value="${esc(r.tipo)}"><button class="btn">${text('Salva ruolo','Save role')}</button></form>`).join('')}`}</section>`;
+  if(tab==='premium')return `<section class="control-subscription"><p>${text('Il tuo livello','Your tier')}: <strong>${esc(ent.tier.toUpperCase())}</strong></p><p>${text('I vantaggi possono provenire da un acquisto o dal supporto a un server abilitato. Lo stato viene verificato dal backend.','Benefits may come from a purchase or support for an eligible server. Status is verified by the backend.')}</p><div class="control-cycles">${['monthly','annual','lifetime'].map(c=>`<button data-cycle="${c}" aria-pressed="${cycle===c}">${c==='monthly'?text('Mensile','Monthly'):c==='annual'?text('Annuale','Annual'):'Lifetime'}</button>`).join('')}</div><div class="control-tier-grid">${['premium','vip-1','vip-5','vip-20'].map(tier=>`<article><p class="control-eyebrow">${cycle==='monthly'?text('MENSILE','MONTHLY'):cycle==='annual'?text('ANNUALE','ANNUAL'):'LIFETIME'}</p><h2>${tier.startsWith('vip')?tier.toUpperCase().replace('-',' '):'Premium'}</h2><p>${tier.startsWith('vip')?text('Include Premium e accesso alle funzionalità AIDA, con quote dedicate.','Includes Premium and access to AIDA features, with dedicated allowances.'):text('Accesso alle funzionalità premium del bot, secondo il piano configurato.','Access to the bot’s premium features, according to the configured plan.')}</p><strong>${text('Lancio gratuito','Free launch')}</strong>${cycle==='lifetime'?`<a class="btn" href="#support-lifetime">${text('Richiedi Lifetime','Ask about Lifetime')}</a>`:`<button disabled>${text('Pagamenti disattivati','Payments disabled')}</button>`}</article>`).join('')}</div><div class="control-quota"><h3>AIDA</h3><p>${ent.aida.enabled?`${Number(ent.aida.remaining_tokens).toLocaleString()} / ${Number(ent.aida.monthly_tokens).toLocaleString()} ${text('token disponibili nel periodo','tokens available this period')}`:text('Quote ancora da configurare. VIP non implica token illimitati.','Allowances are not configured yet. VIP does not imply unlimited tokens.')}</p></div></section>`;
+  if(!g.can_manage)return `<div class="control-empty"><h2>${text('Un ruolo, il suo spazio.','A role, its own space.')}</h2><p>${text('Per configurare questo server servono i permessi Gestisci server o Amministratore, oppure esserne proprietaria/o.','To configure this server, you need Manage Server or Administrator permissions, or ownership.')}</p></div>`;
+  if(!g.bot_present)return `<div class="control-empty"><h2>${text('La Kitsune ti aspetta.','The Kitsune is waiting.')}</h2><p>${text('Questa identità non è ancora presente nel server. Invitala da Discord per iniziare.','This identity is not in this server yet. Invite it through Discord to get started.')}</p>${!demo&&/^https:\/\/discord\.com\//.test(g.invite_url||'')?`<a class="btn btn--main" href="${esc(g.invite_url)}" target="_blank" rel="noopener">${text('Invita questa identità','Invite this identity')}</a>`:`<button class="btn" disabled>${text('Invita questa identità','Invite this identity')}</button>`}</div>`;
+  if(tab==='modules'){
+   const groups={};for(const m of data?.modules||[]){const info=moduleText(m,lang(),key=>t(key)===key?null:t(key));(groups[info.group]||=[]).push({...m,...info});}
+   return `<p class="control-module-note">${text('Ogni interruttore attiva o disattiva il modulo. Le opzioni dettagliate restano nei comandi Discord.','Each switch enables or disables a module. Detailed options remain in the Discord commands.')}</p><div class="control-modules">${Object.entries(groups).map(([group,mods])=>`<section><h2>${esc(group)}</h2>${mods.map(m=>{const locked=moduleLocked(m),required=m.required_tier||'unknown';return `<div class="control-module"><div><strong>${esc(m.label)}</strong><p>${esc(m.description)}</p><small>${m.active?text('Attivo','Active'):text('Disattivato','Off')}${required!=='free'?` · ${text('Richiede','Requires')} ${esc(required.toUpperCase())}`:''}</small>${locked?`<button class="control-text" data-tab="premium">${text('Consulta Premium & VIP','View Premium & VIP')}</button>`:''}</div><button class="sw2" data-module="${esc(m.key)}" role="switch" aria-label="${esc(m.label)}" aria-checked="${Boolean(m.active)}" ${locked||pendingModule?'disabled':''}></button></div>`;}).join('')}</section>`).join('')||`<p>${text('Questa identità non espone moduli configurabili.','This identity has no configurable modules.')}</p>`}</div>`;
+  }
+  if(tab==='history'&&historyError)return `<section><h2>${text('Attività non disponibile','Activity unavailable')}</h2><p>${text('Lo storico non è stato caricato. Non significa che non ci siano modifiche.','History could not be loaded. This does not mean there were no changes.')}</p><button class="btn" data-refresh-guild>${text('Riprova','Retry')}</button></section>`;
+  if(tab==='history')return `<section><h2>${text('Ultime modifiche','Recent changes')}</h2>${(data?.history||[]).length?data.history.map(h=>`<p class="control-log"><strong>${esc(h.key)}</strong> · ${esc(h.new)}<small>${esc(new Date(h.at).toLocaleString(lang()))}</small></p>`).join(''):`<p>${demo?text('Nessuna attività reale nell’anteprima.','No real activity in preview.'):t('pnl.none')}</p>`}</section>`;
+  const count=(data?.modules||[]).filter(m=>m.active).length,role=data?.access?.role;
+  return `<div class="control-stats"><article><small>${text('Moduli attivi','Active modules')}</small><strong>${count}</strong></article><article><small>${text('Il tuo ruolo','Your role')}</small><strong>${role==='owner'?text('Proprietaria/o','Owner'):role==='administrator'?'Admin':text('Gestione server','Server manager')}</strong></article><article><small>${text('Livello','Tier')}</small><strong>${ent.tier.toUpperCase()}</strong></article></div><section class="control-overview"><h2>${text('Tutto sotto controllo.','Everything in balance.')}</h2><p>${text('Configura i moduli, verifica i tuoi vantaggi e consulta le modifiche recenti. Ogni azione è limitata ai permessi della tua identità sul server selezionato.','Configure modules, check your benefits and review recent changes. Each action is limited to your permissions in the selected server.')}</p><div class="control-role-list">${(data?.access?.roles||[]).map(r=>`<span>${esc(r.name)}</span>`).join('')}</div><button class="btn btn--main" data-tab="modules">${text('Configura i moduli','Configure modules')}</button>${['owner','administrator'].includes(role)?`<button class="control-remove" data-remove-bot ${demo?'disabled':''}>${text('Rimuovi questa identità dal server','Remove this identity from the server')}</button>`:''}</section>`;
+ }
+ async function selectGuild(id){
+  current=id;data=null;settingsData=null;settingsError=false;loadError='';historyError=false;pendingModule='';status.textContent='';const ticket=++selection,version=epoch;const guild=me?.guilds.find(g=>g.id===id);loading=Boolean(guild?.bot_present&&guild?.can_manage);render();
+  if(!loading)return;
+  try{
+   const result=demo?{modules:DEMO_MODULES.filter(m=>identity==='core'||m.key==='music').map(m=>({...m})),access:{role:'owner',roles:[{name:text('Ruolo dimostrativo','Sample role')}]},history:[],entitlement:{tier:'free',aida:{enabled:false,remaining_tokens:0,monthly_tokens:0}}}:await api(`/guilds/${encodeURIComponent(id)}`);
+   if(version!==epoch||ticket!==selection||!dialog.open)return;
+   if(!demo){try{result.history=(await api(`/guilds/${encodeURIComponent(id)}/history?limit=8`)).items;}catch(e){if(e.status===401)throw e;if(version===epoch&&ticket===selection)historyError=true;result.history=[];}}
+   if(version!==epoch||ticket!==selection||!dialog.open)return;data=result;
+  }catch(e){if(version===epoch&&ticket===selection){if(e.name!=='AbortError'){loadError=panelError(e.status);handleError(e);}}}
+  finally{if(version===epoch&&ticket===selection){loading=false;render();}}
+ }
+ async function load(){
+  const version=epoch;body.innerHTML=`<p class="control-loading">${t('pnl.loading')}</p>`;
+  try{const r=await fetch('/panel.json',{cache:'no-store',signal:controller.signal});if(r.ok){const c=await r.json();config={enabled:c.enabled===true,apiBase:/^\/[a-z0-9/_-]+$/i.test(c.apiBase||'')?c.apiBase:'/api'};}}
+  catch{config.enabled=false;}
+  if(version!==epoch||!dialog.open)return;
+  if(!config.enabled){render();return;}
+  try{
+   const available=(await api('/panel/config')).identities;if(version!==epoch)return;identities=available;if(!identities.some(i=>i.id===identity&&i.configured))identity=identities.find(i=>i.configured)?.id||'core';const profile=await api('/me'),benefits=await api('/me/entitlements');if(version!==epoch)return;me=profile;personalEnt=benefits;csrf=me.csrf;
+   selectGuild(me.guilds.find(g=>g.can_manage&&g.bot_present)?.id||me.guilds[0]?.id);
+  }catch(e){if(version!==epoch)return;welcome(e.status===401?'':errorMessage(panelError(e.status))); }
+ }
+ function open(el,msg){from=el?.closest('#dc-mobile-menu')?document.querySelector('.dc-menu-toggle'):el;epoch++;selection++;demo=false;me=null;personalEnt=null;guildQuery='';guildFilter='all';loadError='';pendingModule='';status.textContent=msg||'';controller?.abort();controller=new AbortController();if(!dialog.open)dialog.showModal();render();load();}
+ dialog.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const controls=[...dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(e.shiftKey&&document.activeElement===controls[0]){e.preventDefault();controls.at(-1)?.focus();}else if(!e.shiftKey&&document.activeElement===controls.at(-1)){e.preventDefault();controls[0]?.focus();}});
+ dialog.addEventListener('submit',async e=>{
+  if(!e.target.matches('[data-settings-language],[data-settings-role]'))return;
+  e.preventDefault();if(demo||!current)return;
+  const form=e.target,fields=new FormData(form),gid=current,version=epoch;
+  const button=form.querySelector('button');button.disabled=true;
+  try{const payload=form.matches('[data-settings-language]')?{language:fields.get('language')}:{kind:fields.get('kind'),role_id:fields.get('role_id')||null};await api(`/guilds/${encodeURIComponent(gid)}/settings/${'language' in payload?'language':'role'}`,'PATCH',payload);if(version===epoch&&gid===current){const result=await api(`/guilds/${encodeURIComponent(gid)}/settings`);if(version!==epoch||gid!==current)return;settingsData=result;render();status.textContent=text('Impostazioni salvate dal bot.','Settings saved by the bot.');}}catch(error){if(version===epoch&&gid===current)handleError(error);}finally{if(button.isConnected)button.disabled=false;}
+ });
+ dialog.addEventListener('input',e=>{if(e.target.matches('[data-guild-search]')){guildQuery=e.target.value;updateGuilds();}});
+ dialog.addEventListener('close',()=>{epoch++;selection++;controller?.abort();from?.focus?.();});
+ dialog.addEventListener('click',async e=>{
+  if(e.target.closest('[data-owner-load]')){if(demo||!me?.is_bot_owner)return;const version=epoch;try{const [cap,contacts]=await Promise.all([api('/owner/capabilities'),api('/owner/contacts')]);if(version===epoch){ownerData={cap,contacts};render();}}catch(error){if(version===epoch)handleError(error);}return;}
+  if(e.target.closest('[data-load-settings]')){if(demo||!current)return;const gid=current,version=epoch;try{const result=await api(`/guilds/${encodeURIComponent(gid)}/settings`);if(version===epoch&&gid===current){settingsData=result;settingsError=false;render();}}catch(error){if(version===epoch&&gid===current){settingsData=null;settingsError=true;handleError(error);if(me)render();}}return;}
+  if(e.target.closest('[data-picker]')){pickerOpen=!pickerOpen;const button=e.target.closest('[data-picker]');button.setAttribute('aria-expanded',String(pickerOpen));button.closest('.control-sidebar').classList.toggle('picker-open',pickerOpen);return;}
+  if(e.target===dialog||e.target.closest('[data-close]')){dialog.close();return;}
+  if(e.target.closest('[data-demo]')){demo=true;personalEnt=null;me=structuredClone(DEMO);identities=[{id:'core',name:'iYokaiミ',configured:true},{id:'music-1',name:'iYokai Music 1',configured:true}];identity='core';tab='overview';selectGuild(me.guilds[0].id);return;}
+  if(e.target.closest('[data-exit-demo]')){demo=false;me=null;load();return;}
+  if(e.target.closest('[data-logout]')){if(!demo){try{await api('/auth/logout','POST');}catch(error){handleError(error);return;}}demo=false;welcome(t('pnl.out'));return;}
+  if(e.target.closest('[data-refresh-guild]')){if(current){const version=epoch,gid=current;await selectGuild(gid);if(version===epoch&&gid===current)body.querySelector('[data-refresh-guild]')?.focus({preventScroll:true});}return;}
+  if(e.target.closest('[data-refresh-profile]')){if(demo)return;const version=++epoch;selection++;controller?.abort();controller=new AbortController();loading=true;render();try{const profile=await api('/me');if(version===epoch){me=profile;csrf=profile.csrf;await selectGuild(profile.guilds.some(g=>g.id===current)?current:profile.guilds[0]?.id);}}catch(error){if(version===epoch){loading=false;handleError(error);if(me)render();}}return;}
+  if(e.target.closest('[data-remove-bot]')){
+   if(demo||!confirm(text('Rimuovere questa identità dal server selezionato? Potrai invitarla di nuovo.','Remove this identity from the selected server? You can invite it again.')))return;
+   const gid=current,version=epoch;
+   try{await api(`/guilds/${encodeURIComponent(gid)}/bot`,'DELETE',{confirm_guild_id:gid});if(version===epoch){const profile=await api('/me');if(version===epoch){me=profile;selectGuild(gid);}}}catch(error){if(version===epoch)handleError(error);}
+   return;
+  }
+  const g=e.target.closest('[data-guild]');if(g){pickerOpen=false;await selectGuild(g.dataset.guild);body.querySelector('.control-picker-toggle')?.focus({preventScroll:true});return;}
+  const target=e.target.closest('[data-tab]');if(target){tab=target.dataset.tab;render();body.querySelector(`[data-tab="${tab}"]`)?.focus({preventScroll:true});return;}
+  const c=e.target.closest('[data-cycle]');if(c){cycle=c.dataset.cycle;render();return;}
+  const m=e.target.closest('[data-module]');if(m){
+   if(demo){status.textContent=text('Anteprima: nessuna modifica viene inviata.','Preview: no changes are sent.');return;}
+   const item=data?.modules.find(x=>x.key===m.dataset.module);if(!item||moduleLocked(item)||pendingModule)return;
+   const version=epoch,gid=current,selected=selection,selectedIdentity=identity,key=item.key;
+   pendingModule=key;status.textContent=text('Salvataggio in corso…','Saving…');body.querySelectorAll('[data-module]').forEach(button=>button.disabled=true);
+   try{await api(`/guilds/${encodeURIComponent(gid)}/modules/${encodeURIComponent(key)}`,'PATCH',moduleWrite(item));
+    if(version===epoch&&selected===selection&&selectedIdentity===identity&&gid===current){await selectGuild(gid);if(version===epoch&&gid===current&&selectedIdentity===identity&&!loadError&&me){status.textContent=text('Modifica confermata dal server.','Change confirmed by the server.');body.querySelector(`[data-module="${key}"]`)?.focus({preventScroll:true});}}
+   }catch(error){if(version===epoch&&selected===selection){
+    if(error.status===409&&error.code==='module_conflict'){
+     await selectGuild(gid);
+     if(version===epoch&&gid===current&&selectedIdentity===identity&&!loadError&&me){status.textContent=text('Il modulo è stato aggiornato altrove. Ho ricaricato lo stato: controllalo prima di scegliere di nuovo.','The module was updated elsewhere. Its state has been reloaded; review it before choosing again.');body.querySelector(`[data-module="${key}"]`)?.focus({preventScroll:true});}
+    }else{handleError(error);if(me){pendingModule='';render();body.querySelector(`[data-module="${key}"]`)?.focus({preventScroll:true});}}
+   }}
+   finally{if(version===epoch&&selected===selection)pendingModule='';}
+  }
+ });
+ dialog.addEventListener('change',async e=>{
+  if(e.target.matches('[data-guild-filter]')){guildFilter=e.target.value;updateGuilds();return;}
+  if(e.target.matches('[data-language]')){
+   await setLang(e.target.value);savePrefs({...loadPrefs(),lang:e.target.value});
+  }
+  if(e.target.matches('[data-identity]')){
+   identity=e.target.value;guildQuery='';guildFilter='all';
+   if(demo){selectGuild(current);return;}
+   epoch++;selection++;controller?.abort();controller=new AbortController();loading=true;data=null;loadError='';pendingModule='';render();const version=epoch;
+   try{
+    const profile=await api('/me');
+    if(version===epoch){me=profile;selectGuild(me.guilds[0]?.id);}
+   }catch{if(version===epoch){loading=false;welcome(errorMessage('unavailable'));}}
+  }
+ });
+ document.addEventListener('i18n:change',()=>{if(dialog.open){status.textContent='';render();}});
+ document.addEventListener('click',e=>{const link=e.target.closest('a[href="#panel"]');if(link){e.preventDefault();open(link);}});
+ document.addEventListener('realm:entered',()=>{if(currentRoute()==='#panel'||currentRoute()==='#panel-error')open(null,currentRoute()==='#panel-error'?t('pnl.fail'):'');});
 }

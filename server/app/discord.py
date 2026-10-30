@@ -32,3 +32,6 @@ async def revoke(s, token: str) -> None:
 def manageable(guilds: list[dict]) -> list[dict]:
     """Solo i server che l'utente può amministrare; id sempre come stringa (gli snowflake superano 2^53)."""
     return [{"id": str(g["id"]), "name": g["name"], "icon": g.get("icon")} for g in guilds if g.get("owner") or int(g.get("permissions", 0)) & (MANAGE_GUILD | ADMIN)]
+
+def guild_profiles(guilds):
+    return [{"id":str(g["id"]),"name":g["name"],"icon":g.get("icon"),"owner":bool(g.get("owner")),"permissions":str(g.get("permissions","0")),"can_manage":bool(g.get("owner") or int(g.get("permissions",0))&(MANAGE_GUILD|ADMIN))} for g in guilds]

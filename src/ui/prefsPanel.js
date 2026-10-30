@@ -1,3 +1,4 @@
+import { decorateLanguageSelect } from '../i18n/index.js';
 import { savePrefs, applyPrefs } from '../core/prefs.js';
 import { LANGS, a, lang, setLang, t } from '../i18n/index.js';
 const ACCENTS = ['#b24bff', '#ff4fd8', '#7c5cff', '#ff6a9e'];
@@ -12,6 +13,7 @@ export function initPrefsPanel({ prefs, onChange }) {
     <label class="prefs__row"><span ${a('prefs.lang')}>${t('prefs.lang')}</span><select id="plang" class="prefs__sel">${LANGS.map((l) => `<option value="${l.code}">${l.name}</option>`).join('')}</select></label></div>`;
   hub.append(...wrap.children);
   const gear = document.getElementById('gear'), panel = document.getElementById('prefs'), spd = document.getElementById('pspd'), snd = document.getElementById('psnd'), sel = document.getElementById('plang');
+  decorateLanguageSelect(sel);
   const sync = () => {
     spd.value = prefs.speed; snd.checked = prefs.sound; sel.value = lang();
     panel.querySelectorAll('[data-k]').forEach((b) => b.setAttribute('aria-pressed', String(prefs[b.dataset.k] === b.dataset.v)));
@@ -21,5 +23,6 @@ export function initPrefsPanel({ prefs, onChange }) {
   spd.addEventListener('input', () => set('speed', +spd.value)); snd.addEventListener('change', () => set('sound', snd.checked));
   sel.addEventListener('change', async () => { await setLang(sel.value); set('lang', sel.value); });
   gear.addEventListener('click', () => { panel.hidden = !panel.hidden; gear.setAttribute('aria-expanded', String(!panel.hidden)); });
+  document.addEventListener('i18n:change', sync);
   sync();
 }

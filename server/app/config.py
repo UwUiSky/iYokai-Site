@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from dataclasses import dataclass, field
 from functools import lru_cache
 
@@ -20,6 +21,13 @@ class Settings:
     twitch_login: str = field(default_factory=lambda: _e("TWITCH_LOGIN"))
     yt_channels: tuple = field(default_factory=lambda: tuple(x.strip() for x in _e("YOUTUBE_CHANNEL_IDS").split(",") if x.strip()))
     auto_migrate: bool = field(default_factory=lambda: _e("PANEL_AUTO_MIGRATE", "1") != "0")
+    policy_file: str = field(default_factory=lambda: _e("PANEL_POLICY_FILE", str(Path(__file__).resolve().parents[1] / "policy.example.json")))
+    billing_secret: str = field(default_factory=lambda: _e("PANEL_BILLING_BRIDGE_SECRET"), repr=False)
+    bot_bridge_url: str = field(default_factory=lambda: _e("PANEL_BOT_BRIDGE_URL"))
+    bot_bridge_secret: str = field(default_factory=lambda: _e("PANEL_BOT_BRIDGE_SECRET"), repr=False)
+    site_settings_file: str = field(default_factory=lambda: _e("PANEL_SITE_SETTINGS_FILE", str(Path(__file__).resolve().parents[1] / "site-settings.example.json")))
+    commerce_file: str = field(default_factory=lambda: _e("PANEL_COMMERCE_FILE", str(Path(__file__).resolve().parents[1] / "commerce.example.json")))
+    data_keys: str = field(default_factory=lambda: _e("PANEL_DATA_KEYS"), repr=False)
     session_ttl: int = 7 * 24 * 3600
 
 @lru_cache

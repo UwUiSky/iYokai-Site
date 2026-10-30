@@ -1,0 +1,53 @@
+{
+  "platforms": {
+    "youtube": "",
+    "youtubeMusic": "",
+    "spotify": "https://open.spotify.com/album/0X5K33clT2LfQSn5vrn8t4",
+    "twitch": "",
+    "kick": "",
+    "instagram": "",
+    "tiktok": "",
+    "x": "",
+    "bluesky": "",
+    "steam": "",
+    "discord": ""
+  },
+  "music": {
+    "title": "The Oni of Jah",
+    "artist": "iYokaiミ",
+    "tracks": [
+      "Babylon in the Fight",
+      "Conflitto",
+      "Cuore sul Burrone",
+      "Drift no Koi-shii",
+      "Echi di Tempesta",
+      "Eco di Jah",
+      "Fuoco e Polvere",
+      "Lotta Interiore",
+      "Queen Gyal Babylon",
+      "Rebel Echo",
+      "Rebel Soul",
+      "Soul Fight"
+    ]
+  },
+  "contactEmail": "",
+  "projects": [
+    {
+      "name": "iYokai Discord Bot",
+      "url": "https://github.com/UwUiSky/iYokai-DS-BOT"
+    },
+    {
+      "name": "iYokai Site",
+      "url": "https://github.com/UwUiSky/iYokai-Site"
+    }
+  ],
+  "discord": {
+    "botClientId": "",
+    "appClientId": "",
+    "nsfwClientId": "",
+    "botPermissions": "0",
+    "desktopUrl": "",
+    "mobileUrl": "",
+    "nsfwArtworkUrl": ""
+  }
+}

@@ -1,0 +1,805 @@
+{
+  "U+0021": {
+    "character": "!",
+    "glyph": "u0021",
+    "advance": 294,
+    "bounds": [
+      28,
+      51,
+      258,
+      638
+    ]
+  },
+  "U+0022": {
+    "character": "\"",
+    "glyph": "u0022",
+    "advance": 235,
+    "bounds": [
+      12,
+      495,
+      187,
+      675
+    ]
+  },
+  "U+0027": {
+    "character": "'",
+    "glyph": "u0027",
+    "advance": 135,
+    "bounds": [
+      12,
+      495,
+      87,
+      675
+    ]
+  },
+  "U+002C": {
+    "character": ",",
+    "glyph": "u002C",
+    "advance": 160,
+    "bounds": [
+      20,
+      -155,
+      156,
+      35
+    ]
+  },
+  "U+002E": {
+    "character": ".",
+    "glyph": "u002E",
+    "advance": 145,
+    "bounds": [
+      20,
+      -25,
+      99,
+      55
+    ]
+  },
+  "U+0030": {
+    "character": "0",
+    "glyph": "u0030",
+    "advance": 536,
+    "bounds": [
+      28,
+      0,
+      521,
+      646
+    ]
+  },
+  "U+0031": {
+    "character": "1",
+    "glyph": "u0031",
+    "advance": 356,
+    "bounds": [
+      28,
+      0,
+      326,
+      723
+    ]
+  },
+  "U+0032": {
+    "character": "2",
+    "glyph": "u0032",
+    "advance": 528,
+    "bounds": [
+      3,
+      0,
+      666,
+      638
+    ]
+  },
+  "U+0033": {
+    "character": "3",
+    "glyph": "u0033",
+    "advance": 561,
+    "bounds": [
+      -40,
+      0,
+      547,
+      714
+    ]
+  },
+  "U+0034": {
+    "character": "4",
+    "glyph": "u0034",
+    "advance": 561,
+    "bounds": [
+      3,
+      0,
+      666,
+      739
+    ]
+  },
+  "U+0035": {
+    "character": "5",
+    "glyph": "u0035",
+    "advance": 634,
+    "bounds": [
+      -6,
+      0,
+      734,
+      646
+    ]
+  },
+  "U+0036": {
+    "character": "6",
+    "glyph": "u0036",
+    "advance": 536,
+    "bounds": [
+      28,
+      0,
+      555,
+      697
+    ]
+  },
+  "U+0037": {
+    "character": "7",
+    "glyph": "u0037",
+    "advance": 536,
+    "bounds": [
+      -14,
+      0,
+      513,
+      740
+    ]
+  },
+  "U+0038": {
+    "character": "8",
+    "glyph": "u0038",
+    "advance": 511,
+    "bounds": [
+      28,
+      0,
+      547,
+      655
+    ]
+  },
+  "U+0039": {
+    "character": "9",
+    "glyph": "u0039",
+    "advance": 487,
+    "bounds": [
+      28,
+      0,
+      470,
+      714
+    ]
+  },
+  "U+003F": {
+    "character": "?",
+    "glyph": "u003F",
+    "advance": 396,
+    "bounds": [
+      28,
+      9,
+      351,
+      638
+    ]
+  },
+  "U+0041": {
+    "character": "A",
+    "glyph": "u0041",
+    "advance": 577,
+    "bounds": [
+      11,
+      0,
+      756,
+      760
+    ]
+  },
+  "U+0042": {
+    "character": "B",
+    "glyph": "u0042",
+    "advance": 473,
+    "bounds": [
+      6,
+      0,
+      620,
+      760
+    ]
+  },
+  "U+0043": {
+    "character": "C",
+    "glyph": "u0043",
+    "advance": 435,
+    "bounds": [
+      126,
+      0,
+      591,
+      760
+    ]
+  },
+  "U+0044": {
+    "character": "D",
+    "glyph": "u0044",
+    "advance": 372,
+    "bounds": [
+      -26,
+      0,
+      646,
+      760
+    ]
+  },
+  "U+0045": {
+    "character": "E",
+    "glyph": "u0045",
+    "advance": 401,
+    "bounds": [
+      118,
+      0,
+      629,
+      760
+    ]
+  },
+  "U+0046": {
+    "character": "F",
+    "glyph": "u0046",
+    "advance": 148,
+    "bounds": [
+      87,
+      0,
+      671,
+      760
+    ]
+  },
+  "U+0047": {
+    "character": "G",
+    "glyph": "u0047",
+    "advance": 444,
+    "bounds": [
+      194,
+      0,
+      659,
+      760
+    ]
+  },
+  "U+0048": {
+    "character": "H",
+    "glyph": "u0048",
+    "advance": 546,
+    "bounds": [
+      175,
+      0,
+      765,
+      760
+    ]
+  },
+  "U+0049": {
+    "character": "I",
+    "glyph": "u0049",
+    "advance": 144,
+    "bounds": [
+      119,
+      0,
+      377,
+      760
+    ]
+  },
+  "U+004A": {
+    "character": "J",
+    "glyph": "u004A",
+    "advance": 362,
+    "bounds": [
+      121,
+      0,
+      768,
+      760
+    ]
+  },
+  "U+004B": {
+    "character": "K",
+    "glyph": "u004B",
+    "advance": 613,
+    "bounds": [
+      91,
+      0,
+      778,
+      760
+    ]
+  },
+  "U+004C": {
+    "character": "L",
+    "glyph": "u004C",
+    "advance": 429,
+    "bounds": [
+      115,
+      0,
+      623,
+      760
+    ]
+  },
+  "U+004D": {
+    "character": "M",
+    "glyph": "u004D",
+    "advance": 623,
+    "bounds": [
+      94,
+      0,
+      732,
+      760
+    ]
+  },
+  "U+004E": {
+    "character": "N",
+    "glyph": "u004E",
+    "advance": 495,
+    "bounds": [
+      35,
+      0,
+      772,
+      760
+    ]
+  },
+  "U+004F": {
+    "character": "O",
+    "glyph": "u004F",
+    "advance": 478,
+    "bounds": [
+      135,
+      0,
+      657,
+      760
+    ]
+  },
+  "U+0050": {
+    "character": "P",
+    "glyph": "u0050",
+    "advance": 172,
+    "bounds": [
+      114,
+      0,
+      661,
+      760
+    ]
+  },
+  "U+0051": {
+    "character": "Q",
+    "glyph": "u0051",
+    "advance": 568,
+    "bounds": [
+      169,
+      0,
+      759,
+      760
+    ]
+  },
+  "U+0052": {
+    "character": "R",
+    "glyph": "u0052",
+    "advance": 604,
+    "bounds": [
+      121,
+      0,
+      733,
+      760
+    ]
+  },
+  "U+0053": {
+    "character": "S",
+    "glyph": "u0053",
+    "advance": 296,
+    "bounds": [
+      -33,
+      0,
+      445,
+      760
+    ]
+  },
+  "U+0054": {
+    "character": "T",
+    "glyph": "u0054",
+    "advance": 149,
+    "bounds": [
+      92,
+      0,
+      656,
+      760
+    ]
+  },
+  "U+0055": {
+    "character": "U",
+    "glyph": "u0055",
+    "advance": 431,
+    "bounds": [
+      169,
+      0,
+      661,
+      760
+    ]
+  },
+  "U+0056": {
+    "character": "V",
+    "glyph": "u0056",
+    "advance": 312,
+    "bounds": [
+      165,
+      0,
+      676,
+      760
+    ]
+  },
+  "U+0057": {
+    "character": "W",
+    "glyph": "u0057",
+    "advance": 549,
+    "bounds": [
+      149,
+      0,
+      829,
+      760
+    ]
+  },
+  "U+0058": {
+    "character": "X",
+    "glyph": "u0058",
+    "advance": 571,
+    "bounds": [
+      29,
+      0,
+      699,
+      760
+    ]
+  },
+  "U+0059": {
+    "character": "Y",
+    "glyph": "u0059",
+    "advance": 170,
+    "bounds": [
+      124,
+      0,
+      608,
+      760
+    ]
+  },
+  "U+005A": {
+    "character": "Z",
+    "glyph": "u005A",
+    "advance": 478,
+    "bounds": [
+      57,
+      0,
+      691,
+      760
+    ]
+  },
+  "U+0061": {
+    "character": "a",
+    "glyph": "u0061",
+    "advance": 535,
+    "bounds": [
+      81,
+      0,
+      625,
+      450
+    ]
+  },
+  "U+0062": {
+    "character": "b",
+    "glyph": "u0062",
+    "advance": 431,
+    "bounds": [
+      98,
+      0,
+      549,
+      675
+    ]
+  },
+  "U+0063": {
+    "character": "c",
+    "glyph": "u0063",
+    "advance": 365,
+    "bounds": [
+      100,
+      0,
+      474,
+      450
+    ]
+  },
+  "U+0064": {
+    "character": "d",
+    "glyph": "u0064",
+    "advance": 512,
+    "bounds": [
+      99,
+      0,
+      618,
+      675
+    ]
+  },
+  "U+0065": {
+    "character": "e",
+    "glyph": "u0065",
+    "advance": 400,
+    "bounds": [
+      101,
+      0,
+      509,
+      450
+    ]
+  },
+  "U+0066": {
+    "character": "f",
+    "glyph": "u0066",
+    "advance": 282,
+    "bounds": [
+      158,
+      -225,
+      617,
+      675
+    ]
+  },
+  "U+0067": {
+    "character": "g",
+    "glyph": "u0067",
+    "advance": 390,
+    "bounds": [
+      -2,
+      -225,
+      457,
+      450
+    ]
+  },
+  "U+0068": {
+    "character": "h",
+    "glyph": "u0068",
+    "advance": 498,
+    "bounds": [
+      59,
+      0,
+      577,
+      675
+    ]
+  },
+  "U+0069": {
+    "character": "i",
+    "glyph": "u0069",
+    "advance": 277,
+    "bounds": [
+      151,
+      0,
+      406,
+      675
+    ]
+  },
+  "U+006A": {
+    "character": "j",
+    "glyph": "u006A",
+    "advance": 198,
+    "bounds": [
+      -68,
+      -225,
+      340,
+      675
+    ]
+  },
+  "U+006B": {
+    "character": "k",
+    "glyph": "u006B",
+    "advance": 538,
+    "bounds": [
+      114,
+      0,
+      684,
+      675
+    ]
+  },
+  "U+006C": {
+    "character": "l",
+    "glyph": "u006C",
+    "advance": 265,
+    "bounds": [
+      143,
+      0,
+      373,
+      675
+    ]
+  },
+  "U+006D": {
+    "character": "m",
+    "glyph": "u006D",
+    "advance": 800,
+    "bounds": [
+      114,
+      0,
+      913,
+      450
+    ]
+  },
+  "U+006E": {
+    "character": "n",
+    "glyph": "u006E",
+    "advance": 564,
+    "bounds": [
+      108,
+      0,
+      661,
+      450
+    ]
+  },
+  "U+006F": {
+    "character": "o",
+    "glyph": "u006F",
+    "advance": 372,
+    "bounds": [
+      101,
+      0,
+      466,
+      450
+    ]
+  },
+  "U+0070": {
+    "character": "p",
+    "glyph": "u0070",
+    "advance": 439,
+    "bounds": [
+      51,
+      -225,
+      561,
+      450
+    ]
+  },
+  "U+0071": {
+    "character": "q",
+    "glyph": "u0071",
+    "advance": 381,
+    "bounds": [
+      101,
+      -225,
+      475,
+      450
+    ]
+  },
+  "U+0072": {
+    "character": "r",
+    "glyph": "u0072",
+    "advance": 328,
+    "bounds": [
+      123,
+      0,
+      565,
+      450
+    ]
+  },
+  "U+0073": {
+    "character": "s",
+    "glyph": "u0073",
+    "advance": 375,
+    "bounds": [
+      29,
+      0,
+      454,
+      450
+    ]
+  },
+  "U+0074": {
+    "character": "t",
+    "glyph": "u0074",
+    "advance": 343,
+    "bounds": [
+      126,
+      0,
+      585,
+      580
+    ]
+  },
+  "U+0075": {
+    "character": "u",
+    "glyph": "u0075",
+    "advance": 505,
+    "bounds": [
+      121,
+      0,
+      580,
+      450
+    ]
+  },
+  "U+0076": {
+    "character": "v",
+    "glyph": "u0076",
+    "advance": 369,
+    "bounds": [
+      152,
+      0,
+      560,
+      450
+    ]
+  },
+  "U+0077": {
+    "character": "w",
+    "glyph": "u0077",
+    "advance": 575,
+    "bounds": [
+      155,
+      0,
+      776,
+      450
+    ]
+  },
+  "U+0078": {
+    "character": "x",
+    "glyph": "u0078",
+    "advance": 402,
+    "bounds": [
+      26,
+      0,
+      519,
+      450
+    ]
+  },
+  "U+0079": {
+    "character": "y",
+    "glyph": "u0079",
+    "advance": 417,
+    "bounds": [
+      46,
+      -225,
+      505,
+      450
+    ]
+  },
+  "U+007A": {
+    "character": "z",
+    "glyph": "u007A",
+    "advance": 394,
+    "bounds": [
+      60,
+      0,
+      638,
+      450
+    ]
+  },
+  "U+2018": {
+    "character": "‘",
+    "glyph": "u2018",
+    "advance": 135,
+    "bounds": [
+      13,
+      495,
+      88,
+      675
+    ]
+  },
+  "U+2019": {
+    "character": "’",
+    "glyph": "u2019",
+    "advance": 135,
+    "bounds": [
+      12,
+      495,
+      87,
+      675
+    ]
+  },
+  "U+201C": {
+    "character": "“",
+    "glyph": "u201C",
+    "advance": 235,
+    "bounds": [
+      13,
+      495,
+      188,
+      675
+    ]
+  },
+  "U+201D": {
+    "character": "”",
+    "glyph": "u201D",
+    "advance": 235,
+    "bounds": [
+      12,
+      495,
+      187,
+      675
+    ]
+  },
+  "U+30DF": {
+    "character": "ミ",
+    "glyph": "u30DF",
+    "advance": 503,
+    "bounds": [
+      -65,
+      0,
+      521,
+      782
+    ]
+  }
+}

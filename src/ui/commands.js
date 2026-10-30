@@ -1,28 +1,75 @@
-// Elenco comandi del bot (generato da COMMAND_LIST.md): ricerca e filtro per categoria.
-import { a, t } from '../i18n/index.js';
-const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-export function initCommands() {
-  const o = document.createElement('div'); o.className = 'sheet'; o.hidden = true; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true'); o.setAttribute('aria-labelledby', 'cmd-t');
-  o.innerHTML = `<div class="sheet__box glass cmd__box"><button class="sheet__x" type="button" aria-label="${t('sheet.close')}" data-i18n-attr="aria-label:sheet.close">×</button><h3 id="cmd-t" ${a('cmd.t')}>${t('cmd.t')}</h3><p class="cmd__meta"></p><input class="cmd__q" type="search" placeholder="${t('cmd.search')}" aria-label="${t('cmd.search')}" data-i18n-attr="placeholder:cmd.search;aria-label:cmd.search" autocomplete="off"><div class="cmd__cats" role="group" aria-label="${t('cmd.cats')}" data-i18n-attr="aria-label:cmd.cats"></div><ul class="cmd__list"></ul></div>`;
-  document.body.appendChild(o);
-  const $ = (s) => o.querySelector(s), meta = $('.cmd__meta'), qi = $('.cmd__q'), cats = $('.cmd__cats'), list = $('.cmd__list');
-  let data, cat = '*', q = '', from;
-  const render = () => {
-    const rows = [];
-    data.categories.forEach((c) => { if (cat === '*' || cat === c.name) c.commands.forEach(([n, d]) => { if (!q || `${n} ${d}`.toLowerCase().includes(q)) rows.push(`<li><code>${esc(n)}</code><span>${esc(d)}</span></li>`); }); });
-    list.innerHTML = rows.join('') || `<li class="cmd__none" ${a('cmd.none')}>${t('cmd.none')}</li>`; meta.textContent = t('cmd.count', { n: rows.length });
-    cats.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === cat)));
-  };
-  const shut = () => { o.hidden = true; from?.focus(); };
-  const open = async (el) => {
-    from = el; o.hidden = false;
-    if (!data) { data = (await import('../data/commands.json')).default; cats.innerHTML = [['*', data.total], ...data.categories.map((c) => [c.name, c.commands.length])].map(([n, k]) => `<button type="button" data-c="${esc(n)}">${n === '*' ? `<span ${a('cmd.all')}>${t('cmd.all')}</span>` : esc(n)} <small>${k}</small></button>`).join(''); }
-    render(); qi.focus();
-  };
-  document.addEventListener('i18n:change', () => { if (data && !o.hidden) render(); });
-  qi.addEventListener('input', () => { q = qi.value.trim().toLowerCase(); render(); });
-  cats.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { cat = b.dataset.c; render(); } });
-  o.querySelector('.sheet__x').addEventListener('click', shut); o.addEventListener('click', (e) => { if (e.target === o) shut(); });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !o.hidden) shut(); });
-  document.addEventListener('click', (e) => { const a = e.target.closest('a[href="#commands"]'); if (a) { e.preventDefault(); open(a); } });
+import './commands.css';
+import { t,apply,lang } from '../i18n/index.js';
+import { indexCommands,filterCommands } from '../core/command-catalog.js';
+
+export function initCommands(){
+ const dialog=document.createElement('dialog');dialog.className='command-dialog';dialog.setAttribute('aria-labelledby','cmd-title');
+ dialog.innerHTML='<div class="command-shell"><header class="command-header"><div><p class="command-kicker">IYOKAI / COMMAND LIBRARY</p><h2 id="cmd-title" data-i18n="cmd.t"></h2></div><button type="button" data-command-close data-i18n-attr="aria-label:sheet.close">×</button></header><div class="command-controls"><label for="command-search" class="sr-only" data-i18n="cmd.search"></label><div class="command-search-row"><input id="command-search" type="search" maxlength="200" data-i18n-attr="placeholder:cmd.search" autocomplete="off" spellcheck="false"><button type="button" data-command-clear data-i18n="cmd.reset" hidden></button></div><div class="command-categories" role="group" data-i18n-attr="aria-label:cmd.cats"></div><div class="command-meta"><p class="command-count" role="status" aria-live="polite" aria-atomic="true"></p><p class="command-source" data-i18n="cmd.source"></p></div></div><div class="command-results" tabindex="0" data-lenis-prevent data-i18n-attr="aria-label:cmd.results" aria-busy="false"><ul class="command-list"></ul><div class="command-empty" hidden><h3></h3><p></p><button type="button" class="btn" data-command-retry data-i18n="cmd.retry" hidden></button></div></div><p class="command-copy-status" role="status" aria-live="polite"></p></div>';
+ document.body.append(dialog);apply(dialog);
+ const input=dialog.querySelector('input'),categories=dialog.querySelector('.command-categories'),results=dialog.querySelector('.command-results'),list=dialog.querySelector('ul'),empty=dialog.querySelector('.command-empty'),count=dialog.querySelector('.command-count'),clear=dialog.querySelector('[data-command-clear]'),copyStatus=dialog.querySelector('.command-copy-status');
+ const localized=()=>Object.fromEntries(Object.keys(translations).map(name=>[name,t('command.description.'+name)===('command.description.'+name)?translations[name]:t('command.description.'+name)]));
+ let catalog,translations={},commands,groups=[],category='*',from,request=0,loading=false,failed=false,debounce,copyRevision=0;
+ const categoryLabel=name=>t(`cmd.category.${name}`)===`cmd.category.${name}`?name:t(`cmd.category.${name}`);
+ function filters(){
+  categories.replaceChildren();if(!commands)return;
+  const label=document.createElement('label'),select=document.createElement('select');label.textContent=t('cmd.cats');select.dataset.commandCategorySelect='';select.setAttribute('aria-label',t('cmd.cats'));
+  for(const [name,total] of [['*',commands.length],...groups]){
+   const option=document.createElement('option');option.value=name;option.textContent=`${name==='*'?t('cmd.all'):categoryLabel(name)} (${total})`;select.append(option);
+  }
+  select.value=category;label.append(select);categories.append(label);
+ }
+ function placeholder(title,body,{retry=false}={}){
+  list.replaceChildren();empty.hidden=false;empty.querySelector('h3').textContent=title;empty.querySelector('p').textContent=body;empty.querySelector('[data-command-retry]').hidden=!retry;
+ }
+ function render({resetScroll=false}={}){
+  clear.hidden=!input.value&&category==='*';const picker=categories.querySelector('select');if(picker)picker.value=category;const source=dialog.querySelector('.command-source');source.hidden=!commands;if(commands)source.textContent=t('cmd.source',{date:catalog.generated});
+  if(loading){count.textContent=t('cmd.loading');placeholder(t('cmd.loading'),t('cmd.loading-note'));return;}
+  if(failed){count.textContent=t('cmd.load-error');placeholder(t('cmd.load-error'),t('cmd.error-note'),{retry:true});return;}
+  if(!commands)return;
+  const rows=filterCommands(commands,{category,query:input.value});count.textContent=rows.length===1?t('cmd.one'):t('cmd.count',{n:rows.length});list.replaceChildren();empty.hidden=rows.length>0;
+  if(!rows.length)placeholder(t('cmd.none'),t('cmd.search-tip'));
+  const fragment=document.createDocumentFragment();
+  for(const row of rows){
+   const li=document.createElement('li'),details=document.createElement('div'),code=document.createElement('code'),badge=document.createElement('small'),description=document.createElement('p'),copy=document.createElement('button');
+   code.textContent=row.kind==='context'?row.name.slice(1):row.name;badge.textContent=categoryLabel(row.category)+(row.kind==='context'?' · '+t('cmd.context'):'');badge.className='command-category';description.textContent=row.description;description.lang=row.language;details.append(code,badge,description);
+   copy.type='button';copy.className='command-copy';copy.dataset.copyCommand=row.name;copy.textContent=t('cmd.copy');copy.setAttribute('aria-label',t('cmd.copy-name',{name:row.name}));li.append(details);if(row.kind!=='context')li.append(copy);fragment.append(li);
+  }
+  list.append(fragment);if(resetScroll)results.scrollTop=0;
+ }
+ async function load(){
+  if(loading)return;const ticket=++request;loading=true;failed=false;results.setAttribute('aria-busy','true');render();
+  try{
+   const [source,english]=await Promise.all([import('../data/commands.json'),import('../data/commands.en.json')]);
+   const data=source.default;
+   if(ticket!==request||!dialog.open)return;
+   catalog=data;translations=english.default;commands=indexCommands(catalog,{translations:localized(),language:lang(),translationLanguage:lang()});groups=data.categories.map(g=>[g.name,g.commands.length]);filters();
+  }catch{if(ticket===request&&dialog.open)failed=true;}
+  finally{if(ticket===request&&dialog.open){loading=false;results.setAttribute('aria-busy','false');render();}}
+ }
+ function open(trigger){
+  from=trigger.closest('#dc-mobile-menu')?document.querySelector('.dc-menu-toggle'):trigger;
+  if(!dialog.open)dialog.showModal();apply(dialog);if(commands)filters();copyStatus.textContent='';render();input.focus({preventScroll:true});if(!commands)load();
+ }
+ dialog.addEventListener('keydown',e=>{
+  if(e.key!=='Tab')return;
+  const focusable=[...dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex="0"]')].filter(el=>el.getClientRects().length>0);
+  const first=focusable[0],last=focusable.at(-1),active=dialog.ownerDocument.activeElement;
+  if(e.shiftKey&&active===first){e.preventDefault();last?.focus();}
+  else if(!e.shiftKey&&active===last){e.preventDefault();first?.focus();}
+ });
+ dialog.addEventListener('close',()=>{request++;loading=false;clearTimeout(debounce);copyRevision++;from?.focus({preventScroll:true});});
+ dialog.addEventListener('change',e=>{if(e.target.matches('[data-command-category-select]')){category=e.target.value;render({resetScroll:true});}});
+ input.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(()=>render({resetScroll:true}),90);});
+ dialog.addEventListener('click',async e=>{
+  if(e.target===dialog||e.target.closest('[data-command-close]')){dialog.close();return;}
+  if(e.target.closest('[data-command-clear]')){input.value='';category='*';render({resetScroll:true});input.focus();return;}
+  if(e.target.closest('[data-command-retry]')){load();return;}
+  const copy=e.target.closest('[data-copy-command]');if(copy){
+   const ticket=++copyRevision;copyStatus.textContent='';
+   try{await navigator.clipboard.writeText(copy.dataset.copyCommand);if(ticket===copyRevision&&dialog.open)copyStatus.textContent=t('cmd.copied',{name:copy.dataset.copyCommand});}
+   catch{if(ticket===copyRevision&&dialog.open)copyStatus.textContent=t('cmd.copy-error');}
+  }
+ });
+ document.addEventListener('click',e=>{const link=e.target.closest('a[href="#commands"]');if(link){e.preventDefault();open(link);}});
+ document.addEventListener('i18n:change',()=>{if(catalog)commands=indexCommands(catalog,{translations:localized(),language:lang(),translationLanguage:lang()});if(dialog.open){apply(dialog);filters();render();copyStatus.textContent='';}});
 }

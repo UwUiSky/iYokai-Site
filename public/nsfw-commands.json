@@ -1,0 +1,62 @@
+{
+  "source": "UwUiSky/iYokai-DS-BOT/cogs/nsfw/ricerca.py",
+  "source_blob": "77daa666ade42a3efd28b4a24ec5a8427a4ec49c",
+  "commands": [
+    {
+      "name": "/nsfw cerca",
+      "description": {
+        "it": "Pubblica nel canale un contenuto associato a un tag permesso dal server.",
+        "en": "Posts in the channel using a server-approved tag."
+      }
+    },
+    {
+      "name": "/nsfw-admin attiva",
+      "description": {
+        "it": "Attiva o disattiva l’istanza; richiede Gestisci server e conferma delle regole.",
+        "en": "Enables or disables the identity; requires Manage Server and rule confirmation."
+      }
+    },
+    {
+      "name": "/nsfw-admin tag-aggiungi",
+      "description": {
+        "it": "Aggiunge un tag alla lista permessa del server.",
+        "en": "Adds a tag to the server allowlist."
+      }
+    },
+    {
+      "name": "/nsfw-admin tag-togli",
+      "description": {
+        "it": "Rimuove un tag dalla lista permessa.",
+        "en": "Removes a tag from the allowlist."
+      }
+    },
+    {
+      "name": "/nsfw-admin autopost",
+      "description": {
+        "it": "Configura la pubblicazione automatica in un canale per adulti.",
+        "en": "Configures automatic posts in an adult-only channel."
+      }
+    },
+    {
+      "name": "/nsfw-admin autopost-ferma",
+      "description": {
+        "it": "Ferma la pubblicazione automatica in un canale o in tutti.",
+        "en": "Stops automatic posts in one channel or all channels."
+      }
+    },
+    {
+      "name": "/nsfw-admin stato",
+      "description": {
+        "it": "Mostra stato, tag consentiti e programmazioni del server.",
+        "en": "Shows server status, allowed tags and schedules."
+      }
+    },
+    {
+      "name": "Segnala · pulsante",
+      "description": {
+        "it": "Rimuove e blocca un contenuto segnalato secondo le regole del bot.",
+        "en": "Removes and blocks reported content according to the bot rules."
+      }
+    }
+  ]
+}

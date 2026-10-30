@@ -1,5 +1,5 @@
 // Qualità adattiva: se il frame time medio resta alto, scende di un gradino di risoluzione; all'ultimo gradino alleggerisce la scena.
-const STEPS = [2, 1.5, 1.25, 1, 0.8];
+const STEPS = [2, 1.5, 1.25, 1];
 export function createAdaptive(renderer, quality, { onLowest } = {}) {
   let i = Math.max(0, STEPS.findIndex((v) => v <= quality.dpr)), frames = 0, acc = 0, warm = 0;
   const off = /[?&]noadapt/.test(location.search);

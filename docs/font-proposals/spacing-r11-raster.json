@@ -1,0 +1,14 @@
+[
+  {
+    "variant": "normal",
+    "raster_pair_tests": 3364,
+    "size_px": 160,
+    "overlaps_above_baseline": []
+  },
+  {
+    "variant": "extreme",
+    "raster_pair_tests": 3362,
+    "size_px": 160,
+    "overlaps_above_baseline": []
+  }
+]

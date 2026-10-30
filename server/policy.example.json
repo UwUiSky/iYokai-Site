@@ -1,0 +1,89 @@
+{
+  "identities": [
+    {
+      "id": "core",
+      "name": "iYokaiミ",
+      "client_id": "",
+      "token_env": "DISCORD_BOT_TOKEN",
+      "invite_permissions": "0"
+    },
+    {
+      "id": "music-1",
+      "name": "iYokai Music 1",
+      "client_id": "",
+      "token_env": "DISCORD_MUSIC_1_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "music"
+      ]
+    },
+    {
+      "id": "music-2",
+      "name": "iYokai Music 2",
+      "client_id": "",
+      "token_env": "DISCORD_MUSIC_2_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "music"
+      ]
+    },
+    {
+      "id": "music-3",
+      "name": "iYokai Music 3",
+      "client_id": "",
+      "token_env": "DISCORD_MUSIC_3_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "music"
+      ]
+    },
+    {
+      "id": "music-4",
+      "name": "iYokai Music 4",
+      "client_id": "",
+      "token_env": "DISCORD_MUSIC_4_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "music"
+      ]
+    },
+    {
+      "id": "music-5",
+      "name": "iYokai Music 5",
+      "client_id": "",
+      "token_env": "DISCORD_MUSIC_5_TOKEN",
+      "invite_permissions": "0",
+      "modules": [
+        "music"
+      ]
+    },
+    {
+      "id": "nsfw",
+      "name": "iYokai NSFW",
+      "client_id": "",
+      "token_env": "DISCORD_NSFW_TOKEN",
+      "invite_permissions": "0",
+      "modules": []
+    }
+  ],
+  "support_servers": [],
+  "feature_tiers": {},
+  "tiers": {
+    "premium": {
+      "monthly_ai_tokens": 0,
+      "prices": {
+        "monthly": null,
+        "annual": null,
+        "lifetime": null
+      }
+    },
+    "vip": {
+      "monthly_ai_tokens": 0,
+      "prices": {
+        "monthly": null,
+        "annual": null,
+        "lifetime": null
+      }
+    }
+  }
+}

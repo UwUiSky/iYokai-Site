@@ -2,6 +2,7 @@ import asyncio, json
 from urllib.parse import parse_qs, urlparse
 import asyncpg, pytest
 from app import discord as dc
+from app import access
 from app.security import b64, pkce_pair, sign, unsign
 import hashlib, os
 
@@ -14,6 +15,13 @@ async def login(client, monkeypatch, guilds=GUILDS):
     async def gl(t): return guilds
     async def rv(s, t): pass
     for n, f in (("exchange_code", ex), ("fetch_me", me), ("fetch_guilds", gl), ("revoke", rv)): monkeypatch.setattr(dc, n, f)
+    async def bot(request,path,identity_id='core',missing_ok=False):
+        if path.startswith('/users/@me/guilds'): return [{'id':'111'},{'id':'222'}]
+        gid=path.split('/')[2]
+        if '/members/' in path: return {'roles':[],'pending':False}
+        if path.endswith('/roles'): return [{'id':gid,'name':'@everyone','permissions':'32' if gid=='111' else '0'}]
+        return {'id':gid,'owner_id':'1'}
+    monkeypatch.setattr(access,'bot_get',bot)
     r = await client.get("/api/auth/login")
     state = parse_qs(urlparse(r.headers["location"]).query)["state"][0]
     return await client.get("/api/auth/callback", params={"code": "c", "state": state})
@@ -46,17 +54,17 @@ async def test_login_me_and_cookie(client, monkeypatch):
     c = r.headers["set-cookie"].lower()
     assert "__host-iy_sid=" in c and "httponly" in c and "secure" in c and "path=/" in c and "domain" not in c
     me = (await client.get("/api/me")).json()
-    assert [g["id"] for g in me["guilds"]] == ["111"]  # 222 senza permessi, 333 senza bot
+    assert [g["id"] for g in me["guilds"]] == ["111", "222", "333"]  # visibili anche membri e server invitabili
     assert me["user"]["id"] == "999"
     assert (await client.get("/api/guilds/111")).json()["modules"][0]["active"] is False
 
 async def test_requires_auth(client):
     assert (await client.get("/api/me")).status_code == 401
-    assert (await client.patch("/api/guilds/111/modules/automod", json={"active": True})).status_code == 401
+    assert (await client.patch("/api/guilds/111/modules/automod", json={"active": True,"expected_active":False})).status_code == 401
 
 async def test_toggle_guards(client, monkeypatch):
     await login(client, monkeypatch); t = await csrf(client)
-    p = lambda gid, key, h: client.patch(f"/api/guilds/{gid}/modules/{key}", json={"active": True}, headers=h)
+    p = lambda gid, key, h: client.patch(f"/api/guilds/{gid}/modules/{key}", json={"active": True,"expected_active":False}, headers=h)
     assert (await p(111, "automod", {})).status_code == 403                                  # niente Origin/CSRF
     assert (await p(111, "automod", {"Origin": "https://evil.example", "X-CSRF-Token": t})).status_code == 403
     assert (await p(111, "automod", {**OK, "X-CSRF-Token": "no"})).status_code == 403
@@ -70,9 +78,9 @@ async def test_toggle_writes_like_the_bot(client, monkeypatch):
     await login(client, monkeypatch); t = await csrf(client); h = {**OK, "X-CSRF-Token": t}
     listener = await asyncpg.connect(os.environ["DATABASE_URL"]); got = asyncio.Queue()
     await listener.add_listener("guild_config_changed", lambda *a: got.put_nowait(a[3]))
-    assert (await client.patch("/api/guilds/111/modules/automod", json={"active": True}, headers=h)).json() == {"key": "automod", "active": True}
+    assert (await client.patch("/api/guilds/111/modules/automod", json={"active": True,"expected_active":False}, headers=h)).json() == {"key": "automod", "active": True}
     assert json.loads(await asyncio.wait_for(got.get(), 3)) == {"guild_id": 111, "what": "modules"}
-    await client.patch("/api/guilds/111/modules/automod", json={"active": False}, headers=h)
+    await client.patch("/api/guilds/111/modules/automod", json={"active": False,"expected_active":True}, headers=h)
     pool = client._transport.app.state.db.pool
     assert await pool.fetchval("SELECT (modules -> 'automod')::boolean FROM guild_config WHERE guild_id=111") is False  # lettura identica a quella del bot
     rows = await pool.fetch("SELECT changed_by, change_type, old_value, new_value FROM guild_config_history WHERE guild_id=111 ORDER BY id")
@@ -83,7 +91,17 @@ async def test_toggle_writes_like_the_bot(client, monkeypatch):
 
 async def test_rate_limit_and_logout(client, monkeypatch):
     await login(client, monkeypatch); t = await csrf(client); h = {**OK, "X-CSRF-Token": t}
-    codes = [(await client.patch("/api/guilds/111/modules/fun", json={"active": i % 2 == 0}, headers=h)).status_code for i in range(32)]
+    codes = [(await client.patch("/api/guilds/111/modules/fun", json={"active": i % 2 == 0,"expected_active":i % 2 != 0}, headers=h)).status_code for i in range(32)]
     assert codes[:30] == [200] * 30 and 429 in codes[30:]
     assert (await client.post("/api/auth/logout", headers=h)).status_code == 200
     assert (await client.get("/api/me")).status_code == 401
+
+
+async def test_competing_writes_keep_one_audit_entry(client,monkeypatch):
+    await login(client,monkeypatch);h={**OK,'X-CSRF-Token':await csrf(client)}
+    path='/api/guilds/111/modules/automod';payload={'active':True,'expected_active':False}
+    responses=await asyncio.gather(client.patch(path,json=payload,headers=h),client.patch(path,json=payload,headers=h))
+    assert sorted(r.status_code for r in responses)==[200,409]
+    pool=client._transport.app.state.db.pool
+    assert await pool.fetchval("SELECT count(*) FROM guild_config_history WHERE guild_id=111 AND key_name='automod'")==1
+    assert await pool.fetchval("SELECT (modules -> 'automod')::boolean FROM guild_config WHERE guild_id=111") is True

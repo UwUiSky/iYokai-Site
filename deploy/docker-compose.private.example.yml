@@ -1,0 +1,9 @@
+# Copy JSON templates to deploy/private/ (ignored by Git), then compose with this file.
+services:
+  api:
+    environment:
+      PANEL_SITE_SETTINGS_FILE: /run/iyokai/site-settings.json
+      PANEL_COMMERCE_FILE: /run/iyokai/commerce.json
+    volumes:
+      - ./private/site-settings.json:/run/iyokai/site-settings.json:ro
+      - ./private/commerce.json:/run/iyokai/commerce.json:ro

@@ -11,14 +11,24 @@
 		Cross-Origin-Opener-Policy same-origin
 		-Server
 	}
+	route {
+	@private path /api/internal/* /v1/* /openapi.json /docs /redoc
+	respond @private 404
+
 	handle /api/* {
+		request_body {
+			max_size 64KB
+		}
 		reverse_proxy api:8000
 	}
 	handle {
 		root * /srv
 		@assets path /assets/*
 		header @assets Cache-Control "public, max-age=31536000, immutable"
+		@config path /panel.json /links.json /patch-notes.json
+		header @config Cache-Control "no-store"
 		try_files {path} /index.html
 		file_server
+	}
 	}
 }

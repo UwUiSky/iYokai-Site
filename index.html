@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#050408">
-  <title>iYokai ミ</title>
+  <title>iYokaiミ</title>
+  <link rel="stylesheet" href="/fonts/yokai/fonts.css?v=r11">
+  <link rel="preload" href="/fonts/yokai/yokai-extreme-r11.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/fonts/yokai/yokai-normal-r11.woff" as="font" type="font/woff" crossorigin>
   <meta name="description" content="iYokai ミ: identità musicale ed ecosistema di bot Discord, nato dall'equilibrio tra tecnologia e leggenda.">
   <link rel="canonical" href="https://iyokai.dev/">
   <meta property="og:type" content="website"><meta property="og:site_name" content="iYokai ミ"><meta property="og:title" content="iYokai ミ">
@@ -16,18 +19,18 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ic-claws" viewBox="0 0 64 64"><path d="M10.9 0.1Q28.2 21.8 54.3 31.0Q34.3 13.1 10.9 0.1ZM8.4 14.8Q27.4 38.8 55.7 50.7Q33.9 30.4 8.4 14.8ZM9.5 33.2Q26.0 54.7 51.4 63.9Q32.2 46.2 9.5 33.2Z"/></symbol></svg>
   <canvas id="gl" aria-hidden="true"></canvas>
   <main id="term" class="term">
-    <div class="term__win">
+    <div class="term__win"><div class="term-emblem"><img src="/cinematic/gate-mask.webp" alt="" width="90" height="112"><p>iYokaiミ</p></div>
       <p class="term__log">iYokai OS<br><span data-i18n="term.log">Sessione notturna aperta. Il regno attende il comando.</span></p>
       <form id="cmd" class="prompt" autocomplete="off">
         <span class="prompt__ps" aria-hidden="true">›</span>
         <input id="in" value="/iYokai ミ" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Comando" data-i18n-attr="aria-label:term.cmd">
         <button id="go" type="submit">
           <svg class="ic" aria-hidden="true"><use href="#ic-claws"/></svg>
-          Enter the Realm
+          <span data-i18n="term.enter">Entra nel mondo</span>
         </button>
       </form>
       <p id="err" class="term__err" role="status"></p>
-      <p class="term__log">Press Enter to enter the realm</p>
+      <p class="term__log"><span data-i18n="term.hint">Premi Invio per entrare</span></p>
       <div id="cd" class="term__cd"><span id="cdt"></span><i><b id="cdf"></b></i></div>
     </div>
   </main>
@@ -48,7 +51,7 @@
       <nav class="dc__acts" aria-label="Azioni bot" data-i18n-attr="aria-label:dc.actions"><a class="btn" href="#panel">Login Discord</a><a class="btn btn--main" href="#invita">Invite bot</a><a class="btn" href="#panel">Dashboard</a><a class="btn" href="#commands">Commands</a></nav>
     </header>
     <section class="dc__sec dc__hero">
-      <div class="rv"><p class="dc__kick">More than a bot. A spirit.</p><h2 class="dc__word">iYokai</h2>
+      <div class="rv"><p class="dc__kick" data-i18n="dc.kicker">More than a bot. A spirit.</p><h2 class="dc__word">Discord Core</h2>
         <p class="dc__lead" data-i18n="dc.lead">Il tuo alleato digitale, nato dall'equilibrio tra tecnologia e leggenda.</p>
         <p class="dc__chips"><span data-i18n="dc.chip1">Moderazione</span><span data-i18n="dc.chip2">Community</span><span data-i18n="dc.chip3">Automazione</span><span data-i18n="dc.chip4">Intrattenimento</span></p></div>
     </section>

@@ -38,15 +38,21 @@ class RateLimiter:
     def __init__(self, max_keys: int = 10_000):
         self.hits: dict[str, deque] = {}
         self.max_keys = max_keys
+        self.deadlines = {}
 
     def allow(self, key: str, limit: int, window: int) -> bool:
         now = time.monotonic()
-        if len(self.hits) > self.max_keys:
-            self.hits = {k: q for k, q in self.hits.items() if q and now - q[-1] < window}
+        if key not in self.hits and len(self.hits) >= self.max_keys:
+            self.hits = {k: q for k, q in self.hits.items() if self.deadlines.get(k,0) > now}
+            self.deadlines = {k:self.deadlines[k] for k in self.hits}
+            # Do not evict live rate limits to make room for attacker-controlled keys.
+            if len(self.hits) >= self.max_keys:
+                return False
         q = self.hits.setdefault(key, deque())
         while q and now - q[0] > window:
             q.popleft()
         if len(q) >= limit:
             return False
         q.append(now)
+        self.deadlines[key] = now + window
         return True

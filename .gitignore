@@ -6,3 +6,7 @@ deploy/.env
 server/.pytest_cache
 __pycache__
 dist-single
+
+tools/model/renders/
+*.blend1
+deploy/private/

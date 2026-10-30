@@ -1,0 +1,12 @@
+{
+  "contact_discord": {
+    "guild_id": "",
+    "channel_id": "",
+    "token_env": "DISCORD_BOT_TOKEN"
+  },
+  "privacy": {
+    "controller_name": "",
+    "contact_url": "",
+    "notice_version": "draft-2026-10-30"
+  }
+}

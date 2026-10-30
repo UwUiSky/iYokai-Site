@@ -1,0 +1,6 @@
+{
+  "model": null,
+  "prototype": "/cinematic/kitsune-prototype.glb",
+  "rotationY": 0,
+  "note": "Set model to a reviewed, locally hosted GLB, for example /cinematic/kitsune.glb. The approved transparent artwork remains active until then."
+}

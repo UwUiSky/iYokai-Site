@@ -5,6 +5,23 @@ export async function createRenderer(canvas, q) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, q.dpr));
   renderer.setSize(innerWidth, innerHeight, false);
   renderer.setClearColor(0x000000, 0);
-  await renderer.init();
-  return renderer;
+  try {
+    await renderer.init();
+    return renderer;
+  } catch (error) {
+    // Content remains available even with graphics disabled by the browser.
+    console.warn('3D renderer unavailable; using the illustrated experience.', error);
+    canvas.hidden = true;
+    document.documentElement.dataset.graphics = 'static';
+    let loop;
+    return {
+      staticFallback:true,
+      setSize() {}, setPixelRatio() {}, render() {},
+      setAnimationLoop(callback) {
+        cancelAnimationFrame(loop);
+        const frame = (time) => { callback(time); loop = requestAnimationFrame(frame); };
+        loop = requestAnimationFrame(frame);
+      },
+    };
+  }
 }

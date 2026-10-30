@@ -1,7 +1,10 @@
+import COPY_KEYS from './copy-keys.js';
+import './language-ui.css';
 // Traduzioni: un file JSON per lingua, caricato solo quando serve. Per aggiungere una lingua: nuovo src/i18n/<codice>.json + una riga in LANGS.
 const FILES = import.meta.glob('./*.json'); // basta aggiungere src/i18n/<codice>.json: la lingua compare da sola nel selettore
 const NAMES = { bg: 'Български', cs: 'Čeština', da: 'Dansk', de: 'Deutsch', el: 'Ελληνικά', en: 'English', 'es-419': 'Español (Latinoamérica)', 'es-ES': 'Español (España)', fi: 'Suomi', fr: 'Français', hi: 'हिन्दी', hr: 'Hrvatski', hu: 'Magyar', id: 'Bahasa Indonesia', it: 'Italiano', ja: '日本語', ko: '한국어', lt: 'Lietuvių', nl: 'Nederlands', no: 'Norsk', pl: 'Polski', 'pt-BR': 'Português (Brasil)', ro: 'Română', ru: 'Русский', 'sv-SE': 'Svenska', th: 'ไทย', tr: 'Türkçe', uk: 'Українська', vi: 'Tiếng Việt', 'zh-CN': '简体中文', 'zh-TW': '繁體中文' };
-export const LANGS = Object.keys(FILES).map((p) => { const code = p.slice(2, -5); return { code, name: NAMES[code] || code, load: FILES[p] }; }).sort((x, y) => x.name.localeCompare(y.name));
+const BADGES={it:'IT',en:'EN','es-ES':'ES',fr:'FR',de:'DE',ru:'RU',uk:'UA',ja:'JP',ko:'KR','zh-CN':'CN'};
+export const LANGS = Object.keys(FILES).map((p) => { const code = p.slice(2, -5); return { code, badge:BADGES[code]||code.toUpperCase(), name: NAMES[code] || code, load: FILES[p] }; }).sort((x, y) => x.name.localeCompare(y.name));
 const RTL = new Set(['ar', 'he', 'fa', 'ur']);
 let dict = {}, en = {}, cur = 'en';
 export const lang = () => cur;
@@ -27,3 +30,14 @@ export async function setLang(code) {
   document.dispatchEvent(new CustomEvent('i18n:change'));
 }
 export const initI18n = (pref) => setLang(LANGS.some((x) => x.code === pref) ? pref : detect());
+
+export const translateCopy=(it,english)=>lang()==='it'?it:(COPY_KEYS[english]?(english.match(/^\s*/)[0]+t(COPY_KEYS[english]).trim()+english.match(/\s*$/)[0]):english);
+export function decorateLanguageSelect(select){
+ if(select.closest('.language-select'))return;
+ const wrap=document.createElement('span');wrap.className='language-select';
+ const img=document.createElement('img');img.width=22;img.height=16;img.alt='';img.setAttribute('aria-hidden','true');
+ select.before(wrap);wrap.append(img,select);
+ for(const option of select.options){const l=LANGS.find(x=>x.code===option.value);if(l)option.textContent=`${l.badge} · ${l.name}`;}
+ const sync=()=>{const l=LANGS.find(x=>x.code===lang());if(l){img.src=`/flags/${l.badge.toLowerCase()}.svg`;select.title=l.name;}};
+ select.addEventListener('change',sync);document.addEventListener('i18n:change',sync);queueMicrotask(sync);
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "variant": "normal",
+    "unchanged_outline_shapes": 616,
+    "actual_shaped_letter_and_quote_pairs": 3364,
+    "actual_shaped_ASCII_triplets": 140608,
+    "canonical_equivalence": [
+      "é",
+      "ü",
+      "ắ",
+      "ộ",
+      "ǿ",
+      "ĩ",
+      "ḍ",
+      "ấ",
+      "ễ",
+      "ț",
+      "İ"
+    ],
+    "ligature_binary_unchanged": true
+  },
+  {
+    "variant": "extreme",
+    "unchanged_outline_shapes": 618,
+    "actual_shaped_letter_and_quote_pairs": 3364,
+    "actual_shaped_ASCII_triplets": 140608,
+    "canonical_equivalence": [
+      "é",
+      "ü",
+      "ắ",
+      "ộ",
+      "ǿ",
+      "ĩ",
+      "ḍ",
+      "ấ",
+      "ễ",
+      "ț",
+      "İ"
+    ],
+    "ligature_binary_unchanged": true
+  }
+]

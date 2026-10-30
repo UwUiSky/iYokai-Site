@@ -11,7 +11,7 @@ async def client():
     async with app.router.lifespan_context(app):
         pool = app.state.db.pool
         await pool.execute(open(os.path.join(os.path.dirname(__file__), "schema.sql")).read())
-        await pool.execute("TRUNCATE guild_config, guild_config_history, panel_sessions")
+        await pool.execute("TRUNCATE guild_config, guild_config_history, panel_sessions, panel_entitlements, panel_payment_events, panel_ai_usage")
         await pool.execute("INSERT INTO guild_config (guild_id) VALUES (111), (222)")
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="https://iyokai.dev") as c:
             yield c

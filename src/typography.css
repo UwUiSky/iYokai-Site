@@ -1,0 +1,52 @@
+:root[data-artwork="static"]{--body-font:var(--yokai-body-font);--display-font:var(--yokai-display-font)}
+:root[data-artwork="static"] body{font-family:var(--body-font);font-weight:400}
+/* Review 10: static artwork and navigation remain unchanged; type is local. */
+:root[data-artwork="static"] body :is(p,small,button,a,label,select,textarea,input,summary,li,dt,dd,td,th,legend,span,div){font-family:var(--body-font)!important;font-synthesis:none;font-kerning:normal;letter-spacing:0}
+:root[data-artwork="static"] :is(h1,h2,h3,h4,.dc__word,.dc__h,.gate-brand,.term-emblem p,.brand,.control-brand,.hub__word,.module-name,.mod__t),
+:root[data-artwork="static"] :is(h1,h2,h3,h4,.dc__word,.dc__h,.gate-brand,.term-emblem p,.brand,.control-brand,.hub__word,.module-name,.mod__t) *{font-family:var(--display-font)!important;font-weight:400;font-synthesis:none;font-kerning:normal;font-variant-ligatures:common-ligatures;letter-spacing:0}
+:root[data-artwork="static"] :is(code,pre,kbd,.term__log,.term__log *,.prompt,.prompt *,.load-percent,.module-index,.dc-note-date){font-family:'JetBrains Mono',monospace!important}
+:root[data-artwork="static"] :is(.gate-brand,.term-emblem p,#cinematic .brand){font-family:Yokaiextreme,var(--display-font)!important;gap:0}
+:root[data-artwork="static"] :is(.gate-brand span,.term-emblem p span,#cinematic .brand .katakana){font-family:inherit!important;font-size:1em;margin-left:0}
+:root[data-artwork="static"] :is(h1,h2,h3,h4){overflow-wrap:normal;text-wrap:balance}
+:root[data-artwork="static"] .gate-intro h1{font-size:clamp(36px,4.2vw,60px);line-height:1.45;margin-bottom:8px}
+:root[data-artwork="static"] .protocol-name{font-size:20px;line-height:1.5}
+:root[data-artwork="static"] .protocol-hint{font-size:17px;line-height:1.5}
+:root[data-artwork="static"] .gate-intro>p:last-child{font-size:21px}
+:root[data-artwork="static"] :is(.gate-language select,.dc-language){font-size:17px}
+:root[data-artwork="static"] .protocol-panel h1{font-size:clamp(45px,min(6.8vw,11dvh),102px);line-height:1.4;margin-bottom:18px}
+:root[data-artwork="static"] .protocol-panel h2{font-size:clamp(40px,5vw,72px);line-height:1.4}
+:root[data-artwork="static"] :is(.protocol-description,.protocol-detail-intro){font-size:24px!important;line-height:1.65}
+:root[data-artwork="static"] :is(.protocol-action,.protocol-back,.music-platform-button){font-size:21px;line-height:1.5}
+:root[data-artwork="static"] #dc :is(.dc__word,.dc__hero .dc__word){font-size:clamp(50px,6.4vw,96px);line-height:1.4;margin:0 0 18px}
+:root[data-artwork="static"] #dc .dc__h{font-size:clamp(36px,4.2vw,64px);line-height:1.4}
+:root[data-artwork="static"] #dc :is(.dc__lead,.dc__text,.dc-home-download p){font-size:23px;line-height:1.65}
+:root[data-artwork="static"] #dc :is(.btn,.dc__chips span){font-size:19px;line-height:1.5}
+:root[data-artwork="static"] :is(.bot-help,.dc-drawer,.dc-notes,.sheet,.sys){font-family:var(--body-font)!important;font-size:22px;line-height:1.7}
+:root[data-artwork="static"] .bot-help h2{font-size:clamp(36px,5vw,60px);line-height:1.4}
+:root[data-artwork="static"] :is(.bot-help summary,.bot-help h3){font-family:var(--display-font)!important;font-size:28px;line-height:1.5}
+:root[data-artwork="static"] #cinematic h2{font-size:clamp(40px,min(5.2vw,8dvh),80px);line-height:1.4;letter-spacing:0}
+:root[data-artwork="static"] #cinematic .body-copy{font-size:24px;line-height:1.7}
+:root[data-artwork="static"] :is(.protocol-card>small,.contact-draft label,.contact-draft textarea){font-size:20px;line-height:1.6}
+@media(max-width:800px){
+ :root[data-artwork="static"] .gate-intro h1{font-size:38px}
+ :root[data-artwork="static"] .protocol-name{font-size:19px}
+ :root[data-artwork="static"] .protocol-hint{font-size:15px}
+ :root[data-artwork="static"] .protocol-panel h1{font-size:clamp(42px,9vw,64px)}
+ :root[data-artwork="static"] #dc :is(.dc__word,.dc__hero .dc__word){font-size:clamp(44px,10vw,64px)}
+ :root[data-artwork="static"] #dc .dc__h{font-size:38px}
+ :root[data-artwork="static"] #dc :is(.dc__lead,.dc__text,.dc-home-download p){font-size:22px}
+ :root[data-artwork="static"] #dc .dc-home-pair{grid-template-columns:1fr}
+ :root[data-artwork="static"] #dc .dc__bar .btn{font-size:17px}
+}
+
+/* One wordmark run: brush extensions do not create flex-item gaps. */
+:root[data-artwork="static"] :is(.gate-brand,.control-brand,.hub__word,.term-emblem p,#cinematic .brand){white-space:nowrap;letter-spacing:0!important;font-kerning:normal;font-variant-ligatures:common-ligatures}
+:root[data-artwork="static"] .control-brand{font-family:Yokaiextreme,var(--display-font)!important;font-weight:400}
+/* Mobile Discord wordmark was a pseudo-element with its own Harukaze shorthand. */
+:root[data-artwork="static"] #dc .dc__bar::before{font-family:var(--display-font)!important;font-weight:400;font-synthesis:none;font-kerning:normal;font-variant-ligatures:common-ligatures;letter-spacing:0}
+/* Long translated labels must not push the language control outside 4:3 screens. */
+@media(min-width:801px) and (max-width:1300px){
+ :root[data-artwork="static"] #dc .dc__bar{padding-inline:3vw;gap:8px}
+ :root[data-artwork="static"] #dc .dc__bar .dc__acts{min-width:0;flex:1;flex-wrap:wrap;justify-content:center;gap:6px}
+ :root[data-artwork="static"] #dc .dc__bar .dc__acts .btn{font-size:16px;min-height:38px;padding-inline:10px}
+}

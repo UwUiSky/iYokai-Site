@@ -1,0 +1,112 @@
+[
+  {
+    "file": "protocol-discord.webp",
+    "asset": "/cinematic/protocol-discord-wide.webp",
+    "generation": "exec-6063b72f-b825-498f-844d-d4eadb3c2d9b.png"
+  },
+  {
+    "file": "protocol-social.webp",
+    "asset": "/cinematic/protocol-social-wide.webp",
+    "generation": "exec-ffa80ba8-2af6-48b1-8d48-153fbcfd49b3.png"
+  },
+  {
+    "file": "protocol-music.webp",
+    "asset": "/cinematic/protocol-music-wide.webp",
+    "generation": "exec-9ab451f1-21f2-41d9-92fd-9265d0e11d4d.png"
+  },
+  {
+    "file": "protocol-live.webp",
+    "asset": "/cinematic/protocol-live-wide.webp",
+    "generation": "exec-7493c5a4-5d34-45d3-8256-cfeca9818750.png"
+  },
+  {
+    "file": "protocol-projects.webp",
+    "asset": "/cinematic/protocol-projects-wide.webp",
+    "generation": "exec-0e2a8b72-4834-4fff-928b-be5f3e0deb76.png"
+  },
+  {
+    "file": "protocol-contact.webp",
+    "asset": "/cinematic/protocol-contact-wide.webp",
+    "generation": "exec-36a9ae86-d645-457d-8831-afef09552739.png"
+  },
+  {
+    "file": "protocol-social-detail.webp",
+    "asset": "/cinematic/protocol-social-detail-wide.webp",
+    "generation": "exec-c79ed5fb-2ceb-4d31-b08f-85950055ddf6.png"
+  },
+  {
+    "file": "protocol-music-detail.webp",
+    "asset": "/cinematic/protocol-music-detail-wide.webp",
+    "generation": "exec-0b1f7ff0-fe76-4332-b362-1f8d0081c9df.png"
+  },
+  {
+    "file": "protocol-live-detail.webp",
+    "asset": "/cinematic/protocol-live-detail-wide.webp",
+    "generation": "exec-4422dde7-b7e3-4062-9c3c-fa4df2f8ab30.png"
+  },
+  {
+    "file": "protocol-projects-detail.webp",
+    "asset": "/cinematic/protocol-projects-detail-wide.webp",
+    "generation": "exec-37f012e0-549f-4730-8dce-c8d193a1e6f2.png"
+  },
+  {
+    "file": "protocol-contact-detail.webp",
+    "asset": "/cinematic/protocol-contact-detail-wide.webp",
+    "generation": "exec-f57b7eb1-390e-4eb3-a3da-f968f8ecbf5f.png"
+  },
+  {
+    "file": "discord-security.webp",
+    "asset": "/cinematic/discord-security-ears-v2-wide.webp",
+    "generation": "exec-27444e6e-d7a0-4e11-aa09-7363cab435be.png",
+    "previous_generation": "exec-fcc1ac7b-fb8b-4236-beeb-76456f82fdeb.png",
+    "correction": "Exactly two natural ears; decorative mask has rounded edges."
+  },
+  {
+    "file": "discord-music.webp",
+    "asset": "/cinematic/discord-music-ears-v3-wide.webp",
+    "generation": "exec-6a06f41a-abe1-425d-942d-b907819f92d3.png",
+    "previous_generation": "exec-6ab84531-a815-4824-9a89-bb77e9ac174c.png",
+    "correction": "Exactly two natural ears; decorative mask has rounded edges.",
+    "rejected_generation": "exec-6b14d447-c514-4c44-a6d3-77cfdee792da.png",
+    "approval": "Approved by user, 30 October 2026."
+  },
+  {
+    "file": "discord-dashboard.webp",
+    "asset": "/cinematic/discord-dashboard-ears-v3-wide.webp",
+    "generation": "exec-acbb0817-4d2b-4d36-a936-623aba4c365c.png",
+    "previous_generation": "exec-657bb19e-8e50-47dd-aced-f9d0d41448e9.png",
+    "correction": "Exactly two natural ears; decorative mask has rounded edges.",
+    "rejected_generation": "exec-6d441e92-eecf-4e3d-9986-dd5177e75945.png",
+    "approval": "Accepted by user as a provisional compromise, 30 October 2026."
+  },
+  {
+    "file": "discord-spirits-v2.webp",
+    "asset": "/cinematic/discord-spirits-v2-wide.webp",
+    "generation": "exec-a9c09d52-9d5d-4544-9593-196be4f21cec.png"
+  },
+  {
+    "file": "discord-invites.webp",
+    "asset": "/cinematic/discord-invites-wide.webp",
+    "generation": "exec-65ed029d-c455-41f1-ac88-320a0138b28a.png"
+  },
+  {
+    "file": "still-shrine-seated.webp",
+    "asset": "/cinematic/still-shrine-seated-wide.webp",
+    "generation": "exec-9689f937-f718-4544-a634-edd5001920d1.png"
+  },
+  {
+    "file": "still-city-lean.webp",
+    "asset": "/cinematic/still-city-lean-wide.webp",
+    "generation": "exec-c354ef7f-28e9-436c-98b1-9e66cced2f98.png"
+  },
+  {
+    "file": "still-theater-bow.webp",
+    "asset": "/cinematic/still-theater-bow-wide.webp",
+    "generation": "exec-c8ce7ec5-de1b-466e-ae15-2b9d58370eaf.png"
+  },
+  {
+    "file": "still-music-studio.webp",
+    "asset": "/cinematic/still-music-studio-wide.webp",
+    "generation": "exec-f5216a97-d25f-45e2-ad98-3db5a4fc8078.png"
+  }
+]

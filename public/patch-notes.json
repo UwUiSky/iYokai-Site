@@ -1,0 +1,160 @@
+{
+  "revisions": [
+    {
+      "date": "2026-10-30",
+      "title": {
+        "it": "Ritocco delle tavole Discord Core",
+        "en": "Discord Core artwork touch-up"
+      },
+      "changes": {
+        "it": [
+          "Aggiornate le tavole Sicurezza, Musica e Dashboard per correggere le orecchie duplicate e distinguere la mascherina decorativa.",
+          "Conservati ambienti, pose e impaginazione panoramica."
+        ],
+        "en": [
+          "Updated Security, Music and Dashboard paintings to correct duplicate ears and distinguish the decorative mask.",
+          "Preserved the environments, poses and panoramic layout."
+        ]
+      },
+      "translationKey": "patch.2026-10-30.0"
+    },
+    {
+      "date": "2026-10-30",
+      "title": {
+        "it": "Il catalogo segue il bot attuale",
+        "en": "The catalogue follows the current bot"
+      },
+      "changes": {
+        "it": [
+          "Catalogo riallineato alla fonte ufficiale: 584 voci in 25 categorie, con descrizioni IT/EN.",
+          "Aggiornate le firme dei comandi rinominati e aggiunte le categorie AI, Backup, Clan, Economia e app separate.",
+          "Selettore categorie compatto; le tre azioni del menu App sono distinte dai comandi slash."
+        ],
+        "en": [
+          "Catalogue aligned with the official source: 584 entries in 25 categories, with Italian and English descriptions.",
+          "Renamed command signatures updated, with AI, Backup, Clan, Economy and separate app categories added.",
+          "Compact category picker; the three Apps context-menu actions are distinct from slash commands."
+        ]
+      },
+      "translationKey": "patch.2026-10-30.1"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "Modifiche ai moduli senza sovrascritture silenziose",
+        "en": "Module changes without silent overwrites"
+      },
+      "changes": {
+        "it": [
+          "Il pannello invia lo stato letto prima di cambiare un modulo.",
+          "Se lo stato è cambiato altrove, il backend rifiuta la richiesta e il pannello ricarica i dati, senza ripetere automaticamente l’azione.",
+          "Le richieste che non cambiano lo stato non aggiungono righe duplicate allo storico."
+        ],
+        "en": [
+          "The dashboard sends the state it observed before changing a module.",
+          "If that state changed elsewhere, the backend rejects the request and the dashboard reloads it without automatically repeating the action.",
+          "Requests that leave the state unchanged do not add duplicate history entries."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.2"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "Una control room più chiara",
+        "en": "A clearer control room"
+      },
+      "changes": {
+        "it": [
+          "Ricerca dei server per nome o ID e filtri per gestione, invito e sola appartenenza.",
+          "Descrizioni IT/EN dei moduli e requisiti Premium/VIP comunicati dal backend.",
+          "Gestione esplicita di sessione scaduta, storico indisponibile e salvataggio non confermato.",
+          "Selettore server richiudibile su telefono per lasciare più spazio al pannello."
+        ],
+        "en": [
+          "Find servers by name or ID and filter by management access, invite status or membership.",
+          "Bilingual module descriptions and backend-provided Premium/VIP requirements.",
+          "Explicit handling of expired sessions, unavailable history and unconfirmed saves.",
+          "A collapsible phone server picker leaves more room for the dashboard."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.3"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "Comandi in due lingue",
+        "en": "Commands in two languages"
+      },
+      "changes": {
+        "it": [
+          "Tradotte in inglese tutte le 252 descrizioni del catalogo, conservando i nomi originali dei comandi.",
+          "La ricerca riconosce parole italiane e inglesi in entrambe le lingue."
+        ],
+        "en": [
+          "All 252 catalogue descriptions are now available in English, with original command names preserved.",
+          "Search recognizes Italian and English words in either language."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.4"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "La biblioteca dei comandi",
+        "en": "The command library"
+      },
+      "changes": {
+        "it": [
+          "Nuovo catalogo con ricerca per più parole, filtri per categoria e copia rapida del comando.",
+          "Navigazione da tastiera con focus nel dialog, chiusura con Escape e ritorno al pulsante di origine.",
+          "Impaginazione più leggibile su desktop e telefono, con messaggi per ricerca vuota o caricamento non riuscito."
+        ],
+        "en": [
+          "A new catalogue with multi-word search, category filters and quick command copying.",
+          "Keyboard navigation keeps focus in the dialog; Escape closes it and restores focus to its trigger.",
+          "Clearer desktop and phone layouts, with empty-search and loading-error states."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.5"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "Un nuovo orizzonte",
+        "en": "A wider horizon"
+      },
+      "changes": {
+        "it": [
+          "Tavole panoramiche 21:9 ed estensione morbida ai lati sui monitor più larghi.",
+          "Nuovo menu mobile, barra trasparente e inviti rapidi nella home di Discord Core.",
+          "Scelta della durata della sessione al login e archivio delle revisioni."
+        ],
+        "en": [
+          "Panoramic21:9 paintings with softly extended sides on wider monitors.",
+          "New mobile menu, translucent toolbar and quick actions on the Discord Core home.",
+          "Optional persistent sign-in and a revision archive."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.6"
+    },
+    {
+      "date": "2026-10-29",
+      "title": {
+        "it": "La control room prende forma",
+        "en": "The control room takes shape"
+      },
+      "changes": {
+        "it": [
+          "Anteprima del pannello con identità, server, moduli e piani Premium/VIP.",
+          "Scroll delle identità corretto, fiamme animate continuamente e nuova pergamena."
+        ],
+        "en": [
+          "Dashboard preview with identities, servers, modules and Premium/VIP plans.",
+          "Fixed identity scrolling, continuously animated flames and a new scroll."
+        ]
+      },
+      "translationKey": "patch.2026-10-29.7"
+    }
+  ]
+}

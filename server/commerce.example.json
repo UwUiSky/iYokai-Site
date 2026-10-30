@@ -1,0 +1,12 @@
+{
+  "launch_free": true,
+  "checkout_enabled": false,
+  "currency": "EUR",
+  "lifetime": "contact",
+  "products": [
+    {"id":"premium","tier":"premium","label":"Premium","monthly_minor":null,"annual_minor":null,"monthly_ai_tokens":0},
+    {"id":"vip-1","tier":"vip","label":"VIP 1","monthly_minor":null,"annual_minor":null,"monthly_ai_tokens":null},
+    {"id":"vip-5","tier":"vip","label":"VIP 5","monthly_minor":null,"annual_minor":null,"monthly_ai_tokens":null},
+    {"id":"vip-20","tier":"vip","label":"VIP 20","monthly_minor":null,"annual_minor":null,"monthly_ai_tokens":null}
+  ]
+}

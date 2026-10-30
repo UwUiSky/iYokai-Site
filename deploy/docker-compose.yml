@@ -4,6 +4,7 @@ services:
   api:
     build: ../server
     env_file: .env
+    # For private site/commerce files: add read-only volume mounts and set their env paths.
     restart: unless-stopped
     read_only: true
     cap_drop: [ALL]
