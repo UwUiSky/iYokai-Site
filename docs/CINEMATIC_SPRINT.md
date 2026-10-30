@@ -863,3 +863,14 @@ Scelta protocollo Progetti futuri, etichette aggiornate nelle dieci lingue.
 overflow, ordine dei sette pannelli verificato nel DOM, nuovi pulsanti e finestra
 Work in Progress verificati. Controllata anche la dicitura Progetti futuri al
 ritorno al selettore. Nessuna modifica al backend e nessun test su telefono fisico.
+
+## 30 ottobre — tavola NSFW approvata
+
+Integrata la tavola approvata con tre Kitsune adulte in sottovesti corte di
+raso coprente e pizzo, scalze, nel salotto notturno. WebP locale 21:9 in
+public/cinematic/nsfw-lounge-wide.webp e PNG originale in art-src/nsfw-lounge.png.
+Configurata tramite discord.nsfwArtworkUrl; immagine creata nel dialog solo dopo
+la conferma 18+ esistente, che resta un’autodichiarazione, non verifica identità.
+Il file statico non costituisce una risorsa protetta lato server. Layout contain
+e sfumatura al nero preservati; descrizione alternativa corretta in dieci lingue.
+Nessuna modifica a font, altre tavole, backend o bot.

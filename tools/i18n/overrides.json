@@ -83,7 +83,8 @@
     "spirit.loadError": "Die Geschichte ist nicht verfügbar. Bitte erneut versuchen.",
     "spirit.musicShared": "Die Musikbefehle gehören zu Core und werden von der Flotte gemeinsam genutzt.",
     "spirit.modCompanion": "Mod unterstützt Core bei Aktionen und Logs; es ersetzt den Hauptbot nicht eigenständig.",
-    "house.features": "Funktionen"
+    "house.features": "Funktionen",
+    "copy.ff51d0184ae7": "Drei erwachsene Kitsune in Satin-Nachthemden in der nächtlichen Lounge"
   },
   "fr": {
     "gate.title": "Choisis ton protocole",
@@ -169,7 +170,8 @@
     "spirit.loadError": "L’histoire est indisponible. Réessayez.",
     "spirit.musicShared": "Les commandes musicales appartiennent au Core et sont partagées par la flotte.",
     "spirit.modCompanion": "Mod aide le Core à exécuter des actions et des logs ; il ne remplace pas le bot principal de manière autonome.",
-    "house.features": "Fonctionnalités"
+    "house.features": "Fonctionnalités",
+    "copy.ff51d0184ae7": "Trois Kitsune adultes en nuisettes de satin dans le salon nocturne"
   },
   "es-ES": {
     "gate.title": "Elige tu protocolo",
@@ -255,7 +257,8 @@
     "spirit.loadError": "La historia no está disponible. Vuelve a intentarlo.",
     "spirit.musicShared": "Los comandos musicales pertenecen al Core y se comparten con la flota.",
     "spirit.modCompanion": "Mod ayuda al Core con acciones y registros; no sustituye de forma autónoma al bot principal.",
-    "house.features": "Funciones"
+    "house.features": "Funciones",
+    "copy.ff51d0184ae7": "Tres Kitsune adultas con vestidos de satén en el salón nocturno"
   },
   "ru": {
     "gate.title": "Выбери протокол",
@@ -341,7 +344,8 @@
     "spirit.loadError": "История недоступна. Повторите попытку.",
     "spirit.musicShared": "Музыкальные команды принадлежат Core и используются всей флотилией.",
     "spirit.modCompanion": "Mod помогает Core выполнять действия и вести журналы; он не заменяет основного бота автономно.",
-    "house.features": "Возможности"
+    "house.features": "Возможности",
+    "copy.ff51d0184ae7": "Три взрослые кицунэ в атласных платьях в ночной гостиной"
   },
   "uk": {
     "gate.title": "Обери протокол",
@@ -428,7 +432,8 @@
     "spirit.loadError": "Історія недоступна. Спробуйте ще раз.",
     "spirit.musicShared": "Музичні команди належать Core і спільно використовуються флотилією.",
     "spirit.modCompanion": "Mod допомагає Core виконувати дії та вести журнали; він не замінює головного бота автономно.",
-    "house.features": "Функції"
+    "house.features": "Функції",
+    "copy.ff51d0184ae7": "Три дорослі кіцуне в атласних сукнях у нічній вітальні"
   },
   "ja": {
     "gate.title": "プロトコルを選択",
@@ -516,7 +521,8 @@
     "spirit.loadError": "物語を読み込めません。再試行してください。",
     "spirit.musicShared": "音楽コマンドはCoreに属し、艦隊全体で共有されます。",
     "spirit.modCompanion": "ModはCoreの操作やログ処理を補助します。メインボットを単独で置き換えるものではありません。",
-    "house.features": "機能"
+    "house.features": "機能",
+    "copy.ff51d0184ae7": "夜のラウンジでサテンのスリップドレスを着た3人の大人のキツネ"
   },
   "ko": {
     "gate.title": "프로토콜 선택",
@@ -603,7 +609,8 @@
     "spirit.loadError": "이야기를 불러올 수 없습니다. 다시 시도해 주세요.",
     "spirit.musicShared": "음악 명령어는 Core에 속하며 함대가 함께 사용합니다.",
     "spirit.modCompanion": "Mod는 Core의 작업과 로그 처리를 돕습니다. 메인 봇을 독립적으로 대체하지는 않습니다.",
-    "house.features": "기능"
+    "house.features": "기능",
+    "copy.ff51d0184ae7": "밤의 라운지에서 새틴 슬립 드레스를 입은 성인 키츠네 세 명"
   },
   "zh-CN": {
     "gate.title": "选择协议",
@@ -689,6 +696,7 @@
     "spirit.loadError": "故事暂不可用，请重试。",
     "spirit.musicShared": "音乐命令属于 Core，由整个舰队共享。",
     "spirit.modCompanion": "Mod 协助 Core 执行操作和记录日志，并不能独立替代主机器人。",
-    "house.features": "功能"
+    "house.features": "功能",
+    "copy.ff51d0184ae7": "夜间休息室里三位身穿缎面吊带裙的成年狐女"
   }
 }

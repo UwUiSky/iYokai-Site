@@ -731,3 +731,14 @@ seguono Spiriti, Nove code e Casa. Il catalogo DISCORD_LAYOUT mantiene abbinate
 le tavole anche quando cambia l'ordine. Nessuna nuova immagine in questa revisione.
 Solo la didascalia dorata del drawer usa YokaiInterface a 17 px per leggibilità;
 titoli, bio e lore conservano i font Yokai già approvati.
+
+## 30 ottobre — tavola NSFW approvata
+
+Integrata la tavola approvata con tre Kitsune adulte in sottovesti corte di
+raso coprente e pizzo, scalze, nel salotto notturno. WebP locale 21:9 in
+public/cinematic/nsfw-lounge-wide.webp e PNG originale in art-src/nsfw-lounge.png.
+Configurata tramite discord.nsfwArtworkUrl; immagine creata nel dialog solo dopo
+la conferma 18+ esistente, che resta un’autodichiarazione, non verifica identità.
+Il file statico non costituisce una risorsa protetta lato server. Layout contain
+e sfumatura al nero preservati; descrizione alternativa corretta in dieci lingue.
+Nessuna modifica a font, altre tavole, backend o bot.

@@ -127,3 +127,12 @@ Background extraction / clean cutout of the EXACT violet will-o-wisp in this sup
 ### Prompt della pergamena (Imagegen)
 
 One single realistic antique Japanese washi parchment sheet as a high quality website loading asset, portrait aspect ratio about 1:2.7. Front-facing flat lay, strictly orthographic without perspective. Aged ivory honey paper, visible fine plant fibers, tiny wrinkles, slightly curled worn irregular torn edges, delicate browned scorched corners, very subtle thin gold border, one small faded crimson seal near bottom. Blank large center, NO text or characters, no hands or objects, no wood rods, no background. Actual transparent alpha outside the sheet and subtle small soft edge shadow. Photorealistic tactile natural paper, not a vector gradient or cartoon. Sheet fills most of canvas, very small transparent margins.
+
+## 30 ottobre — salotto NSFW
+
+Tavola approvata dall’utente: nsfw-lounge-wide.webp; originale art-src/nsfw-lounge.png.
+Generazione con Imagegen integrato: exec-14d559f8-4677-444f-b30f-f93240856583.png.
+Brief: tre Kitsune adulte argento/ramata/corvina, sottovesti corte aderenti in
+raso coprente carbone/bordeaux/avorio con bordi in pizzo, scalze, salotto
+giapponese notturno con giardino lunare, luci viola/oro, personaggi a destra,
+spazio per testo a sinistra e bordo inferiore scuro. Tavola completa statica.
