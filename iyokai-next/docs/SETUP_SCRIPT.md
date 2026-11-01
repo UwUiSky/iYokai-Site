@@ -1,21 +1,42 @@
-# Setup script dell'ambiente cloud
+# Setup dell'ambiente di lavoro
 
-La macchina di Claude Code nel cloud viene ricreata a ogni sessione: skill e
-programmi installati a mano spariscono. Per averli sempre pronti, incolla
-questo nello **Setup script** dell'ambiente (menu dell'ambiente nella barra del
-titolo della sessione → Edit → Setup script). Lo script parte una cartella
-sopra la repository.
+Due scenari, stesso risultato: skill, agenti e strumenti pronti, senza mai
+scrivere nella repo.
 
-```bash
-cd iYokai-Site && bash iyokai-next/tools/install-skills.sh --blender
-```
+## Cloud (claude.ai/code)
 
-Cosa fa (niente viene scritto nella repo):
-- installa in `~/.claude/skills` le 28 skill `blender-*` e `blender-image-to-3d`
-  (versioni fisse e controllate) e porta a livello utente le skill web 3D,
-  Awwwards e gli agenti forniti dall'ambiente;
-- installa Blender 5.2.3 LTS headless in `/opt` (circa 350 MB di download:
-  togli `--blender` se vuoi sessioni più rapide quando non serve Blender).
+La macchina cloud viene ricreata a ogni sessione. Incolla **l'intero contenuto**
+di `tools/setup-iyokai.sh` nello **Setup script** dell'ambiente (menu
+dell'ambiente nella barra del titolo della sessione → Edit → Setup script).
+È autonomo: non dipende dal branch della repo.
 
-Il nome della cartella dopo `cd` deve corrispondere a quello della repo nel
-container (oggi `iYokai-Site`).
+Installa:
+- 36 skill e 6 agenti in `~/.claude` (versioni fisse e controllate);
+- il design system come `CLAUDE.md` una cartella sopra la repo (valido solo
+  per il sito: dice di ignorarlo per il bot);
+- `gltf-transform` e `gltfpack` per ottimizzare i modelli;
+- Blender 5.2.3 headless in `/opt` (circa 350 MB, solo se manca).
+
+Collaudato il 1/11/2026: completato senza errori.
+
+## Locale, con il tuo Blender aperto
+
+Requisiti: Git, Node.js 22+, Claude Code, Blender 5.2+.
+
+- macOS/Linux: `bash iyokai-next/tools/setup-iyokai.sh --local`
+- Windows: `powershell -ExecutionPolicy Bypass -File iyokai-next\tools\setup-iyokai-local.ps1`
+
+Installa le stesse skill e agenti, gli strumenti glTF, `uv`, l'addon
+**MCP for Blender** e registra in Claude Code il server `blender` (telemetria
+spenta). Poi: apri Blender → `N` nella viewport → scheda **MCP for Blender** →
+**Start MCP Server**, e riavvia Claude Code.
+
+Non ancora provato sul tuo PC: segnala eventuali errori, il riepilogo finale
+elenca i passaggi non riusciti.
+
+## Cloud che usa il Blender del PC
+
+Una sessione cloud non vede il Blender aperto sul tuo PC via MCP. Per farla
+lavorare sul PC si usa **Remote Control** (Claude desktop → Settings → Claude
+Code → Remote Control): la sessione esegue i comandi in una cartella del PC,
+incluso `blender --background`.

@@ -45,7 +45,8 @@ iyokai-next/
 │  ├─ BLENDER.md           ← come usare Blender (headless o sul PC dell'utente) per kitsune e ambienti
 │  ├─ SKILLS.md            ← inventario skill/agent, origine, licenze, commit
 │  └─ SETUP_SCRIPT.md      ← comando per avere skill e Blender pronti a ogni sessione
-├─ tools/install-skills.sh ← installa skill e Blender nella macchina (non nella repo)
+├─ tools/setup-iyokai.sh   ← setup cloud (incollare nello setup script) e locale macOS/Linux (--local)
+├─ tools/setup-iyokai-local.ps1 ← setup locale Windows (skill + Blender via MCP)
 └─ site/                   ← (da creare in Fase 1) copia di lavoro del sito
 ```
 
@@ -89,8 +90,10 @@ Le skill vanno installate **in Claude Code** (`~/.claude/skills`, livello
 utente), **non nella repo**. La macchina cloud è temporanea: all'inizio di ogni
 sessione sul sito controlla che ci siano (`ls ~/.claude/skills | grep blender-core`
 e `blender --version`); se mancano esegui
-`bash iyokai-next/tools/install-skills.sh --blender` (scrive solo nella
-macchina, mai nella repo). Per averle sempre pronte, l'utente può mettere quel
+`bash iyokai-next/tools/setup-iyokai.sh` dalla cartella sopra la repo (scrive
+solo nella macchina, mai nella repo). In locale sul PC dell'utente:
+`setup-iyokai.sh --local` (macOS/Linux) o `setup-iyokai-local.ps1` (Windows),
+che collegano anche il Blender aperto via MCP. Per averle sempre pronte, l'utente può mettere quel
 comando nello **setup script** dell'ambiente: testo pronto in
 `docs/SETUP_SCRIPT.md`. Gli asset generati (render, GLB, texture) si salvano
 nella macchina o, se servono al sito, dentro `iyokai-next/`.

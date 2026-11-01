@@ -9,4 +9,5 @@ Cartella di lavoro della futura revisione cinematografica del sito iYokai.
 - `docs/BLENDER.md` — come lavorare con Blender su kitsune e ambienti.
 - `docs/DESIGN_SYSTEM.md` — palette, font, motion e materiali.
 - `docs/SETUP_SCRIPT.md` — come avere skill e Blender pronti a ogni sessione.
-- `tools/install-skills.sh` — installa skill e Blender nella macchina di Claude Code (non nella repo).
+- `tools/setup-iyokai.sh` — setup del cloud (da incollare) e del PC macOS/Linux (`--local`).
+- `tools/setup-iyokai-local.ps1` — setup del PC Windows con Blender collegato via MCP.

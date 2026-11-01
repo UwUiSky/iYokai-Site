@@ -6,7 +6,9 @@ Discord. Riprendere solo su richiesta esplicita.
 ## Fase 0 — Preparazione ✅
 - [x] Cartella `iyokai-next/` con istruzioni, design system, visione, architettura.
 - [x] Skill web 3D, Awwwards e Blender installate in Claude Code; Blender 5.2.3 headless collaudato (export GLB ok).
-- [ ] Utente: incollare il comando di `docs/SETUP_SCRIPT.md` nello setup script dell'ambiente.
+- [x] Script di setup cloud collaudato (skill, agenti, design system, glTF tools, Blender 5.2.3).
+- [ ] Utente: incollare `tools/setup-iyokai.sh` nello setup script dell'ambiente.
+- [ ] Script locale (`--local` / `.ps1`): da provare sul PC dell'utente con Blender aperto.
 
 ## Fase 1 — Il massimo effetto con il minimo sforzo
 - [ ] Copia aggiornata della sorgente in `iyokai-next/site/` (CLAUDE.md §3).

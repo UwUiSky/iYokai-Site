@@ -7,12 +7,11 @@
 Claude scrive script `bpy` e li esegue senza interfaccia. Nessuna GPU: render
 di controllo con Workbench o Cycles su CPU (lenti, a bassa risoluzione).
 
+Blender 5.2.3 viene installato in `/opt` dallo setup script (`tools/setup-iyokai.sh`);
+se manca, rieseguire lo script. Uso:
+
 ```bash
-# Scaricare nello scratchpad della sessione, NON nella repo (≈ 350 MB)
-cd "$SCRATCH" && curl -LO https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz
-tar -xf blender-5.2.3-linux-x64.tar.xz
-export BLENDER_BIN="$SCRATCH/blender-5.2.3-linux-x64/blender"
-"$BLENDER_BIN" --background --python script.py -- --args
+blender --background --python script.py -- --args
 ```
 
 - Controlla prima se esiste una 5.2.x più recente in
@@ -30,12 +29,13 @@ Due strade, entrambe richiedono l'utente al computer:
    oppure `claude remote-control` nella cartella). Claude esegue
    `blender --background --python ...` sul PC, con la sua GPU.
 2. **MCP per Blender** (`ahujasid/mcp-for-blender`, MIT, commit `992233b` al
-   1/11/2026): addon dentro Blender + server MCP nell'app Claude desktop.
-   Claude comanda il Blender aperto e vede la viewport. Installazione
-   dell'utente: addon `addon.py` da Blender → Preferences → Add-ons → Install,
-   poi server MCP `uvx blender-mcp` nella configurazione di Claude Desktop.
-   Leggere il README del progetto prima di installare; non è software ufficiale
-   Blender Foundation.
+   1/11/2026): addon dentro Blender + server MCP in Claude Code. Claude comanda
+   il Blender aperto e vede la viewport. Lo installano gli script locali
+   (`tools/setup-iyokai.sh --local` o `tools/setup-iyokai-local.ps1`, vedi
+   `SETUP_SCRIPT.md`): `uvx mcp-for-blender install-addon` e
+   `claude mcp add --scope user blender -e DISABLE_TELEMETRY=true -- uvx mcp-for-blender`.
+   In Blender: `N` → scheda MCP for Blender → Start MCP Server. Non è software
+   ufficiale Blender Foundation; l'addon esegue codice Python nel Blender aperto.
 
 ## Pipeline kitsune (skill `blender-image-to-3d` + skill `blender-*`)
 
