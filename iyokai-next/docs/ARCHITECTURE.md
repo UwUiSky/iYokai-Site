@@ -80,20 +80,26 @@ export const scrub = { light:.8, base:1.2, heavy:1.5 };      // sempre 0.8–1.5
 
 ## 1. Architettura tecnica
 
+Stack: Vite + React 19 + TypeScript + Tailwind 4 + R3F 9 / drei / postprocessing,
+GSAP + @gsap/react, Lenis, Motion, Zustand, Leva, Theatre.js (vedi `CLAUDE.md` §4).
+
 ```
-iyokai-next/
-├─ CLAUDE.md
-├─ index.html                 percorso a sezioni 00–10
+iyokai-next/site/
+├─ index.html
 ├─ src/
-│  ├─ core/       lenis.js · ticker.js · quality.js · motion-tokens.js · router.js
-│  ├─ stage/      renderer.js (WebGPU → WebGL2 → fallback 2D)
-│  │              camera-rail.js (spline CatmullRom, damping)
-│  │              materials.js · post.js (solo tier ≥ 2)
-│  │              scenes/  mask · tails · hitodama · wave · torii · fog
-│  ├─ sections/   s00-threshold … s10-farewell — ognuna { mount, timeline, dispose }
-│  ├─ ui/         sistema esistente preservato (panel, commands, i18n, player, dialog…)
-│  └─ styles/     tokens.css · type.css · layout.css · sections/*.css
-└─ server/ deploy/ public/ … invariati
+│  ├─ main.tsx · App.tsx · index.css (Tailwind @theme: palette, font, easing)
+│  ├─ lib/        motion.ts (token) · cn.ts · quality.ts (tier 0–3) · snap-scroll.ts
+│  ├─ store/      zustand: protocollo attivo, sezione, qualità, audio
+│  ├─ stage/      <Stage> unico <Canvas> persistente · CameraRail (spline, damping)
+│  │              materials.ts (Material Language) · Post (solo tier ≥ 2)
+│  │              scenes/  Mask · Tails · Hitodama · Sakura · Wave · Torii · Fog · Kitsune
+│  ├─ intro/      rituale/terminale con cooldown e ingresso automatico
+│  ├─ protocols/  hub di scelta (mouse, tasti 1–6, default Discord) + pagine link
+│  ├─ sections/   sezioni del Discord Bot e degli altri protocolli
+│  ├─ ui/         componenti (cva) · menu · player · dialog
+│  └─ data/       links, lore, i18n (copiati dalla sorgente attuale)
+└─ public/        tavole, GLB compressi, font Yokai
+Il backend `server/` e `deploy/` della repo restano invariati e vengono usati via API.
 ```
 
 - **Un solo canvas persistente** dietro al DOM: niente scene che si

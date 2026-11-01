@@ -53,15 +53,24 @@ iyokai-next/
 ## 3. Avvio del lavoro sul sito (solo quando l'utente lo chiede)
 
 1. `git fetch origin main` e verifica cosa è cambiato nella sorgente da `9c1c625`.
-2. Crea la copia **aggiornata** della sorgente in `iyokai-next/site/`:
+2. Il nuovo sito è un progetto **Vite + React 19 + TypeScript + Tailwind 4 +
+   R3F** (stack completo in §4). Lo setup script prepara il progetto base
+   `iyokai-stack/` accanto alla repo (cloud: `/home/user/iyokai-stack`; PC:
+   `~/iyokai-stack`), già installato e compilato. Copialo in `iyokai-next/site/`
+   senza `node_modules` e `dist`:
    ```bash
    mkdir -p iyokai-next/site
-   git ls-files -- . ':!iyokai-next' | tar -cf - -T - | tar -xf - -C iyokai-next/site
+   tar -C ../iyokai-stack --exclude=node_modules --exclude=dist -cf - . | tar -xf - -C iyokai-next/site
+   cd iyokai-next/site && npm install
    ```
-   (Git deduplica i file identici: la copia non raddoppia il peso della repo.)
-3. Scrivi in `iyokai-next/site/SOURCE_BASE.txt` il commit di partenza.
-4. Lavora solo dentro `iyokai-next/site/`. `npm install` e `npm run dev` da lì.
-   `node_modules/` e `dist/` non si committano.
+   Se `iyokai-stack/` manca, rieseguire `tools/setup-iyokai.sh`.
+3. Dalla sorgente attuale si **leggono e copiano** in `iyokai-next/site/` solo
+   contenuti e asset utili (tavole in `public/cinematic`, font Yokai, testi e
+   lore in `src/data`, `public/links.json`, i18n), annotando il commit di
+   partenza in `iyokai-next/site/SOURCE_BASE.txt`. Il backend `server/` e
+   `deploy/` restano dove sono: il nuovo frontend li usa via API.
+4. Lavora solo dentro `iyokai-next/site/`. `npm run dev` / `npm run build` da lì.
+   `node_modules/` e `dist/` non si committano (aggiungere un `.gitignore`).
 5. I dati sensibili (`.env`, segreti, token) non vanno mai nei file né nei commit.
 
 ## 4. Regole di design e motion
@@ -79,6 +88,13 @@ Applica sempre `docs/DESIGN_SYSTEM.md`. In sintesi:
 - 3D: `MeshPhysicalMaterial`, transmission+thickness per gli spiriti, roughness
   .15–.45, emissive debole e calda.
 - 60fps su laptop medio, qualità adattiva, `prefers-reduced-motion`, mobile leggero.
+- Stack: Vite + React 19 + TypeScript + Tailwind 4 (token con `@theme` in
+  `src/index.css`), three 0.186 + @react-three/fiber 9 + drei 10 +
+  @react-three/postprocessing 3, GSAP + @gsap/react, Lenis (`lenis/react`),
+  Motion, Zustand, Leva (solo sviluppo), Theatre.js (`@theatre/core`, studio
+  solo in sviluppo; `@theatre/r3f` non è compatibile con R3F 9), clsx +
+  tailwind-merge + class-variance-authority. Token motion in `src/lib/motion.ts`.
+  three resta a 0.186 finché `postprocessing` non supporta 0.187.
 
 Conflitti noti della sorgente attuale (palette viola/magenta/bianco, Syne e
 Manrope, tavole con neon, griglia `.glass`) sono elencati in
@@ -99,8 +115,7 @@ comando nello **setup script** dell'ambiente: testo pronto in
 nella macchina o, se servono al sito, dentro `iyokai-next/`.
 
 - Web/3D: `scroll-3d-scene`, `add-postprocessing`, `optimize-3d-assets`,
-  `scaffold-3d-site` (attenzione: è React/R3F, il sito è vanilla — usarne solo
-  i principi), `awwwards-web-design`, `frontend-design`.
+  `scaffold-3d-site` (stack React/R3F, come il nuovo sito), `awwwards-web-design`, `frontend-design`.
 - Blender: parti sempre da `blender-core`; per la kitsune da reference
   `blender-image-to-3d`; poi `blender-character-rigging`, `blender-hair-grooming`
   (pelliccia delle code), `blender-clothing` (kimono), `blender-facial-shapekeys`,

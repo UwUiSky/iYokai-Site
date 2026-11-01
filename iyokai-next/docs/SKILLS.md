@@ -13,8 +13,7 @@ Per aggiornare: cambiare il commit nello script dopo aver controllato la nuova v
 | `scroll-3d-scene`, `add-postprocessing`, `optimize-3d-assets`, `scaffold-3d-site` + 6 agenti | https://github.com/skinnye/3d-web-pack `cabd221` | MIT |
 
 Agenti (`~/.claude/agents/`, da 3d-web-pack): `threejs-architect`, `r3f-engineer`,
-`shader-artist`, `motion-choreographer`, `webgl-perf-auditor`, `asset-pipeline-engineer`. Nota: alcuni assumono React Three Fiber; il sito è Three.js
-vanilla + GSAP + Lenis.
+`shader-artist`, `motion-choreographer`, `webgl-perf-auditor`, `asset-pipeline-engineer`. Sono pensati per React Three Fiber, lo stack del nuovo sito.
 
 ## Blender
 
