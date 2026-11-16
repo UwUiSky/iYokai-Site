@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource/instrument-serif";
+@import "@fontsource/instrument-serif/400-italic.css";
+
+@font-face {
+  font-family: "Yokai Fude";
+  src: url("/fonts/yokai-fude.woff") format("woff");
+  font-display: swap;
+}
+
+@theme {
+  /* Palette iYokai: un fondo, un inchiostro, un solo colore posseduto */
+  --color-void: #07070b;
+  --color-cinnabar: #c24a3a;
+  --color-orchid: #9b4d7a;
+  --color-pale-ink: #c8c4bc;
+  --color-mist: #8a8680;
+  --color-ash: #2a2928;
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-fude: "Yokai Fude", "Instrument Serif", serif;
+
+  --text-mega: clamp(4rem, 14vw, 13rem);
+  --text-h1: clamp(2.75rem, 7vw, 6.5rem);
+  --text-h2: clamp(2rem, 4.5vw, 4rem);
+  --text-lead: clamp(1.125rem, 1.6vw, 1.5rem);
+  --text-body: clamp(1rem, 1.05vw, 1.125rem);
+  --text-micro: clamp(0.75rem, 0.8vw, 0.875rem);
+
+  --ease-primary: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-dramatic: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+:root {
+  --dur-micro: 0.38s;
+  --dur-std: 0.75s;
+  --dur-cine: 1.5s;
+  --gutter: clamp(1.25rem, 6vw, 7rem);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  background: var(--color-void);
+  color: var(--color-pale-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  overflow: hidden; /* la pagina va a scatti: scorre solo ciò che lo dichiara */
+}
+
+::selection {
+  background: var(--color-cinnabar);
+  color: var(--color-void);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cinnabar);
+  outline-offset: 3px;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.kicker {
+  font-size: var(--text-micro);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+}
+
+/* L'incenso: la firma del sito. Una linea che si consuma dall'alto, con la brace in cima. */
+.incense {
+  position: relative;
+  width: 1px;
+  background: color-mix(in srgb, var(--color-mist) 35%, transparent);
+}
+.incense__burn {
+  position: absolute;
+  inset: 0;
+  background: var(--color-pale-ink);
+  transform-origin: bottom;
+}
+.incense__ember {
+  position: absolute;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-cinnabar);
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--color-cinnabar) 55%, transparent);
+}
+
+/* Regrade provvisorio delle tavole verso la palette: meno magenta, più caldo, più buio. */
+.plate {
+  filter: saturate(0.68) hue-rotate(14deg) brightness(0.9) contrast(1.04);
+}
+
+.scrollable {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ash) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

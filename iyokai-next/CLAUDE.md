@@ -47,7 +47,7 @@ iyokai-next/
 │  └─ SETUP_SCRIPT.md      ← comando per avere skill e Blender pronti a ogni sessione
 ├─ tools/setup-iyokai.sh   ← setup cloud (incollare nello setup script) e locale macOS/Linux (--local)
 ├─ tools/setup-iyokai-local.ps1 ← setup locale Windows (skill + Blender via MCP)
-└─ site/                   ← (da creare in Fase 1) copia di lavoro del sito
+└─ site/                   ← il nuovo sito (Fase 1 in corso): `npm install`, `npm run dev`, `npm run build`
 ```
 
 ## 3. Avvio del lavoro sul sito (solo quando l'utente lo chiede)
