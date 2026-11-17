@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { useApp } from './store/app'
 import { detectTier } from './lib/quality'
 import { useReducedMotion } from './lib/useReducedMotion'
+import { useRoute } from './lib/useRoute'
 import { Intro } from './intro/Intro'
 import { Hub } from './protocols/Hub'
 import { ProtocolView } from './protocols/ProtocolView'
@@ -14,6 +15,7 @@ export default function App() {
   const protocol = useApp((s) => s.protocol)
   const setTier = useApp((s) => s.setTier)
   const reduced = useReducedMotion()
+  useRoute()
 
   useEffect(() => {
     setTier(detectTier(reduced))

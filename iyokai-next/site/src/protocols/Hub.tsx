@@ -5,6 +5,7 @@ import { PROTOCOLS, type ProtocolId } from '../data/protocols'
 import { useApp } from '../store/app'
 import { useCountdown } from '../lib/useCountdown'
 import { useReducedMotion } from '../lib/useReducedMotion'
+import { usePointerDrift } from '../lib/usePointerDrift'
 import { dur, ease } from '../lib/motion'
 import { cn } from '../lib/cn'
 import { Incense } from '../ui/Incense'
@@ -22,6 +23,7 @@ export function Hub() {
   const root = useRef<HTMLElement>(null)
 
   const left = useCountdown(WAIT_SECONDS, () => open('discord'), held)
+  usePointerDrift(root, !reduced)
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -44,6 +46,7 @@ export function Hub() {
 
   return (
     <main ref={root} className="relative h-full overflow-hidden bg-void">
+      <div data-drift className="absolute -inset-4">
       {PROTOCOLS.map((p) => (
         <img
           key={p.id}
@@ -56,6 +59,7 @@ export function Hub() {
           )}
         />
       ))}
+      </div>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-void)_18%,color-mix(in_srgb,var(--color-void)_55%,transparent)_55%,transparent)]" />
 
       <div className="relative grid h-full grid-rows-[auto_1fr_auto] px-[var(--gutter)] pb-8 pt-8">

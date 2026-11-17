@@ -5,6 +5,7 @@ import { usePublicLinks, type PublicLinks } from '../data/links'
 import { useApp } from '../store/app'
 import { useSnap } from '../lib/useSnap'
 import { useReducedMotion } from '../lib/useReducedMotion'
+import { usePointerDrift } from '../lib/usePointerDrift'
 import { dur, ease } from '../lib/motion'
 import { cn } from '../lib/cn'
 import { Incense } from '../ui/Incense'
@@ -69,6 +70,7 @@ export function ProtocolView() {
   const previous = useRef(index)
 
   useSnap({ count: sections.length, index, locked, onChange: setSection, onExit: backToHub })
+  usePointerDrift(root, !reduced)
 
   // Il passaggio: prima si muove il mondo (l'illustrazione), poi il testo.
   useEffect(() => {
@@ -117,13 +119,15 @@ export function ProtocolView() {
           inert={i !== index}
           className={cn('absolute inset-0', i === index ? 'visible z-10' : 'invisible z-0')}
         >
-          <img
-            data-art
-            src={section.art}
-            alt=""
-            loading={i === 0 ? 'eager' : 'lazy'}
-            className="plate absolute inset-0 h-full w-full object-cover object-[72%_center] opacity-70 max-md:opacity-45"
-          />
+          <div data-drift className="absolute -inset-4">
+            <img
+              data-art
+              src={section.art}
+              alt=""
+              loading={i === 0 ? 'eager' : 'lazy'}
+              className="plate absolute inset-0 h-full w-full object-cover object-[72%_center] opacity-70 max-md:opacity-45"
+            />
+          </div>
           <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-void)_12%,color-mix(in_srgb,var(--color-void)_62%,transparent)_48%,transparent_78%)] max-md:bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-void)_70%,transparent),var(--color-void)_85%)]" />
           <div id={`${section.id}-title`} className="sr-only">
             {section.title}

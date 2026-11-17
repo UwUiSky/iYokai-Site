@@ -21,6 +21,8 @@ con regrade CSS provvisorio (`.plate`).
 - [x] Navigazione a scatti: rotella, trackpad, frecce, Pagina su/giù, spazio, dito; Esc torna ai protocolli.
 - [x] Pioggia di sakura in 3D (una mesh istanziata, vento dal puntatore, 4 livelli di qualità, ferma con movimento ridotto).
 - [x] Transizioni tra le sezioni (prima l'illustrazione, poi il testo).
+- [x] Link diretti: `#/protocolli`, `#/social`, `#/discord/3`; avanti/indietro del browser funzionano; un link apre la pagina senza intro.
+- [x] Le illustrazioni seguono piano il puntatore (solo mouse, solo con movimento pieno).
 - [ ] Verifica su hardware reale (FPS, GPU): nel cloud solo rendering software.
 - [ ] Lingue (ora solo italiano), dati reali in `links.json`, contenuti di Social/Live/Progetti.
 - [ ] Peso: bundle principale 555 KB (175 KB gzip), scena 3D 1 MB caricata dopo l'intro: da ridurre.
